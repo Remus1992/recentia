@@ -8,7 +8,9 @@ const withErrorHandler = (WrappedComponent, axios) => {
         state = {
             error: null
         };
-        componentDidMount () {
+        // We use componentWillMount here instead of "ComponentDidMount" because
+        // child elements will be rendered first and so this code will never be reached otherwise
+        componentWillMount () {
             axios.interceptors.request.use(req => {
                 this.setState({error: null});
                 return req;
