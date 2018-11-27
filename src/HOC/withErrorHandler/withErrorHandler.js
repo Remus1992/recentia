@@ -10,7 +10,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
         };
         // We use componentWillMount here instead of "ComponentDidMount" because
         // child elements will be rendered first and so this code will never be reached otherwise
-        componentWillMount () {
+        componentWillMount() {
             this.reqInterceptor = axios.interceptors.request.use(req => {
                 this.setState({error: null});
                 return req;
@@ -20,7 +20,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
             });
         }
 
-        componentWillUnmount () {
+        componentWillUnmount() {
             axios.interceptors.request.eject(this.reqInterceptor);
             axios.interceptors.response.eject(this.resInterceptor);
         }
@@ -28,16 +28,19 @@ const withErrorHandler = (WrappedComponent, axios) => {
         errorConfirmedHandler = () => {
             this.setState({error: null})
         };
+
         render() {
             return (
-                <Aux>
-                    <Modal
-                        show={this.state.error}
-                        modalClosed={this.errorConfirmedHandler}>
-                        {this.state.error ? this.state.error.message: null}
-                    </Modal>
-                    <WrappedComponent {...this.props}/>
-                </Aux>
+                <React.Fragment>
+                    {/*<Aux>*/}
+                        <Modal
+                            show={this.state.error}
+                            modalClosed={this.errorConfirmedHandler}>
+                            {this.state.error ? this.state.error.message : null}
+                        </Modal>
+                        <WrappedComponent {...this.props}/>
+                    {/*</Aux>*/}
+                </React.Fragment>
             );
         }
     }
