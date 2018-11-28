@@ -94,6 +94,7 @@ class BurgerBuilder extends Component {
 
     purchaseContinueHandler = () => {
         // alert("You Continue!");
+
         // this.setState({loading: true});
         // const order = {
         //     ingredients: this.state.ingredients,
@@ -120,10 +121,13 @@ class BurgerBuilder extends Component {
 
         // we commented out the above because we don't want to push to fireserve on this page
         // anymore. We instead want to go to a checkout page and push it from there.
+        // We then copy/pasted it to ContactData.js and adjusted the code appropriately
         const queryParams = [];
         for (let i in this.state.ingredients) {
             queryParams.push(encodeURIComponent(i) + '-' + encodeURIComponent(this.state.ingredients[i]));
         }
+        // this line below was added after we copy/pasted the above code to ContactData.js
+        queryParams.push('price=' + this.state.totalPrice);
         const queryString = queryParams.join('&');
         this.props.history.push({
             pathname: '/checkout',
