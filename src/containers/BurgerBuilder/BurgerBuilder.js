@@ -27,6 +27,8 @@ class BurgerBuilder extends Component {
     };
 
     componentDidMount() {
+        // we have access to 'match' elements here
+        console.log(props);
         // don't forget to add '.json' to end of url from Firebase
         axios.get('https://react-my-burger-6f916.firebaseio.com/ingredients.json')
             .then(response => {
@@ -92,29 +94,33 @@ class BurgerBuilder extends Component {
 
     purchaseContinueHandler = () => {
         // alert("You Continue!");
-        this.setState({loading: true});
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: {
-                name: 'John Smith',
-                address: {
-                    street: '1234 Road Ave',
-                    zipCode: '56789',
-                    country: 'USA'
-                },
-                email: 'test@test.com'
-            },
-            deliveryMethod: 'fastest'
-        };
-        // '.json' is necessary for Firebase specifically
-        axios.post('/orders.json', order)
-            .then(response => {
-                this.setState({loading: false, purchasing: false});
-            })
-            .catch(error => {
-                this.setState({loading: false, purchasing: false});
-            });
+        // this.setState({loading: true});
+        // const order = {
+        //     ingredients: this.state.ingredients,
+        //     price: this.state.totalPrice,
+        //     customer: {
+        //         name: 'John Smith',
+        //         address: {
+        //             street: '1234 Road Ave',
+        //             zipCode: '56789',
+        //             country: 'USA'
+        //         },
+        //         email: 'test@test.com'
+        //     },
+        //     deliveryMethod: 'fastest'
+        // };
+        // // '.json' is necessary for Firebase specifically
+        // axios.post('/orders.json', order)
+        //     .then(response => {
+        //         this.setState({loading: false, purchasing: false});
+        //     })
+        //     .catch(error => {
+        //         this.setState({loading: false, purchasing: false});
+        //     });
+
+        // we commented out the above because we don't want to push to fireserve on this page
+        // anymore. We instead want to go to a checkout page and push it from there.
+        this.props.history.push('/checkout');
     };
 
     render() {
