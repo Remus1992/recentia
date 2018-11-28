@@ -120,7 +120,15 @@ class BurgerBuilder extends Component {
 
         // we commented out the above because we don't want to push to fireserve on this page
         // anymore. We instead want to go to a checkout page and push it from there.
-        this.props.history.push('/checkout');
+        const queryParams = [];
+        for (let i in this.state.ingredients) {
+            queryParams.push(encodeURIComponent(i) + '-' + encodeURIComponent(this.state.ingredients[i]));
+        }
+        const queryString = queryParams.join('&');
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
+        });
     };
 
     render() {
