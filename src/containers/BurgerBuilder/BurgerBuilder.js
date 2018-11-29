@@ -28,7 +28,7 @@ class BurgerBuilder extends Component {
 
     componentDidMount() {
         // we have access to 'match' elements here
-        console.log(props);
+        // console.log(props);
         // don't forget to add '.json' to end of url from Firebase
         axios.get('https://react-my-burger-6f916.firebaseio.com/ingredients.json')
             .then(response => {
@@ -124,7 +124,7 @@ class BurgerBuilder extends Component {
         // We then copy/pasted it to ContactData.js and adjusted the code appropriately
         const queryParams = [];
         for (let i in this.state.ingredients) {
-            queryParams.push(encodeURIComponent(i) + '-' + encodeURIComponent(this.state.ingredients[i]));
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
         }
         // this line below was added after we copy/pasted the above code to ContactData.js
         queryParams.push('price=' + this.state.totalPrice);
