@@ -1,0 +1,26 @@
+.recentia_search_li {
+    margin: 0;
+    display: block;
+    box-sizing: border-box;
+    height: 100%;
+    width: auto;
+    align-items: center;
+}
+
+.recentia_search_li a {
+    color: black;
+    height: 100%;
+    padding: 5px 6px;
+    border: 1.5px gray solid;
+    font-size: 14px;
+    /*box-shadow: 5px 5px 10px grey;*/
+    background-color: #fffff4;
+
+}
+
+.recentia_search_li a:hover,
+.recentia_search_li a:active,
+.recentia_search_li a.active {
+    background-color: #d1d1d1;
+    color: black;
+}
