@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import LibraryToolbar from '../../../components/LibraryToolbar/LibraryToolbar';
 
 import axios from '../../../axios-orders';
 
@@ -40,25 +41,7 @@ class Dictionary extends Component {
                     <div className={classes.recentia_search_wrapper}>
                         <input type="text" placeholder="Search" className={classes.search_bar}/>
                     </div>
-                    <nav className={classes.recentia_search_wrapper}>
-                        <ul className={classes.recentia_search_row}>
-                            <li className={classes.recentia_search_box}>
-                                <a href="/">Dictionary</a>
-                            </li>
-                            <li className={classes.recentia_search_box}>
-                                <a href="/">Metathesaurus</a>
-                            </li>
-                            <li className={classes.recentia_search_box}>
-                                <a href="/">Coding Systems</a>
-                            </li>
-                            <li className={classes.recentia_search_box}>
-                                <a href="/">Value Sets</a>
-                            </li>
-                            <li className={classes.recentia_search_box}>
-                                <a href="/">Languages</a>
-                            </li>
-                        </ul>
-                    </nav>
+                    <LibraryToolbar/>
                 </div>
             </React.Fragment>
         );
