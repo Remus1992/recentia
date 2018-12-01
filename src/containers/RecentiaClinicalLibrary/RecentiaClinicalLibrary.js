@@ -4,6 +4,7 @@ import { Route, NavLink, Switch } from 'react-router-dom';
 
 // Components
 import LibraryToolbar from '../../components/LibraryToolbar/LibraryToolbar';
+import SearchBar from '../../components/SearchBar/SearchBar';
 import Profile from '../../components/Profile/Profile';
 import Header from '../../components/Header/Header';
 
@@ -33,13 +34,8 @@ class recentiaClinicalLibrary extends Component {
                     link2_title="Clinical Visit Support"
                     link2="/clinical_visit"/>
                 <div className={classes.recentia_search}>
-                    <div className={classes.recentia_search_wrapper}>
-                        <input
-                            type="text"
-                            placeholder="Search"
-                            className={classes.search_bar}/>
-                    </div>
                     <LibraryToolbar/>
+                    <SearchBar/>
                 </div>
                 <Switch>
                     <Route path={this.props.match.url + "/dictionary" } component={Dictionary}/>

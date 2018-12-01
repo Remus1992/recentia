@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 
 import Profile from '../components/Profile/Profile';
 import Header from '../components/Header/Header';
+import SearchBar from '../components/SearchBar/SearchBar';
 
 import classes from './Home.css'
 import {Route, Switch} from "react-router-dom";
@@ -25,9 +26,7 @@ class Home extends Component {
                     link2="/clinical_visit" />
 
                 <div className={classes.recentia_search}>
-                    <div className={classes.recentia_search_wrapper}>
-                        <input type="text" placeholder="Search" className={classes.search_bar}/>
-                    </div>
+                    <SearchBar/>
                 </div>
                 <Switch>
                     <Route path="/clinical_library" component={RecentiaClinicalLibrary}/>
