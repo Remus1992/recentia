@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import LibraryToolbar from '../../../components/LibraryToolbar/LibraryToolbar';
+import LibraryToolbar from '../../components/LibraryToolbar/LibraryToolbar';
 
-import axios from '../../../axios-orders';
+// import axios from '../../../axios-orders';
 
 import Profile from '../../components/Profile/Profile';
-import HeaderLibrary from '../../components/Header/HeaderLibrary';
+import Header from '../../components/Header/Header';
 
 import classes from './RecentiaClinicalLibrary.css'
 
-class Dictionary extends Component {
+class recentiaClinicalLibrary extends Component {
     state = {
         definitions: null
     };
@@ -17,8 +17,12 @@ class Dictionary extends Component {
         return (
             <React.Fragment>
                 <Profile/>
-                <HeaderLibrary/>
-
+                <Header
+                    header_title="Recentia Clinical Library"
+                    link1_title="Home"
+                    link1="/"
+                    link2_title="Clinical Visit Support"
+                    link2="/clinical_visit_support"/>
                 <div className={classes.recentia_search}>
                     <div className={classes.recentia_search_wrapper}>
                         <input type="text" placeholder="Search" className={classes.search_bar}/>
@@ -30,4 +34,4 @@ class Dictionary extends Component {
     }
 }
 
-export default Dictionary;
+export default recentiaClinicalLibrary;

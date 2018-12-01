@@ -1,24 +1,38 @@
 import React, {Component} from 'react';
 
-import axios from '../axios-orders';
+// import axios from '../axios-orders';
 
 import Profile from '../components/Profile/Profile';
-import HeaderHome from '../components/Header/HeaderHome';
+import Header from '../components/Header/Header';
 
 import classes from './Home.css'
+import {Route, Switch} from "react-router-dom";
+
+import RecentiaClinicalLibrary from './RecentiaClinicalLibrary/RecentiaClinicalLibrary';
+import RecentiaClinicalVisitSupport from './RecentiaClinicalVisitSupport/RecentiaClinicalVisitSupport';
+// import HeaderNavItem from "../components/Header/HeaderNavItems/HeaderNavItem/HeaderNavItem";
 
 class Home extends Component {
     render() {
         return (
             <React.Fragment>
                 <Profile/>
-                <HeaderHome />
+                <Header
+                    header_title="Recentia"
+                    link1_title="Clinical Library"
+                    link1="/clinical_library"
+                    link2_title="Clinical Visit Support"
+                    link2="/clinical_visit_support" />
 
                 <div className={classes.recentia_search}>
                     <div className={classes.recentia_search_wrapper}>
                         <input type="text" placeholder="Search" className={classes.search_bar}/>
                     </div>
                 </div>
+                <Switch>
+                    <Route path="/clinical_library" component={RecentiaClinicalLibrary}/>
+                    <Route path="/clinical_visit" component={RecentiaClinicalVisitSupport}/>
+                </Switch>
             </React.Fragment>
         );
     }
