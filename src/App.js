@@ -10,9 +10,9 @@ class App extends Component {
         return (
             <div>
                 <Switch>
-                    <Route exact path="/" component={Home}/>
                     <Route path="/clinical_library" component={RecentiaClinicalLibrary}/>
                     <Route path="/clinical_visit" component={RecentiaClinicalVisitSupport}/>
+                    <Route exact path="/" component={Home}/>
                 </Switch>
             </div>
         );

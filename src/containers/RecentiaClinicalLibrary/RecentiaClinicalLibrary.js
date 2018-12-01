@@ -13,6 +13,8 @@ class recentiaClinicalLibrary extends Component {
         definitions: null
     };
 
+
+
     render() {
         return (
             <React.Fragment>
@@ -22,10 +24,13 @@ class recentiaClinicalLibrary extends Component {
                     link1_title="Home"
                     link1="/"
                     link2_title="Clinical Visit Support"
-                    link2="/clinical_visit_support"/>
+                    link2="/clinical_visit"/>
                 <div className={classes.recentia_search}>
                     <div className={classes.recentia_search_wrapper}>
-                        <input type="text" placeholder="Search" className={classes.search_bar}/>
+                        <input
+                            type="text"
+                            placeholder="Search"
+                            className={classes.search_bar}/>
                     </div>
                     <LibraryToolbar/>
                 </div>

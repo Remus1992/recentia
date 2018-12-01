@@ -9,12 +9,10 @@ h1 {
 .recentia_header {
     text-align: center;
     height: 100px;
-    /*margin-top: -89px;*/
     margin-bottom: 10px;
     border-bottom: 1px solid gray;
-    /*text-shadow: 5px 5px 10px grey;*/
     background-color: darkblue;
-    /*background-image: linear-gradient(rgba(0, 100, 0, 1), rgba(0, 100, 0, 0) 100%);*/
+    padding-bottom: 20px;
 }
 
 .header_nav {

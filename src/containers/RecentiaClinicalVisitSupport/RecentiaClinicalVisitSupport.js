@@ -1,19 +1,30 @@
 import React, {Component} from 'react';
 
+// import axios from '../../../axios-orders';
+
+import Profile from '../../components/Profile/Profile';
 import Header from '../../components/Header/Header'
 
-class recentiaClinicalLibrary extends Component {
+import classes from './RecentiaClinicalVisitSupport.css'
+
+class recentiaClinicalVisitSupport extends Component {
+    state = {
+        element: null
+    };
 
     render() {
         return (
-            <Header
-                header_title="Recentia Clinical Visit Support"
-                link1_title="Home"
-                link1="/"
-                link2_title="Clinical Library"
-                link2="/clinical_library"/>
+            <React.Fragment>
+                <Profile/>
+                <Header
+                    header_title="Recentia Clinical Visit Support"
+                    link1_title="Home"
+                    link1="/"
+                    link2_title="Clinical Library"
+                    link2="/clinical_library"/>
+            </React.Fragment>
         );
     }
 }
 
-export default recentiaClinicalLibrary;
+export default recentiaClinicalVisitSupport;

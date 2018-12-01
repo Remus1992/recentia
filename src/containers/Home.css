@@ -25,7 +25,7 @@ h1, a, p {
     padding-left: 38px;
     border: 1.5px gray solid;
     /*box-shadow: 5px 5px 10px grey;*/
-    background-image: url('/../assests/images/search_icon.png');
+    background-image: url('../assests/images/search_icon.png');
     background-repeat: no-repeat;
     background-size: 34px;
     background-color: #fffff4;
@@ -38,7 +38,7 @@ h1, a, p {
     margin-left: -1px;
 }
 
-#search_img {
+.search_img {
     width: 25px;
 }
 

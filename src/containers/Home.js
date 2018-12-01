@@ -22,7 +22,7 @@ class Home extends Component {
                     link1_title="Clinical Library"
                     link1="/clinical_library"
                     link2_title="Clinical Visit Support"
-                    link2="/clinical_visit_support" />
+                    link2="/clinical_visit" />
 
                 <div className={classes.recentia_search}>
                     <div className={classes.recentia_search_wrapper}>
