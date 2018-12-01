@@ -9,48 +9,6 @@ h1, a, p {
     text-decoration: none;
 }
 
-/* Profile */
-
-
-/* Header */
-
-h1 {
-    font-weight: lighter;
-    color: #fffff4;
-    margin-top: 0;
-    margin-left: 95px;
-    padding-top: 20px;
-}
-
-.recentia_header {
-    text-align: center;
-    height: 100px;
-    /*margin-top: -89px;*/
-    margin-bottom: 10px;
-    border-bottom: 1px solid gray;
-    /*text-shadow: 5px 5px 10px grey;*/
-    background-color: darkblue;
-    /*background-image: linear-gradient(rgba(0, 100, 0, 1), rgba(0, 100, 0, 0) 100%);*/
-}
-
-.header_nav {
-    margin: auto auto 30px 95px;
-    display: flex;
-    justify-content: center;
-}
-
-.header_ul {
-    margin: -10px;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    height: 100%;
-}
-
-
-
 /* Search Bar */
 
 .recentia_search {

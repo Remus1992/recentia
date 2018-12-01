@@ -5,7 +5,7 @@ import HeaderNavItem from './HeaderNavItem/HeaderNavItem';
 import classes from './HeaderNav.css';
 
 const headerNavHome = () => (
-    <ul className={classes.recentia_search_ul}>
+    <ul className={classes.header_ul}>
         <HeaderNavItem link='/clinical_library'>Clinical Library</HeaderNavItem>
         <li className={classes.header_li_break}>
             <p style={{"color": "white", "margin": "0"}}>|</p>
