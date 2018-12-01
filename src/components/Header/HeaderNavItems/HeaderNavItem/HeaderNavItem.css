@@ -1,0 +1,19 @@
+.header_li {
+    margin: 0;
+    display: block;
+    box-sizing: border-box;
+    height: 100%;
+    width: auto;
+    align-items: center;
+}
+
+.header_li a {
+    color: #fffff4;
+    padding: 5px;
+}
+
+.header_li a:hover,
+.header_li a:active,
+.header_li a.active {
+    color: red;
+}

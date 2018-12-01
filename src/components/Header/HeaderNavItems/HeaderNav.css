@@ -1,0 +1,18 @@
+.header_ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    height: 100%;
+}
+
+.header_li_break {
+    margin: 0;
+    display: block;
+    box-sizing: border-box;
+    height: 100%;
+    width: auto;
+    align-items: center;
+}

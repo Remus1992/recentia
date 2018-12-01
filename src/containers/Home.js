@@ -1,38 +1,30 @@
 import React, {Component} from 'react';
-import LibraryToolbar from '../../../components/LibraryToolbar/LibraryToolbar';
 
-import axios from '../../../axios-orders';
+import axios from '../axios-orders';
 
-import doctorAvatar from '../../../assests/images/LLH-Doctors-Male-Avatar-300x300.png';
-import classes from './Dictionary.css'
+import Profile from '../components/Profile/Profile';
 
-class Dictionary extends Component {
-    state = {
-        definitions: null
-    };
+import classes from './Home.css'
+import {NavLink} from "react-router-dom";
 
+class Home extends Component {
     render() {
         return (
             <React.Fragment>
-                <div className={classes.profile}>
-                    <img className={classes.profile_pic} src={doctorAvatar}/>
-                    <p>Brian Martin, M.D.</p>
-                </div>
-
+                <Profile/>
                 <div className={classes.recentia_header}>
                     <h1>Recentia Clinical Library</h1>
                     <nav className={classes.header_nav}>
                         <ul className={classes.header_ul}>
                             <li className={classes.header_li}>
-                                <a href="/">Home</a>
+                                <NavLink to="/clinical_library">Home</NavLink>
                             </li>
                             <li className={classes.header_li}>
                                 <p style={{"color": "white", "margin": "0"}}>|</p>
                             </li>
                             <li className={classes.header_li}>
-                                <a href="/">Clinical Visit Support</a>
+                                <NavLink to="/clinical_visit_support">Clinical Visit Support</NavLink>
                             </li>
-
                         </ul>
                     </nav>
                 </div>
@@ -41,11 +33,10 @@ class Dictionary extends Component {
                     <div className={classes.recentia_search_wrapper}>
                         <input type="text" placeholder="Search" className={classes.search_bar}/>
                     </div>
-                    <LibraryToolbar/>
                 </div>
             </React.Fragment>
         );
     }
 }
 
-export default Dictionary;
+export default Home;

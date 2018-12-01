@@ -1,0 +1,22 @@
+.profile {
+    float: right;
+    text-align: justify;
+    width: 95px;
+    margin-right: 10px;
+    margin-top: 10px;
+
+}
+
+.profile_pic {
+    display: block;
+    width: 60px;
+    margin: auto;
+    /*box-shadow: 5px 5px 10px grey;*/
+}
+
+.profile p {
+    font-size: 10px;
+    font-weight: bold;
+    /*text-shadow: 5px 5px 10px grey;*/
+    color: white;
+}

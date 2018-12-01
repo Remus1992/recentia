@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
 
-import Dictionary from './containers/RecentiaClinicalLibrary/Dictionary/Dictionary';
+import Home from './containers/Home';
 
 class App extends Component {
     render() {
         return (
             <div>
                 <Switch>
-                    <Route path="/" component={Dictionary}/>
+                    <Route exact path="/" component={Home}/>
                 </Switch>
             </div>
         );
