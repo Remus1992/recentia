@@ -22,6 +22,7 @@ class recentiaClinicalVisitSupport extends Component {
                     link1="/"
                     link2_title="Clinical Library"
                     link2="/clinical_library"/>
+                <h1 className={classes.placeholder}>Under Development</h1>
             </React.Fragment>
         );
     }

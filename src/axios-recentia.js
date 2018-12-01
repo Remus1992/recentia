@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const LocalHost = '140.211.16.25';
+
 const instance = axios.create({
-    baseURL: 'https://react-my-burger-6f916.firebaseio.com/'
+    baseURL: LocalHost + '/api'
 });
 
 export default instance;
