@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 
 // import classes from './Languages.css'
 
-class Languages extends Component {
+class Translate extends Component {
     state = {
         definitions: null
     };
@@ -12,10 +12,10 @@ class Languages extends Component {
     render() {
         return (
             <React.Fragment>
-                <div>Languages</div>
+                <div>Translate</div>
             </React.Fragment>
         );
     }
 }
 
-export default Languages;
+export default Translate;

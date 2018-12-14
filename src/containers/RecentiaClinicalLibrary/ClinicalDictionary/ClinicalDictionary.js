@@ -7,7 +7,7 @@ import license from '../../../secret2';
 
 // import classes from './Dictionary.css'
 
-class Dictionary extends Component {
+class ClinicalDictionary extends Component {
     state = {
         definitions: null
     };
@@ -29,10 +29,10 @@ class Dictionary extends Component {
     render() {
         return (
             <React.Fragment>
-                <div>Dictionary</div>
+                <div>Clinical Dictionary</div>
             </React.Fragment>
         );
     }
 }
 
-export default Dictionary;
+export default ClinicalDictionary;

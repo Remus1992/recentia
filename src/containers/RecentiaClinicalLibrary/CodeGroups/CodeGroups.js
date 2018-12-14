@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 
 // import axios from '../../../axios-orders';
 
-// import classes from './ValueSets.css'
+// import classes from './CodeGroups.css'
 
-class ValueSets extends Component {
+class CodeGroups extends Component {
     state = {
         definitions: null
     };
@@ -12,10 +12,10 @@ class ValueSets extends Component {
     render() {
         return (
             <React.Fragment>
-                <div>ValueSets</div>
+                <div>CodeGroups</div>
             </React.Fragment>
         );
     }
 }
 
-export default ValueSets;
+export default CodeGroups;

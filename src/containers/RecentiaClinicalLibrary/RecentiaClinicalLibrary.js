@@ -12,11 +12,12 @@ import Header from '../../components/Header/Header';
 import classes from './RecentiaClinicalLibrary.css'
 
 // Sub-Containers
-import Dictionary from './Dictionary/Dictionary';
 import Metathesaurus from './Metathesaurus/Metathesaurus';
+import QualityMeasures from './QualityMeasures/QualityMeasures';
+import CodeGroups from './CodeGroups/CodeGroups';
 import CodingSystems from './CodingSystems/CodingSystems';
-import ValueSets from './ValueSets/ValueSets';
-import Languages from './Languages/Languages';
+import ClinicalDictionary from './ClinicalDictionary/ClinicalDictionary';
+import Translate from './Translate/Translate';
 
 class recentiaClinicalLibrary extends Component {
     state = {
@@ -38,11 +39,12 @@ class recentiaClinicalLibrary extends Component {
                     <SearchBar/>
                 </div>
                 <Switch>
-                    <Route path={this.props.match.url + "/dictionary" } component={Dictionary}/>
                     <Route path={this.props.match.url + "/metathesaurus"} component={Metathesaurus}/>
+                    <Route path={this.props.match.url + "/quality_measures"} component={QualityMeasures}/>
+                    <Route path={this.props.match.url + "/code_groups"} component={CodeGroups}/>
                     <Route path={this.props.match.url + "/coding_systems"} component={CodingSystems}/>
-                    <Route path={this.props.match.url + "/value_sets"} component={ValueSets}/>
-                    <Route path={this.props.match.url + "/languages"} component={Languages}/>
+                    <Route path={this.props.match.url + "/clinical_dictionary" } component={ClinicalDictionary}/>
+                    <Route path={this.props.match.url + "/translate"} component={Translate}/>
                 </Switch>
             </React.Fragment>
         );
