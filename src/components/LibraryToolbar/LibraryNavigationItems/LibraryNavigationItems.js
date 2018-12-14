@@ -5,13 +5,14 @@ import LibraryNavigationItem from './LibraryNavigationItem/LibraryNavigationItem
 import classes from './LibraryNavigationItems.css';
 
 const libaryNavigationItems = () => (
-  <ul className={classes.recentia_search_ul}>
-      <LibraryNavigationItem link='/clinical_library/dictionary'>Dictionary</LibraryNavigationItem>
-      <LibraryNavigationItem link='/clinical_library/metathesaurus'>Metathesaurus</LibraryNavigationItem>
-      <LibraryNavigationItem link='/clinical_library/coding_systems'>Coding Systems</LibraryNavigationItem>
-      <LibraryNavigationItem link='/clinical_library/value_sets'>Value Sets</LibraryNavigationItem>
-      <LibraryNavigationItem link='/clinical_library/languages'>Languages</LibraryNavigationItem>
-  </ul>
+    <ul className={classes.recentia_search_ul}>
+        <LibraryNavigationItem link='/clinical_library/metathesaurus'>Metathesaurus</LibraryNavigationItem>
+        <LibraryNavigationItem link='/clinical_library/quality_measures'>Quality Measures</LibraryNavigationItem>
+        <LibraryNavigationItem link='/clinical_library/code_groups'>Code Groups</LibraryNavigationItem>
+        <LibraryNavigationItem link='/clinical_library/coding_systems'>Coding Systems</LibraryNavigationItem>
+        <LibraryNavigationItem link='/clinical_library/clinical_dictionary'>Clinical Dictionary</LibraryNavigationItem>
+        <LibraryNavigationItem link='/clinical_library/translate'>Translate</LibraryNavigationItem>
+    </ul>
 );
 
 export default libaryNavigationItems;
