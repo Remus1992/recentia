@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 
 import axios from '../../../axios-recentia';
 
-import session_id from '../../../secret';
-import license from '../../../secret2';
+import session_id, { license } from "../../../secret2";
 
 // import classes from './Dictionary.css'
 
