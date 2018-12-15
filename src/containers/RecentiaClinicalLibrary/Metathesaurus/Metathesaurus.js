@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from "../../../axios-recentia";
 import session_id, {
-    search_term,
+    // search_term,
     query_type,
     input_language,
     output_language,
@@ -16,7 +16,7 @@ import session_id, {
     ip_address,
     clinic_license,
     physician_license
-            } from "../../../secret";
+} from "../../../secret";
 
 
 // import axios from '../../../axios-orders';
@@ -25,13 +25,15 @@ import session_id, {
 
 class Metathesaurus extends Component {
     state = {
-        definitions: null
+        getTermItems: [],
+        query: ''
     };
 
-        componentDidMount () {
-        console.log( this.props );
-        axios.get( '/getTerms.php?SessionID=' + session_id
-            + '&SearchTerm=' + search_term
+    getInfo  = () => {
+        console.log(this.props);
+        axios.get('/getTerms.php?SessionID=' + session_id
+            // + '&SearchTerm=' + search_term
+            + '&SearchTerm=' + this.state.query
             + '&QueryType=' + query_type
             + '&InputLanguage=' + input_language
             + '&OutputLanguage=' + output_language
@@ -47,21 +49,59 @@ class Metathesaurus extends Component {
             + '&ClinicLicense=' + clinic_license
             + '&PhysicianLicense=' + physician_license
         )
-            .then( response => {
-                const definitions = response.data;
-                this.setState( { definitions: definitions } );
-                console.log( response );
-            } )
-            .catch( error => {
-                console.log( error );
+            .then(response => {
+                const getTermItems = response.data;
+                this.setState({getTermItems: getTermItems});
+                console.log(response);
+
+                let i = getTermItems.length;
+                console.log(i);
+                for (let index = 0; index < getTermItems.length; index++) {
+                    console.log("Concept is: " + getTermItems[index]["Concept"])
+                }
+            })
+            .catch(error => {
+                console.log(error);
                 // this.setState({error: true});
-            } );
-    }
+            });
+    };
+
+    handleInputChange = () => {
+        this.setState({
+            query: this.search.value
+        }, () => {
+            if (this.state.query && this.state.query.length > 1) {
+                if (this.state.query.length % 2 === 0) {
+                    this.getInfo()
+                }
+            } else if (!this.state.query) {
+            }
+        })
+    };
+
 
     render() {
+        let items = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
+        if (!this.state.error) {
+            items = this.state.getTermItems.map(item => {
+                return (
+                    <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm}</p>
+                );
+            });
+        }
+
+
         return (
             <React.Fragment>
-                <div>Metathesaurus</div>
+                <form>
+                    <input
+                        placeholder="Search for..."
+                        ref={input => this.search = input}
+                        onChange={this.handleInputChange}
+                    />
+                    <p>{this.state.query}</p>
+                </form>
+                <div>{items}</div>
             </React.Fragment>
         );
     }
