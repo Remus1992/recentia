@@ -1,15 +1,25 @@
-import React from 'react';
+import React, {Component} from 'react';
 import classes from "./SearchBar.css";
 
-const searchBar = () => (
-    <div className={classes.recentia_search_wrapper}>
-        <form>
-            <input
-                type="text"
-                placeholder="Search"
-                className={classes.search_bar}/>
-        </form>
-    </div>
-);
+import { updateText, handleInputChange, getInfo } from '../../containers/RecentiaClinicalLibrary/Metathesaurus/Metathesaurus';
 
-export default searchBar;
+class SearchBar extends Component {
+    // constructor(props) {
+    //     super(props)
+    // }
+
+    render() {
+        return (
+            <div className={classes.recentia_search_wrapper}>
+                <input
+                    type="text"
+                    placeholder="Search"
+                    // onChange={(e) => updateText(e.target.value)}
+                    onChange={handleInputChange}
+                    className={classes.search_bar}/>
+            </div>
+        )
+    }
+}
+
+export default SearchBar;

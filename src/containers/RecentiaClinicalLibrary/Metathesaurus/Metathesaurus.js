@@ -23,13 +23,26 @@ import session_id, {
 
 // import classes from './Metathesaurus.css'
 
-class Metathesaurus extends Component {
-    state = {
-        getTermItems: [],
-        query: ''
-    };
+export function updateText(text) {
+    this.setState({text})
+}
 
-    getInfo  = () => {
+
+export function handleInputChange() {
+        this.setState({
+            query: this.search.value
+        }, () => {
+            console.log(this.state.query);
+            if (this.state.query && this.state.query.length > 1) {
+                if (this.state.query.length % 2 === 0) {
+                    getInfo()
+                }
+            } else if (!this.state.query) {
+            }
+        })
+    }
+
+export function getInfo() {
         console.log(this.props);
         axios.get('/getTerms.php?SessionID=' + session_id
             // + '&SearchTerm=' + search_term
@@ -64,20 +77,75 @@ class Metathesaurus extends Component {
                 console.log(error);
                 // this.setState({error: true});
             });
-    };
+    }
 
-    handleInputChange = () => {
-        this.setState({
-            query: this.search.value
-        }, () => {
-            if (this.state.query && this.state.query.length > 1) {
-                if (this.state.query.length % 2 === 0) {
-                    this.getInfo()
-                }
-            } else if (!this.state.query) {
-            }
-        })
-    };
+class Metathesaurus extends Component {
+    // state = {
+    //     getTermItems: [],
+    //     query: ''
+    // };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            text: 'Asthma',
+            getTermItems: [],
+            query: ''
+        };
+        updateText = updateText.bind(this);
+        handleInputChange = handleInputChange.bind(this);
+
+    }
+
+    // getInfo  = () => {
+    //     console.log(this.props);
+    //     axios.get('/getTerms.php?SessionID=' + session_id
+    //         // + '&SearchTerm=' + search_term
+    //         + '&SearchTerm=' + this.state.text
+    //         + '&QueryType=' + query_type
+    //         + '&InputLanguage=' + input_language
+    //         + '&OutputLanguage=' + output_language
+    //         + '&InputVocabulary=' + input_vocabulary
+    //         + '&OutputVocabulary=' + output_vocabulary
+    //         + '&SemanticType=' + semantic_type
+    //         + '&ClinicalVariable=' + clinical_variable
+    //         + '&FilterByValueSets=' + filter_by_value_sets
+    //         + '&SortOrder=' + sort_order
+    //         + '&RowOffsetArg=' + row_off_set_arg
+    //         + '&RowsInSubsetArg=' + rows_in_subset_arg
+    //         + '&IP_Address=' + ip_address
+    //         + '&ClinicLicense=' + clinic_license
+    //         + '&PhysicianLicense=' + physician_license
+    //     )
+    //         .then(response => {
+    //             const getTermItems = response.data;
+    //             this.setState({getTermItems: getTermItems});
+    //             console.log(response);
+    //
+    //             let i = getTermItems.length;
+    //             console.log(i);
+    //             for (let index = 0; index < getTermItems.length; index++) {
+    //                 console.log("Concept is: " + getTermItems[index]["Concept"])
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //             // this.setState({error: true});
+    //         });
+    // };
+
+    // handleInputChange = () => {
+    //     this.setState({
+    //         query: this.search.value
+    //     }, () => {
+    //         if (this.state.query && this.state.query.length > 1) {
+    //             if (this.state.query.length % 2 === 0) {
+    //                 this.getInfo()
+    //             }
+    //         } else if (!this.state.query) {
+    //         }
+    //     })
+    // };
 
 
     render() {
@@ -99,9 +167,10 @@ class Metathesaurus extends Component {
                         ref={input => this.search = input}
                         onChange={this.handleInputChange}
                     />
-                    <p>{this.state.query}</p>
+                    <p>Sibling Search = {this.state.text}</p>
+                    <p>Child Search = {this.state.query}</p>
                 </form>
-                <div>{items}</div>
+                {/*<div>{items}</div>*/}
             </React.Fragment>
         );
     }
