@@ -28,9 +28,9 @@ export function updateText(text) {
 }
 
 
-export function handleInputChange() {
+export function handleInputChange(query) {
         this.setState({
-            query: this.search.value
+            query: query
         }, () => {
             console.log(this.state.query);
             if (this.state.query && this.state.query.length > 1) {
@@ -38,12 +38,13 @@ export function handleInputChange() {
                     getInfo()
                 }
             } else if (!this.state.query) {
+                console.log('Unsuccesful')
             }
         })
     }
 
 export function getInfo() {
-        console.log(this.props);
+        // console.log(this.props);
         axios.get('/getTerms.php?SessionID=' + session_id
             // + '&SearchTerm=' + search_term
             + '&SearchTerm=' + this.state.query
@@ -94,6 +95,7 @@ class Metathesaurus extends Component {
         };
         updateText = updateText.bind(this);
         handleInputChange = handleInputChange.bind(this);
+        getInfo = getInfo.bind(this);
 
     }
 

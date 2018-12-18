@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
 import classes from "./SearchBar.css";
 
-import { updateText, handleInputChange, getInfo } from '../../containers/RecentiaClinicalLibrary/Metathesaurus/Metathesaurus';
+import {
+    // updateText,
+    handleInputChange,
+    // getInfo
+} from '../../containers/RecentiaClinicalLibrary/Metathesaurus/Metathesaurus';
 
 class SearchBar extends Component {
     // constructor(props) {
@@ -11,12 +15,15 @@ class SearchBar extends Component {
     render() {
         return (
             <div className={classes.recentia_search_wrapper}>
-                <input
-                    type="text"
-                    placeholder="Search"
-                    // onChange={(e) => updateText(e.target.value)}
-                    onChange={handleInputChange}
-                    className={classes.search_bar}/>
+                <form>
+                    <input
+                        type="text"
+                        placeholder="Search"
+                        // onChange={(e) => updateText(e.target.value)}
+                        onChange={(e) => handleInputChange(e.target.value)}
+                        // onChange={handleInputChange}
+                        className={classes.search_bar}/>
+                </form>
             </div>
         )
     }
