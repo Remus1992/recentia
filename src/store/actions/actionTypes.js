@@ -1,0 +1,1 @@
+export const GET_QUERY_TERM = 'GET_QUERY_TERM';
