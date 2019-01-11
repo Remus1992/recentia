@@ -20,70 +20,7 @@ import CodingSystems from './CodingSystems/CodingSystems';
 import ClinicalDictionary from './ClinicalDictionary/ClinicalDictionary';
 import Translate from './Translate/Translate';
 
-// function updateState(text) {
-//     this.setState({text})
-// }
-
-// class SearchBar extends Component {
-//     render() {
-//         return (
-//             <div>
-//                 <input
-//                     type="text"
-//                     placeholder="Search"
-//                     onChange={(e) => updateText(e.target.value)}/>
-//             </div>
-//         )
-//     }
-// }
-
-// function updateText(text) {
-//     this.setState({
-//         text
-//     })
-// }
-
-// class Metathesaurus extends Component {
-//
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             text: "Initial State"
-//         };
-//         updateText = updateText.bind(this)
-//     }
-//
-//     render() {
-//         return (
-//             <React.Fragment>
-//                 <form>
-//                     <input
-//                         placeholder="Search for..."
-//                         ref={input => this.search = input}
-//                         // onChange={this.handleInputChange}
-//                     />
-//                     <p>Meta</p>
-//                     <p>{this.state.text}</p>
-//                     {/*<p>{this.state.query}</p>*/}
-//                 </form>
-//                 {/*<div>{items}</div>*/}
-//             </React.Fragment>
-//         );
-//     }
-// }
-
 class recentiaClinicalLibrary extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         text: "Initial Text"
-    //     };
-    //     this.updateText1 = this.updateText1;
-    // }
-    //
-    // updateText1 = (text) => {
-    //     this.setState({text})
-    // };
 
     render() {
         return (

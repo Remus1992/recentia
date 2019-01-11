@@ -169,8 +169,8 @@ class Metathesaurus extends Component {
                         ref={input => this.search = input}
                         onChange={this.handleInputChange}
                     />
-                    <p>Sibling Search = {this.state.text}</p>
-                    <p>Child Search = {this.state.query}</p>
+                    <p>Internal Search = {this.state.text}</p>
+                    <p>Sibling Search = {this.state.query}</p>
                 </form>
                 {/*<div>{items}</div>*/}
             </React.Fragment>
