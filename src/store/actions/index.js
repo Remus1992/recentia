@@ -1,0 +1,3 @@
+export {
+    getSearchTerm
+} from './search';

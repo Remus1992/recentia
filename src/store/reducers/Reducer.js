@@ -37,14 +37,15 @@ const initialState = {
     physician_license = physician_license
 }
 
-const getQueryTerm = (state, action) => {
+const getSearchTerm = (state, action) => {
+    const updatedSearchTerm = {[action.searchTerm]}
     return
 }
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
-        case actionTypes.GET_QUERY_TERM:
-            return getQueryTerm;
+        case actionTypes.GET_SEARCH_TERM:
+            return getSearchTerm;
         default:
 
     }

@@ -1,1 +1,1 @@
-export const GET_QUERY_TERM = 'GET_QUERY_TERM';
+export const GET_SEARCH_TERM = 'GET_SEARCH_TERM';
