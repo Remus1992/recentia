@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import classes from "./SearchBar.css";
+import {connect} from 'react-redux';
+
+import * as actions from '../../store/actions/index';
 
 import {
     // updateText,
@@ -29,4 +32,16 @@ class SearchBar extends Component {
     }
 }
 
-export default SearchBar;
+const mapStateToProps = state => {
+    return {
+        sample state
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        sample dispatch
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
