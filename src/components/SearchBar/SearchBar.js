@@ -22,9 +22,10 @@ class SearchBar extends Component {
                     <input
                         type="text"
                         placeholder="Search"
-                        // onChange={(e) => updateText(e.target.value)}
-                        onChange={(e) => handleInputChange(e.target.value)}
-                        // onChange={handleInputChange}
+                        // // onChange={(e) => updateText(e.target.value)}
+                        // onChange={(e) => handleInputChange(e.target.value)}
+                        // // onChange={handleInputChange}
+                        onChange={(e) => this.props.onSearchChange(e.target.value)}
                         className={classes.search_bar}/>
                 </form>
             </div>

@@ -35,10 +35,10 @@ const initialState = {
     ip_address = ip_address,
     clinic_license = clinic_license,
     physician_license = physician_license
-}
+};
 
 const getSearchTerm = (state, action) => {
-    const updatedSearchTerm = {[action.searchTerm]}
+    const updatedSearchTerm = {[action.searchTerm]};
     return
 }
 
