@@ -38,7 +38,7 @@ export function handleInputChange(query) {
                     getInfo()
                 }
             } else if (!this.state.query) {
-                console.log('Unsuccesful')
+                console.log('Unsuccessful')
             }
         })
     }

@@ -34,14 +34,15 @@ class SearchBar extends Component {
 
 const mapStateToProps = state => {
     return {
-        sample state
+        searchTerm: state.search_term
     }
-}
+};
 
 const mapDispatchToProps = dispatch => {
     return {
-        sample dispatch
+        // sample dispatch that sends query to state
+        onSearchChange: (search) => dispatch(actions.getSearchTerm(search))
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
