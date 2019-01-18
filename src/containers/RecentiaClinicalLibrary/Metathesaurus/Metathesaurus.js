@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import axios from "../../../axios-recentia";
+import {connect} from 'react-redux';
+
+import * as actions from '../../../store/actions/index';
+
 import session_id, {
     // search_term,
     query_type,
@@ -173,6 +177,7 @@ class Metathesaurus extends Component {
                     />
                     <p>Internal Search = {this.state.text}</p>
                     <p>Sibling Search = {this.state.query}</p>
+                    <p>Sibling Search = {this.props.searchTerm}</p>
                 </form>
                 {/*<div>{items}</div>*/}
             </React.Fragment>
@@ -180,4 +185,17 @@ class Metathesaurus extends Component {
     }
 }
 
-export default Metathesaurus;
+const mapStateToProps = state => {
+    return {
+        searchTerm: state.searchReducer.search_term
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        // sample dispatch that sends query to state
+        onSearchChange: (search) => dispatch(actions.getSearchTerm(search))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Metathesaurus);
