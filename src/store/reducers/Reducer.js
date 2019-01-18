@@ -1,7 +1,8 @@
 import * as actionTypes from '../actions/actionTypes';
+import {updateObject} from "../utility";
 
 import session_id, {
-    search_term,
+    // search_term,
     query_type,
     input_language,
     output_language,
@@ -20,7 +21,8 @@ import session_id, {
 
 
 const initialState = {
-    search_term: search_term,
+    session_id: session_id,
+    search_term: '',
     query_type: query_type,
     input_language: input_language,
     output_language: output_language,
@@ -38,8 +40,11 @@ const initialState = {
 };
 
 const getSearchTerm = (state, action) => {
-    const updatedSearchTerm = {[action.searchTerm]};
-    return
+    const updatedState = {
+        search_term: action.searchTerm
+    };
+
+    return updateObject(state, updatedState);
 };
 
 const reducer = (state = initialState, action) => {

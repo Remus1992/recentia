@@ -5,4 +5,4 @@ export const getSearchTerm = (term) => {
         type: actionTypes.GET_SEARCH_TERM,
         searchTerm: term
     }
-}
+};
