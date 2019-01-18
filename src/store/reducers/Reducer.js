@@ -36,7 +36,8 @@ const initialState = {
     rows_in_subset_arg: rows_in_subset_arg,
     ip_address: ip_address,
     clinic_license: clinic_license,
-    physician_license: physician_license
+    physician_license: physician_license,
+    error: false
 };
 
 const getSearchTerm = (state, action) => {
@@ -50,9 +51,9 @@ const getSearchTerm = (state, action) => {
 const reducer = (state = initialState, action) => {
     switch(action.type) {
         case actionTypes.GET_SEARCH_TERM:
-            return getSearchTerm;
+            return getSearchTerm(state, action);
         default:
-
+            return state;
     }
 };
 

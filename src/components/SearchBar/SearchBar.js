@@ -6,7 +6,7 @@ import * as actions from '../../store/actions/index';
 
 import {
     // updateText,
-    handleInputChange,
+    // handleInputChange,
     // getInfo
 } from '../../containers/RecentiaClinicalLibrary/Metathesaurus/Metathesaurus';
 
@@ -35,7 +35,7 @@ class SearchBar extends Component {
 
 const mapStateToProps = state => {
     return {
-        searchTerm: state.search_term
+        searchTerm: state.searchReducer.search_term
     }
 };
 

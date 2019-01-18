@@ -23,25 +23,26 @@ import session_id, {
 
 // import classes from './Metathesaurus.css'
 
-export function updateText(text) {
-    this.setState({text})
-}
-
-
-export function handleInputChange(query) {
-        this.setState({
-            query: query
-        }, () => {
-            console.log(this.state.query);
-            if (this.state.query && this.state.query.length > 1) {
-                if (this.state.query.length % 2 === 0) {
-                    getInfo()
-                }
-            } else if (!this.state.query) {
-                console.log('Unsuccessful')
-            }
-        })
-    }
+// 222222
+// export function updateText(text) {
+//     this.setState({text})
+// }
+//
+// 2222222
+// export function handleInputChange(query) {
+//         this.setState({
+//             query: query
+//         }, () => {
+//             console.log(this.state.query);
+//             if (this.state.query && this.state.query.length > 1) {
+//                 if (this.state.query.length % 2 === 0) {
+//                     getInfo()
+//                 }
+//             } else if (!this.state.query) {
+//                 console.log('Unsuccessful')
+//             }
+//         })
+//     }
 
 export function getInfo() {
         // console.log(this.props);
@@ -93,9 +94,10 @@ class Metathesaurus extends Component {
             getTermItems: [],
             query: ''
         };
-        updateText = updateText.bind(this);
-        handleInputChange = handleInputChange.bind(this);
-        getInfo = getInfo.bind(this);
+        // 222222
+        // updateText = updateText.bind(this);
+        // handleInputChange = handleInputChange.bind(this);
+        // getInfo = getInfo.bind(this);
 
     }
 
@@ -167,7 +169,7 @@ class Metathesaurus extends Component {
                     <input
                         placeholder="Search for..."
                         ref={input => this.search = input}
-                        onChange={this.handleInputChange}
+                        // onChange={this.handleInputChange}
                     />
                     <p>Internal Search = {this.state.text}</p>
                     <p>Sibling Search = {this.state.query}</p>
