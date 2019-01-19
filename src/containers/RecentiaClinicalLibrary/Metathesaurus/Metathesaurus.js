@@ -119,6 +119,11 @@ class Metathesaurus extends Component {
         })
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.value !== this.props.value) {
+            alert(prevProps.value)
+        }
+    }
 
     render() {
         let items = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
