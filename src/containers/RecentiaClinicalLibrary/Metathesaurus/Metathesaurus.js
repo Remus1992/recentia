@@ -130,11 +130,8 @@ class Metathesaurus extends Component {
 
     render() {
         let getTerm_results = <Spinner/>;
-
-
-        let items = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
-        if (!this.state.error) {
-            items = this.state.getTermItems.map(item => {
+        if (!this.props.loading) {
+            getTerm_results = this.state.getTermItems.map(item => {
                 return (
                     <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm}</p>
                 );
@@ -142,20 +139,23 @@ class Metathesaurus extends Component {
         }
 
 
+        // let items = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
+        // if (!this.state.error) {
+        //     items = this.state.getTermItems.map(item => {
+        //         return (
+        //             <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm}</p>
+        //         );
+        //     });
+        // }
+
+
         return (
             <React.Fragment>
                 <form>
-                    <input
-                        placeholder="Search for..."
-                        ref={input => this.search = input}
-                        // onChange={this.handleInputChange}
-                    />
-                    <p>Internal Search = {this.state.text}</p>
-                    <p>Sibling Search = {this.state.query}</p>
-                    <p>Sibling Search = {this.props.searchTerm}</p>
+                    <p>Redux SearchTerm = {this.props.searchTerm}</p>
                     <button onClick={this.getInfo}>CLICK ME</button>
                 </form>
-                {/*<div>{items}</div>*/}
+                <div>{getTerm_results}</div>
             </React.Fragment>
         );
     }
@@ -163,7 +163,8 @@ class Metathesaurus extends Component {
 
 const mapStateToProps = state => {
     return {
-        searchTerm: state.searchReducer.search_term
+        searchTerm: state.searchReducer.search_term,
+        loading: state.searchReducer.loading
     }
 };
 
