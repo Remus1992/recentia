@@ -6,154 +6,24 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 
 import * as actions from '../../../store/actions/index';
 
-import session_id, {
-    // search_term,
-    query_type,
-    input_language,
-    output_language,
-    input_vocabulary,
-    output_vocabulary,
-    semantic_type,
-    clinical_variable,
-    filter_by_value_sets,
-    sort_order,
-    row_off_set_arg,
-    rows_in_subset_arg,
-    ip_address,
-    clinic_license,
-    physician_license
-} from "../../../secret";
-
-
-// import axios from '../../../axios-orders';
-
 // import classes from './Metathesaurus.css'
-
-// export function updateText(text) {
-//     this.setState({text})
-// }
-
-export function handleInputChange(query) {
-    this.setState({
-        query: query
-    }, () => {
-        console.log(this.state.query);
-        if (this.state.query && this.state.query.length > 1) {
-            if (this.state.query.length % 2 === 0) {
-                getInfo()
-            }
-        } else if (!this.state.query) {
-            console.log('Unsuccessful')
-        }
-    })
-}
-
-export function getInfo() {
-    // console.log(this.props);
-    axios.get('/getTerms.php?SessionID=' + session_id
-        // + '&SearchTerm=' + search_term
-        // + '&SearchTerm=' + this.state.query
-        + '&SearchTerm=' + this.props.searchTerm
-        + '&QueryType=' + query_type
-        + '&InputLanguage=' + input_language
-        + '&OutputLanguage=' + output_language
-        + '&InputVocabulary=' + input_vocabulary
-        + '&OutputVocabulary=' + output_vocabulary
-        + '&SemanticType=' + semantic_type
-        + '&ClinicalVariable=' + clinical_variable
-        + '&FilterByValueSets=' + filter_by_value_sets
-        + '&SortOrder=' + sort_order
-        + '&RowOffsetArg=' + row_off_set_arg
-        + '&RowsInSubsetArg=' + rows_in_subset_arg
-        + '&IP_Address=' + ip_address
-        + '&ClinicLicense=' + clinic_license
-        + '&PhysicianLicense=' + physician_license
-    )
-        .then(response => {
-            const getTermItems = response.data;
-            this.setState({getTermItems: getTermItems});
-            console.log(response);
-
-            let i = getTermItems.length;
-            console.log(i);
-            for (let index = 0; index < getTermItems.length; index++) {
-                console.log("Concept is: " + getTermItems[index]["Concept"])
-            }
-        })
-        .catch(error => {
-            console.log(error);
-            // this.setState({error: true});
-        });
-}
 
 
 class Metathesaurus extends Component {
-    // state = {
-    //     getTermItems: [],
-    //     query: ''
-    // };
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            text: 'Asthma',
-            getTermItems: [],
-            query: '',
-
-            searchTermLocal: '',
-            currentlyDisplayed: this.props.searchTerm
-        };
-
-        // bindings
-        this.onInputChange = this.onInputChange.bind(this)
-
-        // 222222
-        // updateText = updateText.bind(this);
-        // handleInputChange = handleInputChange.bind(this);
-        // getInfo = getInfo.bind(this);
-    }
-
-    onInputChange(event) {
-        // let newlyDisplayed = ();
-
-        this.setState({
-            searchTerm: event.target.value,
-            // currentlyDisplayed: newlyDisplayed
-        })
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.value !== this.props.value) {
-            alert(prevProps.value)
-        }
-    }
-
     render() {
         let getTerm_results = <Spinner/>;
         if (!this.props.loading) {
-            getTerm_results = this.state.getTermItems.map(item => {
+            getTerm_results = this.props.getTermItems.map(item => {
                 return (
                     <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm}</p>
                 );
             });
         }
 
-
-        // let items = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
-        // if (!this.state.error) {
-        //     items = this.state.getTermItems.map(item => {
-        //         return (
-        //             <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm}</p>
-        //         );
-        //     });
-        // }
-
-
         return (
             <React.Fragment>
                 <form>
                     <p>Redux SearchTerm = {this.props.searchTerm}</p>
-                    <button onClick={this.getInfo}>CLICK ME</button>
                 </form>
                 <div>{getTerm_results}</div>
             </React.Fragment>
@@ -164,7 +34,8 @@ class Metathesaurus extends Component {
 const mapStateToProps = state => {
     return {
         searchTerm: state.searchReducer.search_term,
-        loading: state.searchReducer.loading
+        loading: state.searchReducer.loading,
+        getTermItems: state.searchReducer.search_results
     }
 };
 
