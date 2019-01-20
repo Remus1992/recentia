@@ -24,7 +24,9 @@ class Metathesaurus extends Component {
             <React.Fragment>
                 <form>
                     <p>Redux SearchTerm = {this.props.searchTerm}</p>
+                    <input type="text" onChange={(e) => this.props.onGetInfo(e.target.value)} value={this.props.searchTerm}/>
                 </form>
+
                 <div>{getTerm_results}</div>
             </React.Fragment>
         );
@@ -41,8 +43,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        // sample dispatch that sends query to state
-        onSearchChange: (search) => dispatch(actions.getSearchTerm(search))
+        onGetInfo: (SEARCH) => dispatch(actions.getInfo(SEARCH))
     }
 };
 

@@ -50,10 +50,8 @@ const initialState = {
 };
 
 const getInfoStart = (state, action) => {
-    return updateObject(state, {loading: false});
+    return updateObject(state, {loading: true});
 };
-
-
 
 const getInfoFail = (state, action) => {
     return updateObject(state, {loading: false});
@@ -61,7 +59,7 @@ const getInfoFail = (state, action) => {
 
 const getInfoSuccess = (state, action) => {
     return updateObject(state, {
-        orders: action.orders,
+        search_results: action.getTermItems,
         loading: false
     });
 };

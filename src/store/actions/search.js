@@ -2,12 +2,19 @@ import * as actionTypes from './actionTypes';
 import axios from "../../axios-recentia";
 import session_id, {
     clinic_license,
-    clinical_variable, filter_by_value_sets,
+    clinical_variable,
+    filter_by_value_sets,
     input_language,
-    input_vocabulary, ip_address,
+    input_vocabulary,
+    ip_address,
     output_language,
-    output_vocabulary, physician_license,
-    query_type, row_off_set_arg, rows_in_subset_arg, semantic_type, sort_order
+    output_vocabulary,
+    physician_license,
+    query_type,
+    row_off_set_arg,
+    rows_in_subset_arg,
+    semantic_type,
+    sort_order
 } from "../../secret";
 
 
@@ -32,13 +39,13 @@ export const getInfoFail = (error) => {
     }
 };
 
-export const getInfo = () => {
+export const getInfo = (SEARCH_TERM) => {
     return dispatch => {
         dispatch(getInfoStart());
         axios.get('/getTerms.php?SessionID=' + session_id
             // + '&SearchTerm=' + search_term
             // + '&SearchTerm=' + this.state.query
-            + '&SearchTerm=' + this.props.searchTerm
+            + '&SearchTerm=' + SEARCH_TERM
             + '&QueryType=' + query_type
             + '&InputLanguage=' + input_language
             + '&OutputLanguage=' + output_language

@@ -1,3 +1,4 @@
 export {
-    getSearchTerm
+    getSearchTerm,
+    getInfo
 } from './search';
