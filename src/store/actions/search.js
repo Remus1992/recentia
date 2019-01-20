@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from "../../axios-recentia";
+
 import session_id, {
     clinic_license,
     clinical_variable,

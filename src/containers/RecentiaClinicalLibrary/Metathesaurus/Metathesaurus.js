@@ -13,6 +13,7 @@ class Metathesaurus extends Component {
     render() {
         let getTerm_results = <Spinner/>;
         if (!this.props.loading) {
+            console.log(this.props.getTermItems);
             getTerm_results = this.props.getTermItems.map(item => {
                 return (
                     <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm}</p>
@@ -26,7 +27,6 @@ class Metathesaurus extends Component {
                     <p>Redux SearchTerm = {this.props.searchTerm}</p>
                     <input type="text" onChange={(e) => this.props.onGetInfo(e.target.value)} value={this.props.searchTerm}/>
                 </form>
-
                 <div>{getTerm_results}</div>
             </React.Fragment>
         );
