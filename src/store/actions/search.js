@@ -56,7 +56,7 @@ export const getInfo = () => {
         )
             .then(response => {
                 const getTermItems = response.data;
-                this.setState({getTermItems: getTermItems});
+                this.setState({search_results: getTermItems});
                 console.log(response);
 
                 let i = getTermItems.length;
@@ -64,6 +64,7 @@ export const getInfo = () => {
                 for (let index = 0; index < getTermItems.length; index++) {
                     console.log("Concept is: " + getTermItems[index]["Concept"])
                 }
+                dispatch(getInfoSuccess(getTermItems));
             })
             .catch(error => {
                 console.log(error);
