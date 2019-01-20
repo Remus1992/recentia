@@ -22,6 +22,11 @@ import axios from "../../axios-recentia";
 
 
 const initialState = {
+    // search results
+
+    search_results: [],
+
+    // query params
     session_id: session_id,
     search_term: '',
     query_type: query_type,
@@ -38,12 +43,27 @@ const initialState = {
     ip_address: ip_address,
     clinic_license: clinic_license,
     physician_license: physician_license,
+
+    // loading info
     error: false,
     loading: false
 };
 
-const getSearchTermStart = (state, action) => {
+const getInfoStart = (state, action) => {
     return updateObject(state, {loading: false});
+};
+
+
+
+const getInfoFail = (state, action) => {
+    return updateObject(state, {loading: false});
+};
+
+const getInfoSuccess = (state, action) => {
+    return updateObject(state, {
+        orders: action.orders,
+        loading: false
+    });
 };
 
 const getSearchTerm = (state, action) => {
@@ -55,18 +75,16 @@ const getSearchTerm = (state, action) => {
     return updateObject(state, updatedState);
 };
 
-const getSearchTermFail = (state, action) => {
-    return updateObject(state, {loading: false});
-};
-
 const reducer = (state = initialState, action) => {
-    switch(action.type) {
-        case actionTypes.GET_SEARCH_TERM_START:
-            return getSearchTermStart(state, action);
+    switch (action.type) {
+        case actionTypes.GET_INFO_START:
+            return getInfoStart(state, action);
+        case actionTypes.GET_INFO_SUCCESS:
+            return getInfoSuccess(state, action);
+        case actionTypes.GET_INFO_FAIL:
+            return getInfoFail(state, action);
         case actionTypes.GET_SEARCH_TERM:
             return getSearchTerm(state, action);
-        case actionTypes.GET_SEARCH_TERM_FAIL:
-            return getSearchTermFail(state, action);
         default:
             return state;
     }

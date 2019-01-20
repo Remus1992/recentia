@@ -10,9 +10,25 @@ import session_id, {
     query_type, row_off_set_arg, rows_in_subset_arg, semantic_type, sort_order
 } from "../../secret";
 
+
 export const getInfoStart = () => {
     return {
-        type: actionTypes.FETCH_ORDERS_START
+        type: actionTypes.GET_INFO_START
+    }
+};
+
+
+export const getInfoSuccess = (search_results) => {
+    return {
+        type: actionTypes.GET_INFO_SUCCESS,
+        search_results: search_results
+    }
+};
+
+export const getInfoFail = (error) => {
+    return {
+        type: actionTypes.GET_INFO_FAIL,
+        error: error
     }
 };
 
@@ -51,7 +67,7 @@ export const getInfo = () => {
             })
             .catch(error => {
                 console.log(error);
-                // this.setState({error: true});
+                dispatch(getInfoFail(error))
             });
     }
 };
