@@ -50,7 +50,8 @@ export function getInfo() {
     // console.log(this.props);
     axios.get('/getTerms.php?SessionID=' + session_id
         // + '&SearchTerm=' + search_term
-        + '&SearchTerm=' + this.state.query
+        // + '&SearchTerm=' + this.state.query
+        + '&SearchTerm=' + this.props.searchTerm
         + '&QueryType=' + query_type
         + '&InputLanguage=' + input_language
         + '&OutputLanguage=' + output_language
@@ -147,6 +148,7 @@ class Metathesaurus extends Component {
                     <p>Internal Search = {this.state.text}</p>
                     <p>Sibling Search = {this.state.query}</p>
                     <p>Sibling Search = {this.props.searchTerm}</p>
+                    <button onClick={this.getInfo}>CLICK ME</button>
                 </form>
                 {/*<div>{items}</div>*/}
             </React.Fragment>

@@ -18,6 +18,7 @@ import session_id, {
     clinic_license,
     physician_license
 } from "../../secret";
+import axios from "../../axios-recentia";
 
 
 const initialState = {
@@ -39,6 +40,8 @@ const initialState = {
     physician_license: physician_license,
     error: false
 };
+
+
 
 const getSearchTerm = (state, action) => {
     const updatedState = {
