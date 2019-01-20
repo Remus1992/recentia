@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import axios from "../../../axios-recentia";
 import {connect} from 'react-redux';
 
+import Spinner from '../../../components/UI/Spinner/Spinner';
+
 import * as actions from '../../../store/actions/index';
 
 import session_id, {
@@ -127,6 +129,9 @@ class Metathesaurus extends Component {
     }
 
     render() {
+        let getTerm_results = <Spinner/>;
+
+
         let items = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
         if (!this.state.error) {
             items = this.state.getTermItems.map(item => {

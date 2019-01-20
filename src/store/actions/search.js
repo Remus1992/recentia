@@ -56,8 +56,6 @@ export const getInfo = () => {
         )
             .then(response => {
                 const getTermItems = response.data;
-                this.setState({search_results: getTermItems});
-                console.log(response);
 
                 let i = getTermItems.length;
                 console.log(i);
