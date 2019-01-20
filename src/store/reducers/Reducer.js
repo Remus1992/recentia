@@ -38,23 +38,35 @@ const initialState = {
     ip_address: ip_address,
     clinic_license: clinic_license,
     physician_license: physician_license,
-    error: false
+    error: false,
+    loading: false
 };
 
-
+const getSearchTermStart = (state, action) => {
+    return updateObject(state, {loading: false});
+};
 
 const getSearchTerm = (state, action) => {
     const updatedState = {
-        search_term: action.searchTerm
+        search_term: action.searchTerm,
+        loading: false
     };
 
     return updateObject(state, updatedState);
 };
 
+const getSearchTermFail = (state, action) => {
+    return updateObject(state, {loading: false});
+};
+
 const reducer = (state = initialState, action) => {
     switch(action.type) {
+        case actionTypes.GET_SEARCH_TERM_START:
+            return getSearchTermStart(state, action);
         case actionTypes.GET_SEARCH_TERM:
             return getSearchTerm(state, action);
+        case actionTypes.GET_SEARCH_TERM_FAIL:
+            return getSearchTermFail(state, action);
         default:
             return state;
     }
