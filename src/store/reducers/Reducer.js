@@ -59,7 +59,8 @@ const getInfoFail = (state, action) => {
 
 const getInfoSuccess = (state, action) => {
     return updateObject(state, {
-        search_results: action.getTermItems,
+        search_results: action.search_results,
+
         loading: false
     });
 };
@@ -67,7 +68,6 @@ const getInfoSuccess = (state, action) => {
 const getSearchTerm = (state, action) => {
     const updatedState = {
         search_term: action.searchTerm,
-        loading: false
     };
 
     return updateObject(state, updatedState);
