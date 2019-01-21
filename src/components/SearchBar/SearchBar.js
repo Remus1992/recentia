@@ -13,7 +13,7 @@ class SearchBar extends Component {
                     <input
                         type="text"
                         placeholder="Search"
-                        onChange={(e) => this.props.onGetInfo(e.target.value)}
+                        onChange={(e) => this.props.onSearchChange(e.target.value)}
                         className={classes.search_bar}/>
                 </form>
             </div>

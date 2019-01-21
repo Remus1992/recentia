@@ -46,8 +46,8 @@ export const getInfo = (SEARCH_TERM) => {
         console.log(SEARCH_TERM);
         axios.get('/getTerms.php?SessionID=' + session_id
             // + '&SearchTerm=' + search_term
-            // + '&SearchTerm=' + this.state.query
             + '&SearchTerm=' + SEARCH_TERM
+            // + '&SearchTerm=' + SEARCH_TERM
             + '&QueryType=' + query_type
             + '&InputLanguage=' + input_language
             + '&OutputLanguage=' + output_language

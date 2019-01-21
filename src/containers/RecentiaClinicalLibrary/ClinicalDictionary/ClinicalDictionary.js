@@ -1,37 +1,48 @@
 import React, {Component} from 'react';
+import {connect} from "react-redux";
 
-import axios from '../../../axios-recentia';
+import * as actions from "../../../store/actions";
 
-import session_id, { license } from "../../../secret2";
+import Spinner from '../../../components/UI/Spinner/Spinner';
 
 // import classes from './Dictionary.css'
 
 class ClinicalDictionary extends Component {
-    state = {
-        definitions: null
-    };
-
-    componentDidMount () {
-        console.log( this.props );
-        axios.get( '/getPhysicians.php?SessionID=' + session_id + '&License=' + license )
-            .then( response => {
-                const definitions = response.data;
-                this.setState( { definitions: definitions } );
-                console.log( response );
-            } )
-            .catch( error => {
-                console.log( error );
-                // this.setState({error: true});
-            } );
-    }
-
     render() {
+        let getTerm_results = <Spinner/>;
+        if (!this.props.loading) {
+            console.log(this.props.getTermItems);
+            getTerm_results = this.props.getTermItems.map(item => {
+                return (
+                    <p style={{textAlign: 'center'}}>Preferred Term: {item.Term}</p>
+                );
+            });
+        }
+
         return (
             <React.Fragment>
-                <div>Clinical Dictionary</div>
+                <form>
+                    <p>Redux SearchTerm = {this.props.searchTerm}</p>
+                </form>
+                <div>{getTerm_results}</div>
             </React.Fragment>
         );
     }
 }
 
-export default ClinicalDictionary;
+
+const mapStateToProps = state => {
+    return {
+        searchTerm: state.searchReducer.search_term,
+        loading: state.searchReducer.loading,
+        getTermItems: state.searchReducer.search_results
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onGetInfo: (SEARCH) => dispatch(actions.getInfo(SEARCH))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClinicalDictionary);

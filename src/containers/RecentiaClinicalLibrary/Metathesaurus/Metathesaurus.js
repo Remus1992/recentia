@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import axios from "../../../axios-recentia";
 import {connect} from 'react-redux';
 
-import Spinner from '../../../components/UI/Spinner/Spinner';
-
 import * as actions from '../../../store/actions/index';
+
+import Spinner from '../../../components/UI/Spinner/Spinner';
 
 // import classes from './Metathesaurus.css'
 
@@ -48,3 +47,4 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Metathesaurus);
+
