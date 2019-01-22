@@ -61,7 +61,7 @@ export const submitSearchFail = (error) => {
 
 export const getInfo = (SEARCH_TERM) => {
     return dispatch => {
-        dispatch(getInfoStart());
+        // dispatch(getInfoStart());
         console.log(SEARCH_TERM);
         axios.get('/getTerms.php?SessionID=' + session_id
             // + '&SearchTerm=' + search_term

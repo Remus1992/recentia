@@ -12,9 +12,7 @@ class SearchBar extends Component {
     }
 
     handleSubmit(event) {
-        // alert('A term was submitted: ' + this.props.searchTerm);
-        console.log(this.props.searchTerm);
-        // this.props.onGetInfo(this.props.searchTerm);
+        // console.log(this.props.searchTerm);
         this.props.onSubmitSearchStart();
         event.preventDefault();
     }
@@ -43,7 +41,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onSearchChange: (search) => dispatch(actions.getSearchTerm(search)),
-        onGetInfo: (SEARCH) => dispatch(actions.getInfo(SEARCH)),
         onSubmitSearchStart: () => dispatch(actions.submitSearchStart())
     }
 };
