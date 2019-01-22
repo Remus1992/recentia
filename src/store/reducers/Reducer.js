@@ -73,25 +73,19 @@ const getSearchTerm = (state, action) => {
 };
 
 const submitSearchStart = (state, action) => {
-  return updateObject(state, {searchSubmit: true});
+    return updateObject(state, {searchSubmit: true});
 };
 
 const submitSearchSuccess = (state, action) => {
-  return updateObject(state, {searchSubmit: false});
+    return updateObject(state, {searchSubmit: false});
 };
 
 const submitSearchFail = (state, action) => {
-  return updateObject(state, {searchSubmit: false});
+    return updateObject(state, {searchSubmit: false});
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.GET_INFO_START:
-            return getInfoStart(state, action);
-        case actionTypes.GET_INFO_SUCCESS:
-            return getInfoSuccess(state, action);
-        case actionTypes.GET_INFO_FAIL:
-            return getInfoFail(state, action);
         case actionTypes.GET_SEARCH_TERM:
             return getSearchTerm(state, action);
         case actionTypes.SUBMIT_SEARCH_START:
@@ -100,6 +94,12 @@ const reducer = (state = initialState, action) => {
             return submitSearchSuccess(state, action);
         case actionTypes.SUBMIT_SEARCH_FAIL:
             return submitSearchFail(state, action);
+        case actionTypes.GET_INFO_START:
+            return getInfoStart(state, action);
+        case actionTypes.GET_INFO_SUCCESS:
+            return getInfoSuccess(state, action);
+        case actionTypes.GET_INFO_FAIL:
+            return getInfoFail(state, action);
         default:
             return state;
     }

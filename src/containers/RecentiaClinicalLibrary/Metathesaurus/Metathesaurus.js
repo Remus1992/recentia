@@ -25,7 +25,7 @@ class Metathesaurus extends Component {
 
         return (
             <React.Fragment>
-                <div>{this.props.searchTerm}</div>
+                <div style={{textAlign: 'center'}}>Search Term is: {this.props.searchTerm}</div>
                 <div>{getTerm_results}</div>
             </React.Fragment>
         );
