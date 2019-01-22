@@ -40,6 +40,25 @@ export const getInfoFail = (error) => {
     }
 };
 
+export const submitSearchStart = () => {
+    return {
+        type: actionTypes.SUBMIT_SEARCH_START
+    }
+};
+
+export const submitSearchSuccess = () => {
+    return {
+        type: actionTypes.SUBMIT_SEARCH_SUCCESS
+    }
+};
+
+export const submitSearchFail = (error) => {
+    return {
+        type: actionTypes.SUBMIT_SEARCH_FAIL,
+        error: error
+    }
+};
+
 export const getInfo = (SEARCH_TERM) => {
     return dispatch => {
         dispatch(getInfoStart());
@@ -72,6 +91,7 @@ export const getInfo = (SEARCH_TERM) => {
                     console.log("Concept is: " + getTermItems[index]["Concept"])
                 }
                 dispatch(getInfoSuccess(getTermItems));
+                dispatch(submitSearchSuccess());
             })
             .catch(error => {
                 console.log(error);
@@ -80,10 +100,10 @@ export const getInfo = (SEARCH_TERM) => {
     }
 };
 
-
 export const getSearchTerm = (term) => {
     return {
         type: actionTypes.GET_SEARCH_TERM,
         searchTerm: term
     }
 };
+

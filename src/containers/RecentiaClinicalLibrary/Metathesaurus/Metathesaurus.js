@@ -9,9 +9,29 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 
 
 class Metathesaurus extends Component {
+    constructor(props) {
+        super(props);
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(event) {
+        // alert('A term was submitted: ' + this.props.searchTerm);
+        console.log(this.props.searchTerm);
+        this.props.onGetInfo(this.props.searchTerm);
+        event.preventDefault();
+    }
+
     render() {
         let getTerm_results = <Spinner/>;
-        if (!this.props.loading) {
+        // if (!this.props.searching) {
+        //     this.props.onGetInfo(this.props.searchTerm)
+        // }
+
+        // if (!this.props.loading) {
+        if (!this.props.loading && this.props.searching) {
+        // if (!this.props.loading) {
+            this.props.onGetInfo(this.props.searchTerm);
             console.log(this.props.getTermItems);
             getTerm_results = this.props.getTermItems.map(item => {
                 return (
@@ -20,11 +40,14 @@ class Metathesaurus extends Component {
             });
         }
 
+        // if (!this.props.searching)
+
         return (
             <React.Fragment>
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <p>Redux SearchTerm = {this.props.searchTerm}</p>
-                    <input type="text" onChange={(e) => this.props.onGetInfo(e.target.value)} value={this.props.searchTerm}/>
+                    <input type="text" onChange={(e) => this.props.onGetInfo(e.target.value)}
+                           value={this.props.searchTerm}/>
                 </form>
                 <div>{getTerm_results}</div>
             </React.Fragment>
@@ -36,7 +59,8 @@ const mapStateToProps = state => {
     return {
         searchTerm: state.searchReducer.search_term,
         loading: state.searchReducer.loading,
-        getTermItems: state.searchReducer.search_results
+        getTermItems: state.searchReducer.search_results,
+        searching: state.searchReducer.searchSubmit
     }
 };
 

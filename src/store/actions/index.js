@@ -1,4 +1,5 @@
 export {
     getSearchTerm,
-    getInfo
+    getInfo,
+    submitSearchStart
 } from './search';

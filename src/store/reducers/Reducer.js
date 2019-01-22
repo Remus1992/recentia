@@ -18,7 +18,7 @@ import session_id, {
     clinic_license,
     physician_license
 } from "../../secret";
-import axios from "../../axios-recentia";
+// import axios from "../../axios-recentia";
 
 
 const initialState = {
@@ -46,7 +46,8 @@ const initialState = {
 
     // loading info
     error: false,
-    loading: false
+    loading: false,
+    searchSubmit: false
 };
 
 const getInfoStart = (state, action) => {
@@ -73,6 +74,18 @@ const getSearchTerm = (state, action) => {
     return updateObject(state, updatedState);
 };
 
+const submitSearchStart = (state, action) => {
+  return updateObject(state, {searchSubmit: true});
+};
+
+const submitSearchSuccess = (state, action) => {
+  return updateObject(state, {searchSubmit: false});
+};
+
+const submitSearchFail = (state, action) => {
+  return updateObject(state, {searchSubmit: false});
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.GET_INFO_START:
@@ -83,6 +96,12 @@ const reducer = (state = initialState, action) => {
             return getInfoFail(state, action);
         case actionTypes.GET_SEARCH_TERM:
             return getSearchTerm(state, action);
+        case actionTypes.SUBMIT_SEARCH_START:
+            return submitSearchStart(state, action);
+        case actionTypes.SUBMIT_SEARCH_SUCCESS:
+            return submitSearchSuccess(state, action);
+        case actionTypes.SUBMIT_SEARCH_FAIL:
+            return submitSearchFail(state, action);
         default:
             return state;
     }
