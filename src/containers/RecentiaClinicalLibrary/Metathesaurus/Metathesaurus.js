@@ -9,13 +9,23 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 
 
 class Metathesaurus extends Component {
+    componentWillMount() {
+        if (this.props.searching) {
+            console.log("Got to first if");
+            this.props.onGetInfo(this.props.searchTerm);
+        }
+    }
+
     render() {
         let getTerm_results = <Spinner/>;
+
         if (this.props.searching) {
+            console.log("Got to first if");
             this.props.onGetInfo(this.props.searchTerm);
         }
 
         if (!this.props.loading) {
+            console.log("Got to second if");
             getTerm_results = this.props.getTermItems.map(item => {
                 return (
                     <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm}</p>
