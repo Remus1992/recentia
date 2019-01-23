@@ -11,33 +11,43 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 class Metathesaurus extends Component {
     // triggered by Parent
     // error message on console says that it's not good for Async code
-    componentWillReceiveProps(nextProps, nextContext) {
-        console.log('componentWillReceiveProps: nextProps -> ' + nextProps + ' nextContext -> ' + nextContext)
-    }
+    // componentWillReceiveProps(nextProps, nextContext) {
+    //     console.log('componentWillReceiveProps: nextProps -> ' + nextProps + ' nextContext -> ' + nextContext)
+    // }
 
     // triggered by Internal Change
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log("shouldComponentUpdate: nextProps -> " + nextProps + " nextState -> " + nextState);
-        return this.props.searching
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log("shouldComponentUpdate: nextProps -> " + nextProps.valueOf() + " nextState -> " + nextState);
+    //     console.log("shouldComponentUpdate: searching-> " + this.props.searching);
+    //     return this.props.searching
+    // }
 
     // error message on console says that it's not good for Async code
-    componentWillUpdate() {
-        console.log("componentWillUpdate");
-        // console.log(this.props.searching);
-        // if (this.props.searching) {
-        //     console.log("Got to first if");
-        //     this.props.onGetInfo(this.props.searchTerm);
-        // }
+    // componentWillUpdate() {
+    //     console.log("componentWillUpdate");
+    //     console.log(this.props.searching);
+    // if (this.props.searching) {
+    //     console.log("Got to first if");
+    //     this.props.onGetInfo(this.props.searchTerm);
+    // }
+    // }
+
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     console.log("componentDidUpdate: prevProps -> " + prevProps + " prevState -> " + prevState)
+    // }
+
+    componentDidMount() {
+        console.log("componentDidMount");
+        console.log("componentDidMount: searching -> " + this.props.searching);
+        if (this.props.searching) {
+            console.log("componentDidMount: if statement");
+            this.props.onGetInfo(this.props.searchTerm);
+        }
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log("componentDidUpdate: prevProps -> " + prevProps + " prevState -> " + prevState)
-    }
-
-    static getDerivedStateFromProps(nextProps, prevState) {
-        // Redux and shouldComponentUpdate
-    }
+    // static getDerivedStateFromProps(nextProps, prevState) {
+    //     // Redux and shouldComponentUpdate
+    // }
 
     render() {
         let getTerm_results = <Spinner/>;
