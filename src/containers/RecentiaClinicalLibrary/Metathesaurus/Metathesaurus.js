@@ -16,11 +16,11 @@ class Metathesaurus extends Component {
     // }
 
     // triggered by Internal Change
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log("shouldComponentUpdate: nextProps -> " + nextProps.valueOf() + " nextState -> " + nextState);
-    //     console.log("shouldComponentUpdate: searching-> " + this.props.searching);
-    //     return this.props.searching
-    // }
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log("shouldComponentUpdate: nextProps -> " + nextProps.valueOf() + " nextState -> " + nextState);
+        console.log("shouldComponentUpdate: searching-> " + this.props.searching);
+        return this.props.searching
+    }
 
     // error message on console says that it's not good for Async code
     // componentWillUpdate() {
@@ -34,6 +34,15 @@ class Metathesaurus extends Component {
 
     // componentDidUpdate(prevProps, prevState, snapshot) {
     //     console.log("componentDidUpdate: prevProps -> " + prevProps + " prevState -> " + prevState)
+    // }
+
+    // componentWillMount() {
+    //     console.log("componentWillMount");
+    //     console.log("componentWillMount: searching -> " + this.props.searching);
+    //     if (this.props.searching) {
+    //         console.log("componentWillMount: if statement");
+    //         this.props.onGetInfo(this.props.searchTerm);
+    //     }
     // }
 
     componentDidMount() {
