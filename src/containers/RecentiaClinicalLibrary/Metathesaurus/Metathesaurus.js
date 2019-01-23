@@ -9,20 +9,43 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 
 
 class Metathesaurus extends Component {
-    componentWillMount() {
-        if (this.props.searching) {
-            console.log("Got to first if");
-            this.props.onGetInfo(this.props.searchTerm);
-        }
+    // triggered by Parent
+    // error message on console says that it's not good for Async code
+    componentWillReceiveProps(nextProps, nextContext) {
+        console.log('componentWillReceiveProps: nextProps -> ' + nextProps + ' nextContext -> ' + nextContext)
+    }
+
+    // triggered by Internal Change
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log("shouldComponentUpdate: nextProps -> " + nextProps + " nextState -> " + nextState);
+        return this.props.searching
+    }
+
+    // error message on console says that it's not good for Async code
+    componentWillUpdate() {
+        console.log("componentWillUpdate");
+        // console.log(this.props.searching);
+        // if (this.props.searching) {
+        //     console.log("Got to first if");
+        //     this.props.onGetInfo(this.props.searchTerm);
+        // }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log("componentDidUpdate: prevProps -> " + prevProps + " prevState -> " + prevState)
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        // Redux and shouldComponentUpdate
     }
 
     render() {
         let getTerm_results = <Spinner/>;
 
-        if (this.props.searching) {
-            console.log("Got to first if");
-            this.props.onGetInfo(this.props.searchTerm);
-        }
+        // if (this.props.searching) {
+        //     console.log("Got to first if");
+        //     this.props.onGetInfo(this.props.searchTerm);
+        // }
 
         if (!this.props.loading) {
             console.log("Got to second if");
