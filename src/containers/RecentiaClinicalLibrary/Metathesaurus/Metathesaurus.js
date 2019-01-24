@@ -16,11 +16,13 @@ class Metathesaurus extends Component {
     // }
 
     // triggered by Internal Change
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log("shouldComponentUpdate: nextProps -> " + nextProps.valueOf() + " nextState -> " + nextState);
-        console.log("shouldComponentUpdate: searching-> " + this.props.searching);
-        return this.props.searching
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log("shouldComponentUpdate: nextProps -> " + nextProps.valueOf() + " nextState -> " + nextState);
+    //     console.log("shouldComponentUpdate1: searching-> " + this.props.searching);
+    //     console.log("shouldComponentUpdate2: searching-> " + nextProps.searching);
+    //
+    //     return nextProps.searching
+    // }
 
     // error message on console says that it's not good for Async code
     // componentWillUpdate() {
@@ -45,14 +47,14 @@ class Metathesaurus extends Component {
     //     }
     // }
 
-    componentDidMount() {
-        console.log("componentDidMount");
-        console.log("componentDidMount: searching -> " + this.props.searching);
-        if (this.props.searching) {
-            console.log("componentDidMount: if statement");
-            this.props.onGetInfo(this.props.searchTerm);
-        }
-    }
+    // componentDidMount() {
+    //     console.log("componentDidMount");
+    //     console.log("componentDidMount: searching -> " + this.props.searching);
+    //     if (this.props.searching) {
+    //         console.log("componentDidMount: if statement");
+    //         this.props.onGetInfo(this.props.searchTerm);
+    //     }
+    // }
 
     // static getDerivedStateFromProps(nextProps, prevState) {
     //     // Redux and shouldComponentUpdate
@@ -61,13 +63,13 @@ class Metathesaurus extends Component {
     render() {
         let getTerm_results = <Spinner/>;
 
-        // if (this.props.searching) {
-        //     console.log("Got to first if");
-        //     this.props.onGetInfo(this.props.searchTerm);
-        // }
+        if (this.props.searching) {
+            console.log("Render: 1st if statement");
+            this.props.onGetInfo(this.props.searchTerm);
+        }
 
         if (!this.props.loading) {
-            console.log("Got to second if");
+            console.log("Render: 2nd if statement");
             getTerm_results = this.props.getTermItems.map(item => {
                 return (
                     <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm}</p>
