@@ -16,13 +16,13 @@ class Metathesaurus extends Component {
     // }
 
     // triggered by Internal Change
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log("shouldComponentUpdate: nextProps -> " + nextProps.valueOf() + " nextState -> " + nextState);
-    //     console.log("shouldComponentUpdate1: searching-> " + this.props.searching);
-    //     console.log("shouldComponentUpdate2: searching-> " + nextProps.searching);
-    //
-    //     return nextProps.searching
-    // }
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log("shouldComponentUpdate: nextProps -> " + nextProps.valueOf() + " nextState -> " + nextState);
+        console.log("shouldComponentUpdate1: this.props.searching-> " + this.props.searching);
+        console.log("shouldComponentUpdate2: nextProps.searching-> " + nextProps.searching);
+
+        return nextProps.searching
+    }
 
     // error message on console says that it's not good for Async code
     // componentWillUpdate() {
@@ -35,7 +35,7 @@ class Metathesaurus extends Component {
     // }
 
     // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     console.log("componentDidUpdate: prevProps -> " + prevProps + " prevState -> " + prevState)
+    //     console.log("componentDidUpdate: prevProps -> " + prevProps.searching + " prevState -> " + prevState)
     // }
 
     // componentWillMount() {
@@ -47,14 +47,15 @@ class Metathesaurus extends Component {
     //     }
     // }
 
-    // componentDidMount() {
-    //     console.log("componentDidMount");
-    //     console.log("componentDidMount: searching -> " + this.props.searching);
-    //     if (this.props.searching) {
-    //         console.log("componentDidMount: if statement");
-    //         this.props.onGetInfo(this.props.searchTerm);
-    //     }
-    // }
+    componentDidMount() {
+        console.log("componentDidMount: this.props -> " + this.props);
+        console.log("componentDidMount: searching -> " + this.props.searching);
+
+        if (this.props.searching) {
+            console.log("componentDidMount: if statement");
+            this.props.onGetInfo(this.props.searchTerm);
+        }
+    }
 
     // static getDerivedStateFromProps(nextProps, prevState) {
     //     // Redux and shouldComponentUpdate
@@ -63,10 +64,10 @@ class Metathesaurus extends Component {
     render() {
         let getTerm_results = <Spinner/>;
 
-        if (this.props.searching) {
-            console.log("Render: 1st if statement");
-            this.props.onGetInfo(this.props.searchTerm);
-        }
+        // if (this.props.searching) {
+        //     console.log("Render: 1st if statement");
+        //     this.props.onGetInfo(this.props.searchTerm);
+        // }
 
         if (!this.props.loading) {
             console.log("Render: 2nd if statement");
