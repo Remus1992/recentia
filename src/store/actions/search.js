@@ -59,10 +59,12 @@ export const submitSearchFail = (error) => {
     }
 };
 
-export const getInfo = (SEARCH_TERM) => {
+export const getInfo = (SEARCH_TERM, API_ENDPOINT) => {
+    console.log(API_ENDPOINT);
     return dispatch => {
         dispatch(getInfoStart());
-        axios.get('/getTerms.php?SessionID=' + session_id
+        // axios.get('/getTerms.php?SessionID=' + session_id
+        axios.get(API_ENDPOINT + '.php?SessionID=' + session_id
             // + '&SearchTerm=' + search_term
             + '&SearchTerm=' + SEARCH_TERM
             // + '&SearchTerm=' + SEARCH_TERM

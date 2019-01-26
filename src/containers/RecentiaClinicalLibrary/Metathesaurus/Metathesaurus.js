@@ -15,7 +15,7 @@ class Metathesaurus extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (!prevProps.searching) {
-            this.props.onGetInfo(this.props.searchTerm);
+            this.props.onGetInfo(this.props.searchTerm, '/getTerms');
         }
     }
 
@@ -51,7 +51,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetInfo: (SEARCH) => dispatch(actions.getInfo(SEARCH))
+        onGetInfo: (SEARCH, API_VERSION) => dispatch(actions.getInfo(SEARCH, API_VERSION))
     }
 };
 
