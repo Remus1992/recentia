@@ -21,7 +21,7 @@ class Home extends Component {
                 <Header
                     header_title="Recentia"
                     link1_title="Clinical Library"
-                    link1="/clinical_library"
+                    link1="/clinical_library/metathesaurus"
                     link2_title="Clinical Visit Support"
                     link2="/clinical_visit" />
 

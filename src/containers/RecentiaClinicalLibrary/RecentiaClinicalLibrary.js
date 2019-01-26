@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
 // import axios from '../../../axios-orders';
 
 // Stateless Components
@@ -44,6 +44,7 @@ class recentiaClinicalLibrary extends Component {
                     <Route path={this.props.match.url + "/coding_systems"} component={CodingSystems}/>
                     <Route path={this.props.match.url + "/clinical_dictionary"} component={ClinicalDictionary}/>
                     <Route path={this.props.match.url + "/translate"} component={Translate}/>
+                    <Redirect from={this.props.match.url} to={this.props.match.url + "/metathesaurus"}/>
                 </Switch>
             </React.Fragment>
         );
