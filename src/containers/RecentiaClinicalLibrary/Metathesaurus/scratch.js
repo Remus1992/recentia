@@ -71,6 +71,86 @@ export function getInfo() {
         });
 }
 
+class Metathesaurus extends Component {
+    // triggered by Parent
+    // error message on console says that it's not good for Async code
+    // componentWillReceiveProps(nextProps, nextContext) {
+    //     console.log('componentWillReceiveProps: nextProps -> ' + nextProps + ' nextContext -> ' + nextContext)
+    // }
+
+    // triggered by Internal Change
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log("shouldComponentUpdate: nextProps -> " + nextProps.valueOf() + " nextState -> " + nextState);
+        console.log("shouldComponentUpdate1: this.props.searching-> " + this.props.searching);
+        console.log("shouldComponentUpdate2: nextProps.searching-> " + nextProps.searching);
+
+        return nextProps.searching
+    }
+
+    // error message on console says that it's not good for Async code
+    // componentWillUpdate() {
+    //     console.log("componentWillUpdate");
+    //     console.log(this.props.searching);
+    // if (this.props.searching) {
+    //     console.log("Got to first if");
+    //     this.props.onGetInfo(this.props.searchTerm);
+    // }
+    // }
+
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     console.log("componentDidUpdate: prevProps -> " + prevProps.searching + " prevState -> " + prevState)
+    // }
+
+    // componentWillMount() {
+    //     console.log("componentWillMount");
+    //     console.log("componentWillMount: searching -> " + this.props.searching);
+    //     if (this.props.searching) {
+    //         console.log("componentWillMount: if statement");
+    //         this.props.onGetInfo(this.props.searchTerm);
+    //     }
+    // }
+
+    componentDidMount() {
+        console.log("componentDidMount: this.props -> " + this.props);
+        console.log("componentDidMount: searching -> " + this.props.searching);
+
+        if (this.props.searching) {
+            console.log("componentDidMount: if statement");
+            this.props.onGetInfo(this.props.searchTerm);
+        }
+    }
+
+    // static getDerivedStateFromProps(nextProps, prevState) {
+    //     // Redux and shouldComponentUpdate
+    // }
+
+    render() {
+        let getTerm_results = <Spinner/>;
+
+        // if (this.props.searching) {
+        //     console.log("Render: 1st if statement");
+        //     this.props.onGetInfo(this.props.searchTerm);
+        // }
+
+        if (!this.props.loading) {
+            console.log("Render: 2nd if statement");
+            getTerm_results = this.props.getTermItems.map(item => {
+                return (
+                    <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm}</p>
+                );
+            });
+        }
+
+        return (
+            <React.Fragment>
+                <div style={{textAlign: 'center'}}>Search Term is: {this.props.searchTerm}</div>
+                <div>{getTerm_results}</div>
+            </React.Fragment>
+        );
+    }
+}
+
+
 
 // getClinicalDefinitionsByTerm
 // Acute Pneumonia
@@ -118,4 +198,4 @@ export const sample_dictionary_call_by_concept =
         "Definition Language": "FRE",
         "Source Clinical Vocabulary": "MSHFRE",
         "Clinical Definition": "Maladie respiratoire chronique due au virus de Visna-Maedi. Pendant longtemps, on a pens\u00e9 que cette maladie \u00e9tait identique \u00e0 l'ad\u00e9nomatose pulmonaire des ovins, actuellement, on sait qu'il s'agit de deux entit\u00e9s s\u00e9par\u00e9es."
-    }]
+    }];

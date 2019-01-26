@@ -84,12 +84,6 @@ export const getInfo = (SEARCH_TERM) => {
         )
             .then(response => {
                 const getTermItems = response.data;
-
-                // let i = getTermItems.length;
-                // console.log(i);
-                // for (let index = 0; index < getTermItems.length; index++) {
-                //     console.log("Concept is: " + getTermItems[index]["Concept"])
-                // }
                 dispatch(getInfoSuccess(getTermItems));
                 dispatch(submitSearchSuccess());
             })

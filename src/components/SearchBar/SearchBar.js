@@ -12,7 +12,6 @@ class SearchBar extends Component {
     }
 
     handleSubmit(event) {
-        // console.log(this.props.searchTerm);
         this.props.onSubmitSearchStart();
         event.preventDefault();
     }

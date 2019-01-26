@@ -18,12 +18,9 @@ import session_id, {
     clinic_license,
     physician_license
 } from "../../secret";
-// import axios from "../../axios-recentia";
 
 
 const initialState = {
-    // search results
-
     search_results: [],
 
     // query params
