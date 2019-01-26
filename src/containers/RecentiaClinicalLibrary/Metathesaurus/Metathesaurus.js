@@ -14,19 +14,12 @@ class Metathesaurus extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log(prevProps.searching);
         if (!prevProps.searching) {
-            console.log("componentDidMount: if statement");
             this.props.onGetInfo(this.props.searchTerm);
         }
     }
 
     render() {
-        // if (this.props.searching) {
-        //     console.log("Render: 1st if statement");
-        //     this.props.onGetInfo(this.props.searchTerm);
-        // }
-
         let getTerm_results = <Spinner/>;
 
         if (!this.props.loading) {
@@ -37,7 +30,6 @@ class Metathesaurus extends Component {
                 );
             });
         }
-
 
         return (
             <React.Fragment>
