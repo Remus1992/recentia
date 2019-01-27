@@ -20,7 +20,7 @@ class Metathesaurus extends Component {
     }
 
     // componentDidMount() {
-    //     if (this.props.searching) {
+    //     if (!this.props.searching) {
     //         this.props.onGetInfo(this.props.searching, '/getTerms');
     //     }
     // }
@@ -29,7 +29,7 @@ class Metathesaurus extends Component {
         let getTerm_results = <Spinner/>;
 
         if (!this.props.loading) {
-            console.log("Render: 2nd if statement executed");
+            // console.log("Render: 2nd if statement executed");
             getTerm_results = this.props.getTermItems.map(item => {
                 return (
                     <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm}</p>

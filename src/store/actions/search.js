@@ -84,7 +84,16 @@ export const getInfo = (SEARCH_TERM, API_ENDPOINT) => {
             + '&PhysicianLicense=' + physician_license
         )
             .then(response => {
-                const getTermItems = response.data;
+                // const getTermItems = response.data;
+
+                const getTermItems = [];
+                for (let key in response.data) {
+                    getTermItems.push({
+                        ...response.data[key],
+                        id: key
+                    });
+                }
+
                 dispatch(getInfoSuccess(getTermItems));
                 dispatch(submitSearchSuccess());
             })

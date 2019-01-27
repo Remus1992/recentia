@@ -19,14 +19,21 @@ class ClinicalDictionary extends Component {
         }
     }
 
+    // componentDidMount() {
+    //     console.log('getClinicalDefinitionsByTerm: ' + this.props.searchTerm)
+    //     if (!this.props.searching) {
+    //         this.props.onGetInfo(this.props.searching, '/getClinicalDefinitionsByTerm');
+    //     }
+    // }
+
     render() {
         let getTerm_results = <Spinner/>;
 
         if (!this.props.loading) {
-            console.log("Render: 2nd if statement executed");
+            // console.log("Render: 2nd if statement executed");
             getTerm_results = this.props.getTermItems.map(item => {
                 return (
-                    <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm}</p>
+                    <p style={{textAlign: 'center'}} key={item.id}>Preferred Term: {item["Clinical Definition"]}</p>
                 );
             });
         }

@@ -151,51 +151,75 @@ class Metathesaurus extends Component {
 }
 
 
-
-// getClinicalDefinitionsByTerm
-// Acute Pneumonia
-
-export const sample_dictionary_call =
+getTerms__sample_api =
     [{
-        "Term": "Pneumonia, Progressive Interstitial, of Sheep",
-        "Lookup Language": "ENG",
-        "Definition Language": "ENG",
-        "Source Clinical Vocabulary": "MSH",
-        "Clinical Definition": "Chronic respiratory disease caused by the VISNA-MAEDI VIRUS. It was formerly believed to be identical with jaagsiekte (PULMONARY ADENOMATOSIS, OVINE) but is now recognized as a separate entity."
+        "Concept": 278986,
+        "IsMappedToCQM": 0,
+        "SynonymCount": 18,
+        "Acronym": null,
+        "Category1": null,
+        "Category2": null,
+        "Category3": null,
+        "Category4": null,
+        "PreferredTerm": "Stage 0 Non-Small Cell Lung Cancer"
     }, {
-        "Term": "Pneumonia, Progressive Interstitial, of Sheep",
-        "Lookup Language": "ENG",
-        "Definition Language": "CZE",
-        "Source Clinical Vocabulary": "MSHCZE",
-        "Clinical Definition": "Chronick\u00e9 respira\u010dn\u00ed onemocn\u011bn\u00ed zp\u016fsoben\u00e9 virem visna-maedi. P\u016fvodn\u011b byla tato nemoc ztoto\u017e\u0148ov\u00e1na s plicn\u00ed adenomat\u00f3zou ovc\u00ed vyvol\u00e1vanou virem jaagsiekte, ale nyn\u00ed jsou ji\u017e ob\u011b choroby odli\u0161ov\u00e1ny."
+        "Concept": 278504,
+        "IsMappedToCQM": 0,
+        "SynonymCount": 19,
+        "Acronym": null,
+        "Category1": null,
+        "Category2": null,
+        "Category3": null,
+        "Category4": null,
+        "PreferredTerm": "Stage I Non-Small Cell Lung Cancer"
     }, {
-        "Term": "Pneumonia, Progressive Interstitial, of Sheep",
-        "Lookup Language": "ENG",
-        "Definition Language": "FRE",
-        "Source Clinical Vocabulary": "MSHFRE",
-        "Clinical Definition": "Maladie respiratoire chronique due au virus de Visna-Maedi. Pendant longtemps, on a pens\u00e9 que cette maladie \u00e9tait identique \u00e0 l'ad\u00e9nomatose pulmonaire des ovins, actuellement, on sait qu'il s'agit de deux entit\u00e9s s\u00e9par\u00e9es."
-    }];
-
-// getClinicalDefinitions
-// 32306
-
-export const sample_dictionary_call_by_concept =
-    [{
-        "Term": "Pneumonia, Progressive Interstitial, of Sheep",
-        "Lookup Language": "ENG",
-        "Definition Language": "ENG",
-        "Source Clinical Vocabulary": "MSH",
-        "Clinical Definition": "Chronic respiratory disease caused by the VISNA-MAEDI VIRUS. It was formerly believed to be identical with jaagsiekte (PULMONARY ADENOMATOSIS, OVINE) but is now recognized as a separate entity."
+        "Concept": 278505,
+        "IsMappedToCQM": 0,
+        "SynonymCount": 20,
+        "Acronym": null,
+        "Category1": null,
+        "Category2": null,
+        "Category3": null,
+        "Category4": null,
+        "PreferredTerm": "Stage II Non-Small Cell Lung Cancer"
     }, {
-        "Term": "Pneumonia, Progressive Interstitial, of Sheep",
-        "Lookup Language": "ENG",
-        "Definition Language": "CZE",
-        "Source Clinical Vocabulary": "MSHCZE",
-        "Clinical Definition": "Chronick\u00e9 respira\u010dn\u00ed onemocn\u011bn\u00ed zp\u016fsoben\u00e9 virem visna-maedi. P\u016fvodn\u011b byla tato nemoc ztoto\u017e\u0148ov\u00e1na s plicn\u00ed adenomat\u00f3zou ovc\u00ed vyvol\u00e1vanou virem jaagsiekte, ale nyn\u00ed jsou ji\u017e ob\u011b choroby odli\u0161ov\u00e1ny."
+        "Concept": 278506,
+        "IsMappedToCQM": 0,
+        "SynonymCount": 20,
+        "Acronym": null,
+        "Category1": null,
+        "Category2": null,
+        "Category3": null,
+        "Category4": null,
+        "PreferredTerm": "Stage III Non-Small Cell Lung Cancer"
     }, {
-        "Term": "Pneumonia, Progressive Interstitial, of Sheep",
-        "Lookup Language": "ENG",
-        "Definition Language": "FRE",
-        "Source Clinical Vocabulary": "MSHFRE",
-        "Clinical Definition": "Maladie respiratoire chronique due au virus de Visna-Maedi. Pendant longtemps, on a pens\u00e9 que cette maladie \u00e9tait identique \u00e0 l'ad\u00e9nomatose pulmonaire des ovins, actuellement, on sait qu'il s'agit de deux entit\u00e9s s\u00e9par\u00e9es."
-    }];
+        "Concept": 278983,
+        "IsMappedToCQM": 0,
+        "SynonymCount": 22,
+        "Acronym": null,
+        "Category1": null,
+        "Category2": null,
+        "Category3": null,
+        "Category4": null,
+        "PreferredTerm": "Stage IIIA Non-Small Cell Lung Cancer"
+    }, {
+        "Concept": 278984,
+        "IsMappedToCQM": 0,
+        "SynonymCount": 22,
+        "Acronym": null,
+        "Category1": null,
+        "Category2": null,
+        "Category3": null,
+        "Category4": null,
+        "PreferredTerm": "Stage IIIB Non-Small Cell Lung Cancer"
+    }, {
+        "Concept": 278987,
+        "IsMappedToCQM": 0,
+        "SynonymCount": 33,
+        "Acronym": null,
+        "Category1": null,
+        "Category2": null,
+        "Category3": null,
+        "Category4": null,
+        "PreferredTerm": "Stage IV Non-Small Cell Lung Cancer"
+    }]
