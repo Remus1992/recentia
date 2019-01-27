@@ -22,14 +22,14 @@ class Metathesaurus extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        // console.log(nextProps.getTermItems !== this.props.getTermItems);
+        // console.log(nextProps.getInfoItems !== this.props.getInfoItems);
         return nextProps.searching
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // console.log(this.props.getTermItems);
-        // console.log(prevProps.getTermItems);
-        // console.log(prevProps.getTermItems !== this.props.getTermItems);
+        // console.log(this.props.getInfoItems);
+        // console.log(prevProps.getInfoItems);
+        // console.log(prevProps.getInfoItems !== this.props.getInfoItems);
         if (!prevProps.searching) {
             // console.log('getTerm -> componentDidUpdate: ' + this.props.searchTerm);
             this.props.onGetInfo(this.props.searchTerm, '/getTerms');
@@ -41,6 +41,7 @@ class Metathesaurus extends Component {
             // console.log('getTerm -> componentDidMount: ' + this.props.searchTerm);
             this.props.onSubmitSearchStart();
             this.props.onGetInfo(this.props.searching, '/getTerms');
+            this.history.pushState(this.props.getInfoItems, '/synonym')
         }
     }
 
@@ -49,7 +50,7 @@ class Metathesaurus extends Component {
 
         if (!this.props.loading) {
             // console.log("Render: 2nd if statement executed");
-            getTerm_results = this.props.getTermItems.map(item => {
+            getTerm_results = this.props.getInfoItems.map(item => {
                 return (
                     <span>
                         <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm}</p>
@@ -61,7 +62,7 @@ class Metathesaurus extends Component {
 
         return (
             <React.Fragment>
-                <div style={{textAlign: 'center'}}>Search Term is: {this.props.searchTerm}</div>
+                {/*<div style={{textAlign: 'center'}}>Search Term is: {this.props.searchTerm}</div>*/}
                 <div>{getTerm_results}</div>
             </React.Fragment>
         );
@@ -72,7 +73,7 @@ const mapStateToProps = state => {
     return {
         searchTerm: state.searchReducer.search_term,
         loading: state.searchReducer.loading,
-        getTermItems: state.searchReducer.search_results,
+        getInfoItems: state.searchReducer.search_results,
         searching: state.searchReducer.searchSubmit
     }
 };
