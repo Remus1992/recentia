@@ -19,14 +19,14 @@ class Metathesaurus extends Component {
         // console.log(prevProps.getTermItems);
         // console.log(prevProps.getTermItems !== this.props.getTermItems);
         if (!prevProps.searching) {
-            console.log('getTerm -> componentDidUpdate: ' + this.props.searchTerm);
+            // console.log('getTerm -> componentDidUpdate: ' + this.props.searchTerm);
             this.props.onGetInfo(this.props.searchTerm, '/getTerms');
         }
     }
 
     componentDidMount() {
         if (!this.props.searching && this.props.searchTerm.length !== 0) {
-            console.log('getTerm -> componentDidMount: ' + this.props.searchTerm);
+            // console.log('getTerm -> componentDidMount: ' + this.props.searchTerm);
             this.props.onSubmitSearchStart();
             this.props.onGetInfo(this.props.searching, '/getTerms');
         }
@@ -39,7 +39,7 @@ class Metathesaurus extends Component {
             // console.log("Render: 2nd if statement executed");
             getTerm_results = this.props.getTermItems.map(item => {
                 return (
-                    <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm}</p>
+                    <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm} + Synonym Count: {item.SynonymCount}</p>
                 );
             });
         }

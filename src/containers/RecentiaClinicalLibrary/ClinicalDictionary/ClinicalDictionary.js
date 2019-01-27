@@ -18,14 +18,14 @@ class ClinicalDictionary extends Component {
         // console.log(prevProps.getTermItems);
         // if (!prevProps.searching && prevProps.getTermItems !== this.props.getTermItems) {
         if (!prevProps.searching) {
-            console.log('getClinicalDefinitionsByTerm -> componentDidUpdate: ' + this.props.searchTerm);
+            // console.log('getClinicalDefinitionsByTerm -> componentDidUpdate: ' + this.props.searchTerm);
             this.props.onGetInfo(this.props.searchTerm, '/getClinicalDefinitionsByTerm');
         }
     }
 
     componentDidMount() {
         if (!this.props.searching && this.props.searchTerm.length !== 0) {
-            console.log('getClinicalDefinitionsByTerm -> componentDidMount: ' + this.props.searchTerm);
+            // console.log('getClinicalDefinitionsByTerm -> componentDidMount: ' + this.props.searchTerm);
             this.props.onSubmitSearchStart();
             this.props.onGetInfo(this.props.searching, '/getClinicalDefinitionsByTerm');
         }

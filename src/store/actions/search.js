@@ -60,14 +60,11 @@ export const submitSearchFail = (error) => {
 };
 
 export const getInfo = (SEARCH_TERM, API_ENDPOINT) => {
-    console.log(API_ENDPOINT);
+    // console.log(API_ENDPOINT);
     return dispatch => {
         dispatch(getInfoStart());
-        // axios.get('/getTerms.php?SessionID=' + session_id
         axios.get(API_ENDPOINT + '.php?SessionID=' + session_id
-            // + '&SearchTerm=' + search_term
             + '&SearchTerm=' + SEARCH_TERM
-            // + '&SearchTerm=' + SEARCH_TERM
             + '&QueryType=' + query_type
             + '&InputLanguage=' + input_language
             + '&OutputLanguage=' + output_language
@@ -86,15 +83,19 @@ export const getInfo = (SEARCH_TERM, API_ENDPOINT) => {
             .then(response => {
                 // const getTermItems = response.data;
 
-                const getTermItems = [];
+                const getInfoItems = [];
                 for (let key in response.data) {
-                    getTermItems.push({
+                    getInfoItems.push({
                         ...response.data[key],
                         id: key
                     });
                 }
+                // console.log(getInfoItems);
+                // if (API_ENDPOINT === '/getTerms') {
+                //     dispatch(getSynonyms(getTermItems))
+                // }
 
-                dispatch(getInfoSuccess(getTermItems));
+                dispatch(getInfoSuccess(getInfoItems));
                 dispatch(submitSearchSuccess());
             })
             .catch(error => {
