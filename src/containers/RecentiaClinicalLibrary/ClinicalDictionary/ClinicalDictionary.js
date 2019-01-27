@@ -14,17 +14,19 @@ class ClinicalDictionary extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('getClinicalDefinitionsByTerm -> componentDidUpdate: ' + this.props.searchTerm);
         if (!prevProps.searching) {
             this.props.onGetInfo(this.props.searchTerm, '/getClinicalDefinitionsByTerm');
         }
     }
 
-    // componentDidMount() {
-    //     console.log('getClinicalDefinitionsByTerm: ' + this.props.searchTerm)
-    //     if (!this.props.searching) {
-    //         this.props.onGetInfo(this.props.searching, '/getClinicalDefinitionsByTerm');
-    //     }
-    // }
+    componentDidMount() {
+        console.log('getClinicalDefinitionsByTerm -> componentDidMount: ' + this.props.searchTerm);
+        if (!this.props.searching) {
+            this.props.onSubmitSearchStart();
+            this.props.onGetInfo(this.props.searching, '/getClinicalDefinitionsByTerm');
+        }
+    }
 
     render() {
         let getTerm_results = <Spinner/>;
@@ -58,7 +60,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetInfo: (SEARCH, API_VERSION) => dispatch(actions.getInfo(SEARCH, API_VERSION))
+        onGetInfo: (SEARCH, API_VERSION) => dispatch(actions.getInfo(SEARCH, API_VERSION)),
+        onSubmitSearchStart: () => dispatch(actions.submitSearchStart())
     }
 };
 

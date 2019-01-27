@@ -14,16 +14,19 @@ class Metathesaurus extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('getTerm -> componentDidUpdate: ' + this.props.searchTerm);
         if (!prevProps.searching) {
             this.props.onGetInfo(this.props.searchTerm, '/getTerms');
         }
     }
 
-    // componentDidMount() {
-    //     if (!this.props.searching) {
-    //         this.props.onGetInfo(this.props.searching, '/getTerms');
-    //     }
-    // }
+    componentDidMount() {
+        console.log('getTerm -> componentDidMount: ' + this.props.searchTerm);
+        if (!this.props.searching) {
+            this.props.onSubmitSearchStart();
+            this.props.onGetInfo(this.props.searching, '/getTerms');
+        }
+    }
 
     render() {
         let getTerm_results = <Spinner/>;
@@ -57,7 +60,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetInfo: (SEARCH, API_VERSION) => dispatch(actions.getInfo(SEARCH, API_VERSION))
+        onGetInfo: (SEARCH, API_VERSION) => dispatch(actions.getInfo(SEARCH, API_VERSION)),
+        onSubmitSearchStart: () => dispatch(actions.submitSearchStart())
     }
 };
 
