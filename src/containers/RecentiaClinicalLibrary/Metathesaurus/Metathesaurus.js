@@ -10,19 +10,23 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 
 class Metathesaurus extends Component {
     shouldComponentUpdate(nextProps, nextState, nextContext) {
+        // console.log(nextProps.getTermItems !== this.props.getTermItems);
         return nextProps.searching
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('getTerm -> componentDidUpdate: ' + this.props.searchTerm);
+        // console.log(this.props.getTermItems);
+        // console.log(prevProps.getTermItems);
+        // console.log(prevProps.getTermItems !== this.props.getTermItems);
         if (!prevProps.searching) {
+            console.log('getTerm -> componentDidUpdate: ' + this.props.searchTerm);
             this.props.onGetInfo(this.props.searchTerm, '/getTerms');
         }
     }
 
     componentDidMount() {
-        console.log('getTerm -> componentDidMount: ' + this.props.searchTerm);
-        if (!this.props.searching) {
+        if (!this.props.searching && this.props.searchTerm.length !== 0) {
+            console.log('getTerm -> componentDidMount: ' + this.props.searchTerm);
             this.props.onSubmitSearchStart();
             this.props.onGetInfo(this.props.searching, '/getTerms');
         }

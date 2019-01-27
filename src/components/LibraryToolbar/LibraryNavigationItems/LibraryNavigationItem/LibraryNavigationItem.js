@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {NavLink} from "react-router-dom";
 
 import classes from './LibraryNavigationItem.css';
 
-import * as actions from "../../../../store/actions";
-import {connect} from "react-redux";
+// import * as actions from "../../../../store/actions";
+// import {connect} from "react-redux";
 
 const libraryNavigationItem = (props) => (
     <li className={classes.recentia_search_li}>
