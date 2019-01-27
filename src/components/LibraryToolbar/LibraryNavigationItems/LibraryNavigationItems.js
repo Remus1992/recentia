@@ -4,7 +4,7 @@ import LibraryNavigationItem from './LibraryNavigationItem/LibraryNavigationItem
 
 import classes from './LibraryNavigationItems.css';
 
-const libaryNavigationItems = () => (
+const libraryNavigationItems = () => (
     <ul className={classes.recentia_search_ul}>
         <LibraryNavigationItem link='/clinical_library/metathesaurus'>Metathesaurus</LibraryNavigationItem>
         <LibraryNavigationItem link='/clinical_library/quality_measures'>Quality Measures</LibraryNavigationItem>
@@ -15,4 +15,4 @@ const libaryNavigationItems = () => (
     </ul>
 );
 
-export default libaryNavigationItems;
+export default libraryNavigationItems;

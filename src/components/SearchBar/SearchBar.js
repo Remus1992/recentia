@@ -31,12 +31,6 @@ class SearchBar extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        searchTerm: state.searchReducer.search_term
-    }
-};
-
 const mapDispatchToProps = dispatch => {
     return {
         onSearchChange: (search) => dispatch(actions.getSearchTerm(search)),
@@ -44,4 +38,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+export default connect(null, mapDispatchToProps)(SearchBar);
