@@ -35,7 +35,6 @@ class recentiaClinicalLibrary extends Component {
                 <div className={classes.recentia_search}>
                     <LibraryToolbar/>
                     <SearchBar/>
-                    {/*<Metathesaurus/>*/}
                 </div>
                 <Switch>
                     <Route path={this.props.match.url + "/metathesaurus"} component={Metathesaurus}/>

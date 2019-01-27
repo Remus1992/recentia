@@ -2,18 +2,14 @@ import React, {Component} from 'react';
 
 // import classes from './CodingSystems.css'
 
-class CodingSystems extends Component {
-    state = {
-        definitions: null
-    };
-
+class PreferredTerms extends Component {
     render() {
         return (
             <React.Fragment>
-                <div>CodingSystems</div>
+                <div>Preferred Terms</div>
             </React.Fragment>
         );
     }
 }
 
-export default CodingSystems;
+export default PreferredTerms;

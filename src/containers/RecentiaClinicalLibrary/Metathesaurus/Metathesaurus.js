@@ -4,9 +4,13 @@ import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
 
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import {Route, Switch} from "react-router-dom";
 
 // import classes from './Metathesaurus.css'
 
+// Sub-Containers
+import Synonyms from './Synonyms/Synonyms';
+import PreferredTerms from './PreferredTerms/PreferredTerms';
 
 class Metathesaurus extends Component {
     constructor(props) {
@@ -41,7 +45,7 @@ class Metathesaurus extends Component {
             // console.log('getTerm -> componentDidMount: ' + this.props.searchTerm);
             this.props.onSubmitSearchStart();
             this.props.onGetInfo(this.props.searching, '/getTerms');
-            this.history.pushState(this.props.getInfoItems, '/synonym')
+            this.history.pushState(this.props.getInfoItems, '/synonyms')
         }
     }
 
@@ -64,6 +68,10 @@ class Metathesaurus extends Component {
             <React.Fragment>
                 {/*<div style={{textAlign: 'center'}}>Search Term is: {this.props.searchTerm}</div>*/}
                 <div>{getTerm_results}</div>
+                <Switch>
+                    <Route path={this.props.match.url + "/preferred_terms"} component={PreferredTerms}/>
+                    <Route path={this.props.match.url + "/synonyms"} component={Synonyms}/>
+                </Switch>
             </React.Fragment>
         );
     }
