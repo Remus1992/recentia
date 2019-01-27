@@ -9,6 +9,18 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 
 
 class Metathesaurus extends Component {
+    constructor(props) {
+        super(props);
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(event, CONCEPT, API_ENDPOINT) {
+        this.props.onSubmitSearchStart();
+        this.props.onGetInfo(CONCEPT, API_ENDPOINT);
+        event.preventDefault();
+    }
+
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         // console.log(nextProps.getTermItems !== this.props.getTermItems);
         return nextProps.searching
@@ -39,7 +51,10 @@ class Metathesaurus extends Component {
             // console.log("Render: 2nd if statement executed");
             getTerm_results = this.props.getTermItems.map(item => {
                 return (
-                    <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm} + Synonym Count: {item.SynonymCount}</p>
+                    <span>
+                        <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm}</p>
+                        <button onClick={(e) => this.handleClick(e, item.Concept, '/getSynonyms')}>Synonym Count: {item.SynonymCount}</button>
+                    </span>
                 );
             });
         }

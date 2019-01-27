@@ -59,12 +59,23 @@ export const submitSearchFail = (error) => {
     }
 };
 
-export const getInfo = (SEARCH_TERM, API_ENDPOINT) => {
-    // console.log(API_ENDPOINT);
+export const getInfo = (SEARCH_ITEM, API_ENDPOINT) => {
+    console.log(API_ENDPOINT);
+
+    let SEARCH_COUNTERPART = '';
+
+    if (API_ENDPOINT === '/getTerms') {
+        SEARCH_COUNTERPART = '&SearchTerm='
+    } else if (API_ENDPOINT === '/getSynonyms') {
+        SEARCH_COUNTERPART = '&Concept='
+    }
+
     return dispatch => {
         dispatch(getInfoStart());
+
         axios.get(API_ENDPOINT + '.php?SessionID=' + session_id
-            + '&SearchTerm=' + SEARCH_TERM
+            + SEARCH_COUNTERPART + SEARCH_ITEM
+            + '&SearchTerm=' + SEARCH_ITEM
             + '&QueryType=' + query_type
             + '&InputLanguage=' + input_language
             + '&OutputLanguage=' + output_language
@@ -90,7 +101,7 @@ export const getInfo = (SEARCH_TERM, API_ENDPOINT) => {
                         id: key
                     });
                 }
-                // console.log(getInfoItems);
+                console.log(getInfoItems);
                 // if (API_ENDPOINT === '/getTerms') {
                 //     dispatch(getSynonyms(getTermItems))
                 // }
