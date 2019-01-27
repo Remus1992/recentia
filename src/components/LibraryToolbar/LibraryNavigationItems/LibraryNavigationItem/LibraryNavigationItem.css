@@ -12,9 +12,31 @@
     height: 100%;
     padding: 5px 6px;
     border: 1.5px gray solid;
-    font-size: 14px;
     /*box-shadow: 5px 5px 10px grey;*/
     background-color: #fffff4;
+
+    /*ITC Giovanni Std Bold*/
+    /*font-family: itc-giovanni, serif;*/
+    /*font-weight: 700;*/
+    /*font-style: normal;*/
+
+    /*ITC Giovanni Std Bold Italic*/
+    /*font-family: itc-giovanni, serif;*/
+    /*font-weight: 700;*/
+    /*font-style: italic;*/
+
+
+    /*ITC Giovanni Std Book*/
+    font-family: itc-giovanni, serif;
+    font-weight: 400;
+    font-size: 17px;
+    font-style: normal;
+
+    /*ITC Giovanni Std Book Italic*/
+    /*font-family: itc-giovanni, serif;*/
+    /*font-weight: 400;*/
+    /*font-style: italic;*/
+
 
 }
 

@@ -15,6 +15,18 @@ h1 {
     padding-bottom: 20px;
 }
 
+.recentia_header h1 {
+    /*Trajan Pro 3 Regular*/
+    font-family: trajan-pro-3, serif;
+    font-weight: 400;
+    font-size: 35px;
+
+    /* Bold */
+    /*font-weight: 700;*/
+    font-style: normal;
+    margin-bottom: 0;
+}
+
 .header_nav {
     margin: auto auto 30px 95px;
     display: flex;

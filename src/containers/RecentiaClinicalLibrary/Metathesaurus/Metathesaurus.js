@@ -19,6 +19,12 @@ class Metathesaurus extends Component {
         }
     }
 
+    // componentDidMount() {
+    //     if (this.props.searching) {
+    //         this.props.onGetInfo(this.props.searching, '/getTerms');
+    //     }
+    // }
+
     render() {
         let getTerm_results = <Spinner/>;
 
