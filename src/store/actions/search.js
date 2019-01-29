@@ -26,11 +26,13 @@ export const getInfoStart = () => {
 };
 
 
-export const getInfoSuccess = (search_results) => {
+export const getInfoSuccess = (search_results, is_sub_component_or_not) => {
     return {
-        type: actionTypes.GET_INFO_SUCCESS,
-        search_results: search_results
-    }
+            type: actionTypes.GET_INFO_SUCCESS,
+            search_results: search_results,
+            is_sub_component_or_not: is_sub_component_or_not
+        }
+
 };
 
 export const getInfoFail = (error) => {
@@ -63,16 +65,21 @@ export const getInfo = (SEARCH_ITEM, API_ENDPOINT) => {
     console.log(API_ENDPOINT);
 
     let SEARCH_COUNTERPART = '';
+    let IS_SUB_COMPONENT_OR_NOT = false;
 
     if (API_ENDPOINT === '/getTerms') {
-        SEARCH_COUNTERPART = '&SearchTerm='
+        SEARCH_COUNTERPART = '&SearchTerm=';
+    } else if (API_ENDPOINT === '/getClinicalDefinitionsByTerm') {
+        SEARCH_COUNTERPART = '&SearchTerm=';
     } else if (API_ENDPOINT === '/getSynonyms') {
-        SEARCH_COUNTERPART = '&Concept='
+        SEARCH_COUNTERPART = '&Concept=';
+        IS_SUB_COMPONENT_OR_NOT = true;
+        console.log(IS_SUB_COMPONENT_OR_NOT);
     }
 
     return dispatch => {
         dispatch(getInfoStart());
-
+        console.log(IS_SUB_COMPONENT_OR_NOT);
         axios.get(API_ENDPOINT + '.php?SessionID=' + session_id
             + SEARCH_COUNTERPART + SEARCH_ITEM
             + '&SearchTerm=' + SEARCH_ITEM
@@ -101,12 +108,17 @@ export const getInfo = (SEARCH_ITEM, API_ENDPOINT) => {
                         id: key
                     });
                 }
-                console.log(getInfoItems);
-                // if (API_ENDPOINT === '/getTerms') {
-                //     dispatch(getSynonyms(getTermItems))
+                // console.log(getInfoItems);
+
+                // if (IS_SUB_COMPONENT_OR_NOT) {
+                //     dispatch(getInfoSuccess(getInfoItems));
+                //     dispatch(submitSearchSuccess());
+                // } else {
+                //     dispatch(getInfoSuccess(getInfoItems));
+                //     dispatch(submitSearchSuccess());
                 // }
 
-                dispatch(getInfoSuccess(getInfoItems));
+                dispatch(getInfoSuccess(getInfoItems, IS_SUB_COMPONENT_OR_NOT));
                 dispatch(submitSearchSuccess());
             })
             .catch(error => {

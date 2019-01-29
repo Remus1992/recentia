@@ -4,13 +4,13 @@ import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
 
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import {Route, Switch} from "react-router-dom";
+// import {Route, Switch} from "react-router-dom";
 
 // import classes from './Metathesaurus.css'
 
 // Sub-Containers
-import Synonyms from './Synonyms/Synonyms';
-import PreferredTerms from './PreferredTerms/PreferredTerms';
+// import Synonyms from './Synonyms/Synonyms';
+// import PreferredTerms from './PreferredTerms/PreferredTerms';
 
 class Metathesaurus extends Component {
     constructor(props) {
@@ -22,6 +22,7 @@ class Metathesaurus extends Component {
     handleClick(event, CONCEPT, API_ENDPOINT) {
         this.props.onSubmitSearchStart();
         this.props.onGetInfo(CONCEPT, API_ENDPOINT);
+        // this.history.pushState(this.props.getInfoItems, '/synonyms')
         event.preventDefault();
     }
 
@@ -31,34 +32,39 @@ class Metathesaurus extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // console.log(this.props.getInfoItems);
-        // console.log(prevProps.getInfoItems);
-        // console.log(prevProps.getInfoItems !== this.props.getInfoItems);
+        let API_version = '/getTerms';
         if (!prevProps.searching) {
-            // console.log('getTerm -> componentDidUpdate: ' + this.props.searchTerm);
-            this.props.onGetInfo(this.props.searchTerm, '/getTerms');
+            this.props.onGetInfo(this.props.searchTerm, API_version);
         }
+
+        // if (!prevProps.searching) {
+        //     this.props.onGetInfo(this.props.searchTerm, '/getTerms');
+        // }
     }
 
     componentDidMount() {
+        let API_version = '/getTerms';
         if (!this.props.searching && this.props.searchTerm.length !== 0) {
-            // console.log('getTerm -> componentDidMount: ' + this.props.searchTerm);
             this.props.onSubmitSearchStart();
-            this.props.onGetInfo(this.props.searching, '/getTerms');
-            this.history.pushState(this.props.getInfoItems, '/synonyms')
+            this.props.onGetInfo(this.props.searching, API_version);
         }
+
+        // if (!this.props.searching && this.props.searchTerm.length !== 0) {
+        //     this.props.onSubmitSearchStart();
+        //     this.props.onGetInfo(this.props.searching, '/getTerms');
+        // }
     }
 
     render() {
         let getTerm_results = <Spinner/>;
+        let API_version = '/getSynonyms';
 
         if (!this.props.loading) {
-            // console.log("Render: 2nd if statement executed");
             getTerm_results = this.props.getInfoItems.map(item => {
                 return (
                     <span>
                         <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm}</p>
-                        <button onClick={(e) => this.handleClick(e, item.Concept, '/getSynonyms')}>Synonym Count: {item.SynonymCount}</button>
+                        <button onClick={(e) => this.handleClick(e, item.Concept, API_version)}>Synonym Count: {item.SynonymCount}</button>
                     </span>
                 );
             });
@@ -66,12 +72,11 @@ class Metathesaurus extends Component {
 
         return (
             <React.Fragment>
-                {/*<div style={{textAlign: 'center'}}>Search Term is: {this.props.searchTerm}</div>*/}
                 <div>{getTerm_results}</div>
-                <Switch>
-                    <Route path={this.props.match.url + "/preferred_terms"} component={PreferredTerms}/>
-                    <Route path={this.props.match.url + "/synonyms"} component={Synonyms}/>
-                </Switch>
+                {/*<Switch>*/}
+                    {/*<Route path={this.props.match.url + "/preferred_terms"} component={PreferredTerms}/>*/}
+                    {/*<Route path={this.props.match.url + "/synonyms"} component={Synonyms}/>*/}
+                {/*</Switch>*/}
             </React.Fragment>
         );
     }

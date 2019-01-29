@@ -31,7 +31,7 @@ class recentiaClinicalLibrary extends Component {
                     link1_title="Home"
                     link1="/"
                     link2_title="Clinical Visit Support"
-                    link2="/clinical_visit"/>
+                    link2="/clinical_visit" />
                 <div className={classes.recentia_search}>
                     <LibraryToolbar/>
                     <SearchBar/>

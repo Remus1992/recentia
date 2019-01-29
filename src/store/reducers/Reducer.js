@@ -22,6 +22,7 @@ import session_id, {
 
 const initialState = {
     search_results: [],
+    search_sub_results: [],
 
     // query params
     session_id: session_id,
@@ -56,10 +57,17 @@ const getInfoFail = (state, action) => {
 };
 
 const getInfoSuccess = (state, action) => {
-    return updateObject(state, {
-        search_results: action.search_results,
-        loading: false
-    });
+    if (action.is_sub_component_or_not) {
+        return updateObject(state, {
+            search_sub_results: action.search_results,
+            loading: false
+        });
+    } else {
+        return updateObject(state, {
+            search_results: action.search_results,
+            loading: false
+        });
+    }
 };
 
 const getSearchTerm = (state, action) => {

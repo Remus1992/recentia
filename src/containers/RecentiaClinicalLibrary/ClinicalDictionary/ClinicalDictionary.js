@@ -17,17 +17,19 @@ class ClinicalDictionary extends Component {
         // console.log(this.props.getTermItems);
         // console.log(prevProps.getTermItems);
         // if (!prevProps.searching && prevProps.getTermItems !== this.props.getTermItems) {
+        let API_version = '/getClinicalDefinitionsByTerm';
         if (!prevProps.searching) {
             // console.log('getClinicalDefinitionsByTerm -> componentDidUpdate: ' + this.props.searchTerm);
-            this.props.onGetInfo(this.props.searchTerm, '/getClinicalDefinitionsByTerm');
+            this.props.onGetInfo(this.props.searchTerm, API_version);
         }
     }
 
     componentDidMount() {
+        let API_version = '/getClinicalDefinitionsByTerm';
         if (!this.props.searching && this.props.searchTerm.length !== 0) {
             // console.log('getClinicalDefinitionsByTerm -> componentDidMount: ' + this.props.searchTerm);
             this.props.onSubmitSearchStart();
-            this.props.onGetInfo(this.props.searching, '/getClinicalDefinitionsByTerm');
+            this.props.onGetInfo(this.props.searching, API_version);
         }
     }
 
