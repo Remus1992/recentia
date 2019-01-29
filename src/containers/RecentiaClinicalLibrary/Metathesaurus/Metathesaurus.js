@@ -13,17 +13,50 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 // import PreferredTerms from './PreferredTerms/PreferredTerms';
 
 class Metathesaurus extends Component {
+    state = {
+        expanded: false
+    };
+
     constructor(props) {
         super(props);
 
         this.handleClick = this.handleClick.bind(this);
+        // this.expandedText = this.expandedText(this);
+
     }
 
     handleClick(event, CONCEPT, API_ENDPOINT) {
         this.props.onSubmitSearchStart();
         this.props.onGetInfo(CONCEPT, API_ENDPOINT);
-        // this.history.pushState(this.props.getInfoItems, '/synonyms')
+        console.log('Expanded before: ' + this.state.expanded);
+
+        this.setState({
+            expanded: true
+        });
+
+        console.log('Expanded after: ' + this.state.expanded);
         event.preventDefault();
+    }
+
+    expandedText() {
+        this.setState({
+            expanded: true
+        })
+    }
+
+    getMoreTextDiv() {
+        if (this.state.expanded) {
+            this.props.getInfoSubItems.map(item => {
+                return (
+                    <span>
+                        <p key={item.TermID}>{item.PreferredTerm}</p>
+                    </span>
+                )
+            })
+
+        } else {
+            return null;
+        }
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -36,10 +69,6 @@ class Metathesaurus extends Component {
         if (!prevProps.searching) {
             this.props.onGetInfo(this.props.searchTerm, API_version);
         }
-
-        // if (!prevProps.searching) {
-        //     this.props.onGetInfo(this.props.searchTerm, '/getTerms');
-        // }
     }
 
     componentDidMount() {
@@ -48,23 +77,22 @@ class Metathesaurus extends Component {
             this.props.onSubmitSearchStart();
             this.props.onGetInfo(this.props.searching, API_version);
         }
-
-        // if (!this.props.searching && this.props.searchTerm.length !== 0) {
-        //     this.props.onSubmitSearchStart();
-        //     this.props.onGetInfo(this.props.searching, '/getTerms');
-        // }
     }
 
     render() {
         let getTerm_results = <Spinner/>;
         let API_version = '/getSynonyms';
 
+        let expandedDiv = this.getMoreTextDiv();
+
         if (!this.props.loading) {
             getTerm_results = this.props.getInfoItems.map(item => {
                 return (
                     <span>
                         <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm}</p>
-                        <button onClick={(e) => this.handleClick(e, item.Concept, API_version)}>Synonym Count: {item.SynonymCount}</button>
+                        <button
+                            onClick={(e) => this.handleClick(e, item.Concept, API_version)}>Synonym Count: {item.SynonymCount}</button>
+                        <div>{expandedDiv}</div>
                     </span>
                 );
             });
@@ -72,10 +100,11 @@ class Metathesaurus extends Component {
 
         return (
             <React.Fragment>
+                {/*<div>{expandedDiv}</div>*/}
                 <div>{getTerm_results}</div>
                 {/*<Switch>*/}
-                    {/*<Route path={this.props.match.url + "/preferred_terms"} component={PreferredTerms}/>*/}
-                    {/*<Route path={this.props.match.url + "/synonyms"} component={Synonyms}/>*/}
+                {/*<Route path={this.props.match.url + "/preferred_terms"} component={PreferredTerms}/>*/}
+                {/*<Route path={this.props.match.url + "/synonyms"} component={Synonyms}/>*/}
                 {/*</Switch>*/}
             </React.Fragment>
         );
@@ -87,6 +116,7 @@ const mapStateToProps = state => {
         searchTerm: state.searchReducer.search_term,
         loading: state.searchReducer.loading,
         getInfoItems: state.searchReducer.search_results,
+        getInfoSubItems: state.searchReducer.search_sub_results,
         searching: state.searchReducer.searchSubmit
     }
 };

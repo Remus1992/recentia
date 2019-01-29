@@ -74,12 +74,12 @@ export const getInfo = (SEARCH_ITEM, API_ENDPOINT) => {
     } else if (API_ENDPOINT === '/getSynonyms') {
         SEARCH_COUNTERPART = '&Concept=';
         IS_SUB_COMPONENT_OR_NOT = true;
-        console.log(IS_SUB_COMPONENT_OR_NOT);
+        // console.log(IS_SUB_COMPONENT_OR_NOT);
     }
 
     return dispatch => {
         dispatch(getInfoStart());
-        console.log(IS_SUB_COMPONENT_OR_NOT);
+        // console.log(IS_SUB_COMPONENT_OR_NOT);
         axios.get(API_ENDPOINT + '.php?SessionID=' + session_id
             + SEARCH_COUNTERPART + SEARCH_ITEM
             + '&SearchTerm=' + SEARCH_ITEM
