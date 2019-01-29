@@ -34,6 +34,8 @@ class Metathesaurus extends Component {
             expanded: true
         });
 
+        // this.expandedText();
+
         console.log('Expanded after: ' + this.state.expanded);
         event.preventDefault();
     }
@@ -52,8 +54,9 @@ class Metathesaurus extends Component {
                         <p key={item.TermID}>{item.PreferredTerm}</p>
                     </span>
                 )
-            })
+            });
 
+            return <div>Expanded</div>
         } else {
             return null;
         }
@@ -83,7 +86,19 @@ class Metathesaurus extends Component {
         let getTerm_results = <Spinner/>;
         let API_version = '/getSynonyms';
 
-        let expandedDiv = this.getMoreTextDiv();
+        // let expandedDiv = this.getMoreTextDiv();
+
+        let expandedDiv = null;
+
+        if (this.state.expanded) {
+            expandedDiv = this.props.getInfoSubItems.map(item => {
+                return (
+                    <span>
+                        <p key={item.TermID}>{item.PreferredTerm}</p>
+                    </span>
+                )
+            });
+        }
 
         if (!this.props.loading) {
             getTerm_results = this.props.getInfoItems.map(item => {
