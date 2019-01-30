@@ -14,7 +14,8 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 
 class Metathesaurus extends Component {
     state = {
-        expanded: false
+        expanded: false,
+        elementClicked: null
     };
 
     constructor(props) {
@@ -25,42 +26,45 @@ class Metathesaurus extends Component {
 
     }
 
-    handleClick(event, CONCEPT, API_ENDPOINT) {
+    handleClick(event, CONCEPT, API_ENDPOINT, ELEMENT_ID) {
         this.props.onSubmitSearchStart();
         this.props.onGetInfo(CONCEPT, API_ENDPOINT);
         console.log('Expanded before: ' + this.state.expanded);
+        console.log('elementClicked before: ' + this.state.elementClicked);
 
         this.setState({
-            expanded: true
+            expanded: true,
+            elementClicked: ELEMENT_ID
         });
 
         // this.expandedText();
 
         console.log('Expanded after: ' + this.state.expanded);
+        console.log('elementClicked after: ' + this.state.elementClicked);
         event.preventDefault();
     }
 
-    expandedText() {
-        this.setState({
-            expanded: true
-        })
-    }
-
-    getMoreTextDiv() {
-        if (this.state.expanded) {
-            this.props.getInfoSubItems.map(item => {
-                return (
-                    <span>
-                        <p key={item.TermID}>{item.PreferredTerm}</p>
-                    </span>
-                )
-            });
-
-            return <div>Expanded</div>
-        } else {
-            return null;
-        }
-    }
+    // expandedText() {
+    //     this.setState({
+    //         expanded: true
+    //     })
+    // }
+    //
+    // getMoreTextDiv() {
+    //     if (this.state.expanded) {
+    //         this.props.getInfoSubItems.map(item => {
+    //             return (
+    //                 <span>
+    //                     <p key={item.TermID}>{item.PreferredTerm}</p>
+    //                 </span>
+    //             )
+    //         });
+    //
+    //         return <div>Expanded</div>
+    //     } else {
+    //         return null;
+    //     }
+    // }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         // console.log(nextProps.getInfoItems !== this.props.getInfoItems);
@@ -84,43 +88,54 @@ class Metathesaurus extends Component {
 
     render() {
         let getTerm_results = <Spinner/>;
+        let expandedDiv = null;
         let API_version = '/getSynonyms';
 
         // let expandedDiv = this.getMoreTextDiv();
 
-        let expandedDiv = null;
-
+        console.log('Expanded in Render: ' + this.state.expanded);
+        console.log('elementClicked in Render: ' + this.state.elementClicked);
         if (this.state.expanded) {
+
             expandedDiv = this.props.getInfoSubItems.map(item => {
                 return (
-                    <span>
-                        <p key={item.TermID}>{item.PreferredTerm}</p>
-                    </span>
+                    <p key={item.TermID}>{item.PreferredTerm} TermID: {item.TermID}</p>
                 )
             });
+            console.log(expandedDiv)
         }
 
         if (!this.props.loading) {
+
+            let isElementClicked = false;
+
             getTerm_results = this.props.getInfoItems.map(item => {
+                console.log('elementClicked in Render if statement: ' + this.state.elementClicked);
+                console.log('item.id in Render if statement: ' + item.id);
+                if (this.state.elementClicked === item.id) {
+                    isElementClicked = true;
+                } else {
+                    isElementClicked = false;
+                }
                 return (
-                    <span>
-                        <p style={{textAlign: 'center'}} key={item.Concept}>Preferred Term: {item.PreferredTerm}</p>
+                    <span key={item.id}>
+                        <p style={{textAlign: 'center'}}>Preferred Term: {item.PreferredTerm} Concept: {item.Concept}</p>
+                        <p>{item.id}</p>
                         <button
-                            onClick={(e) => this.handleClick(e, item.Concept, API_version)}>Synonym Count: {item.SynonymCount}</button>
-                        <div>{expandedDiv}</div>
+                            onClick={(e) => this.handleClick(e, item.Concept, API_version, item.id)}>Synonym Count: {item.SynonymCount}</button>
+                        {/*<div id={item.id}>{expandedDiv}</div>*/}
+
+                        {/*<div>{isElementClicked ? {expandedDiv} : 'not clicked'}</div>*/}
+
                     </span>
                 );
             });
         }
 
+
         return (
             <React.Fragment>
-                {/*<div>{expandedDiv}</div>*/}
                 <div>{getTerm_results}</div>
-                {/*<Switch>*/}
-                {/*<Route path={this.props.match.url + "/preferred_terms"} component={PreferredTerms}/>*/}
-                {/*<Route path={this.props.match.url + "/synonyms"} component={Synonyms}/>*/}
-                {/*</Switch>*/}
             </React.Fragment>
         );
     }
