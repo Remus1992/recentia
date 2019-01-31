@@ -40,7 +40,10 @@ class ClinicalDictionary extends Component {
             // console.log("Render: 2nd if statement executed");
             getTerm_results = this.props.getTermItems.map(item => {
                 return (
-                    <p style={{textAlign: 'center'}} key={item.id}>Preferred Term: {item["Clinical Definition"]}</p>
+                    <span key={item.id}>
+                        <p style={{textAlign: 'center'}}>Term: {item.Term}</p>
+                        <p style={{textAlign: 'center'}} key={item.id}>Clinical Definition: {item["Clinical Definition"]}</p>
+                    </span>
                 );
             });
         }
