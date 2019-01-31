@@ -88,7 +88,7 @@ class Metathesaurus extends Component {
         let getTerm_results = <Spinner/>;
         let expandedDiv = null;
         let API_version = '/getSynonyms';
-        let synonymList = [];
+        // let synonymList = [];
         let synonymListLength = null;
 
         // let expandedDiv = this.getMoreTextDiv();
@@ -105,25 +105,30 @@ class Metathesaurus extends Component {
         //     console.log(expandedDiv)
         // }
 
-        if (this.state.expanded) {
-            // array
-            this.props.getInfoSubItems.map(item => {
-                return(
-                    synonymList.push(item.TermID)
-                )
-            });
+        // if (this.state.expanded) {
+        //     // array
+        //     this.props.getInfoSubItems.map(item => {
+        //         return(
+        //             synonymList.push(item.TermID)
+        //         )
+        //     });
+        //     //
+        //     // // console.log('synonymList: ' + synonymList);
+        //     // console.log('synonymList: ' + typeof synonymList);
+        //     // synonymListLength = synonymList.length;
+        //     //
+        //     // // object set
+        //     // expandedDiv = this.props.getInfoSubItems.map(item => {
+        //     //     return (
+        //     //         <Synonym key={item.TermID}>{item.TermID}</Synonym>
+        //     //     )
+        //     // });
+        //     // console.log('expandedDiv: ' + expandedDiv)
+        // }
 
-            console.log('synonymList: ' + synonymList);
-            synonymListLength = synonymList.length;
-
-            // object set
-            expandedDiv = this.props.getInfoSubItems.map(item => {
-                return (
-                    <Synonym key={item.TermID}>{item.TermID}</Synonym>
-                )
-            });
-            console.log('expandedDiv: ' + expandedDiv)
-        }
+        const synonymList = (synonyms) => {
+            return synonyms.map((synonym => <Synonym key={synonym.TermID}>{synonym.TermID}</Synonym>))
+        };
 
 
         if (!this.props.loading) {
@@ -148,13 +153,12 @@ class Metathesaurus extends Component {
 
                         <div>{isElementClicked ? 'clicked' : 'not clicked'}</div>
 
-                        <ul>{isElementClicked ? {synonymListLength} : 'not clicked'}</ul>
+                        <ul>{isElementClicked ? synonymList(this.props.getInfoSubItems) : 'not clicked'}</ul>
 
                     </span>
                 );
             });
         }
-
 
         return (
             <React.Fragment>
