@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import * as actions from "../../../store/actions";
 
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import Synonym from "../Metathesaurus/Metathesaurus";
 
 // import classes from './Dictionary.css'
 
@@ -22,6 +21,7 @@ class ClinicalDictionary extends Component {
 
     handleClick(event, ELEMENT_ID) {
         console.log('Clicked');
+        this.props.onSubmitSearchStart();
         this.setState({
             expanded: true,
             elementClicked: ELEMENT_ID
@@ -31,6 +31,14 @@ class ClinicalDictionary extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
+        // console.log('nextProps.searching: ' + nextProps.searching);
+        // console.log('nextState.expanded: ' + nextState.expanded);
+        // return nextProps.searching || nextState.expanded
+
+        if (nextProps.searching && nextState.expanded) {
+            return true
+        }
+
         return nextProps.searching
     }
 
@@ -57,9 +65,9 @@ class ClinicalDictionary extends Component {
     render() {
         let getTerm_results = <Spinner/>;
 
-        const clinicalDefinition = (definition) => {
-            return <p>{definition}</p>
-        };
+        // const clinicalDefinition = (definition) => {
+        //     return <p>{definition}</p>
+        // };
 
         if (!this.props.loading) {
             let isElementClicked = false;
@@ -74,10 +82,10 @@ class ClinicalDictionary extends Component {
                         <p style={{textAlign: 'center'}}>Term: {item.Term}</p>
                         <button onClick={(e) => this.handleClick(e, item.id)}>Read Definition</button>
 
-                        <p style={{textAlign: 'center'}} key={item.id}>Clinical Definition: {item["Clinical Definition"]}</p>
+                        {/*<p style={{textAlign: 'center'}} key={item.id}>Clinical Definition: {item["Clinical Definition"]}</p>*/}
                         {/*<p>{isElementClicked ? clinicalDefinition(item["Clinical Definition"]) : null}</p>*/}
 
-                        <p>{isElementClicked ? 'clicked' : 'not clicked'}</p>
+                        <p>{isElementClicked ? item["Clinical Definition"] : null}</p>
                     </span>
                 );
             });
@@ -85,7 +93,6 @@ class ClinicalDictionary extends Component {
 
         return (
             <React.Fragment>
-                <div style={{textAlign: 'center'}}>Search Term is: {this.props.searchTerm}</div>
                 <div>{getTerm_results}</div>
             </React.Fragment>
         );
