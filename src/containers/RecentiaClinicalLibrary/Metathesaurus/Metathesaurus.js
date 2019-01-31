@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
 
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import Synonym from '../../../components/Subcomponents/Synonyms/Synonym/Synonym';
+
 // import {Route, Switch} from "react-router-dom";
 
 // import classes from './Metathesaurus.css'
@@ -29,8 +31,6 @@ class Metathesaurus extends Component {
     handleClick(event, CONCEPT, API_ENDPOINT, ELEMENT_ID) {
         this.props.onSubmitSearchStart();
         this.props.onGetInfo(CONCEPT, API_ENDPOINT);
-        console.log('Expanded before: ' + this.state.expanded);
-        console.log('elementClicked before: ' + this.state.elementClicked);
 
         this.setState({
             expanded: true,
@@ -39,8 +39,6 @@ class Metathesaurus extends Component {
 
         // this.expandedText();
 
-        console.log('Expanded after: ' + this.state.expanded);
-        console.log('elementClicked after: ' + this.state.elementClicked);
         event.preventDefault();
     }
 
@@ -67,13 +65,13 @@ class Metathesaurus extends Component {
     // }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        // console.log(nextProps.getInfoItems !== this.props.getInfoItems);
         return nextProps.searching
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         let API_version = '/getTerms';
         if (!prevProps.searching) {
+            console.log('API_VERSION: ' + API_version);
             this.props.onGetInfo(this.props.searchTerm, API_version);
         }
     }
@@ -90,28 +88,51 @@ class Metathesaurus extends Component {
         let getTerm_results = <Spinner/>;
         let expandedDiv = null;
         let API_version = '/getSynonyms';
+        let synonymList = [];
+        let synonymListLength = null;
 
         // let expandedDiv = this.getMoreTextDiv();
 
-        console.log('Expanded in Render: ' + this.state.expanded);
-        console.log('elementClicked in Render: ' + this.state.elementClicked);
-        if (this.state.expanded) {
+        // console.log('Expanded in Render: ' + this.state.expanded);
+        // console.log('elementClicked in Render: ' + this.state.elementClicked);
+        // if (this.state.expanded) {
+        //
+        //     expandedDiv = this.props.getInfoSubItems.map(item => {
+        //         return (
+        //             <p key={item.TermID}>{item.PreferredTerm} TermID: {item.TermID}</p>
+        //         )
+        //     });
+        //     console.log(expandedDiv)
+        // }
 
-            expandedDiv = this.props.getInfoSubItems.map(item => {
-                return (
-                    <p key={item.TermID}>{item.PreferredTerm} TermID: {item.TermID}</p>
+        if (this.state.expanded) {
+            // array
+            this.props.getInfoSubItems.map(item => {
+                return(
+                    synonymList.push(item.TermID)
                 )
             });
-            console.log(expandedDiv)
+
+            console.log('synonymList: ' + synonymList);
+            synonymListLength = synonymList.length;
+
+            // object set
+            expandedDiv = this.props.getInfoSubItems.map(item => {
+                return (
+                    <Synonym key={item.TermID}>{item.TermID}</Synonym>
+                )
+            });
+            console.log('expandedDiv: ' + expandedDiv)
         }
+
 
         if (!this.props.loading) {
 
             let isElementClicked = false;
 
+            // expandedDiv = this.props.getInfoSubItems.map(item => <p>{item.PreferredTerm} TermID: {item.TermID}</p>);
+
             getTerm_results = this.props.getInfoItems.map(item => {
-                console.log('elementClicked in Render if statement: ' + this.state.elementClicked);
-                console.log('item.id in Render if statement: ' + item.id);
                 if (this.state.elementClicked === item.id) {
                     isElementClicked = true;
                 } else {
@@ -125,7 +146,9 @@ class Metathesaurus extends Component {
                             onClick={(e) => this.handleClick(e, item.Concept, API_version, item.id)}>Synonym Count: {item.SynonymCount}</button>
                         {/*<div id={item.id}>{expandedDiv}</div>*/}
 
-                        {/*<div>{isElementClicked ? {expandedDiv} : 'not clicked'}</div>*/}
+                        <div>{isElementClicked ? 'clicked' : 'not clicked'}</div>
+
+                        <ul>{isElementClicked ? {synonymListLength} : 'not clicked'}</ul>
 
                     </span>
                 );
@@ -135,6 +158,8 @@ class Metathesaurus extends Component {
 
         return (
             <React.Fragment>
+                <ul>Synonym Length: {synonymListLength}</ul>
+                <ul>{expandedDiv}</ul>
                 <div>{getTerm_results}</div>
             </React.Fragment>
         );

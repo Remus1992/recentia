@@ -62,7 +62,7 @@ export const submitSearchFail = (error) => {
 };
 
 export const getInfo = (SEARCH_ITEM, API_ENDPOINT) => {
-    console.log(API_ENDPOINT);
+    console.log(API_ENDPOINT + ' ' + SEARCH_ITEM);
 
     let SEARCH_COUNTERPART = '';
     let IS_SUB_COMPONENT_OR_NOT = false;
