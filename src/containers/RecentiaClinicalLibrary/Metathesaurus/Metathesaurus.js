@@ -24,8 +24,6 @@ class Metathesaurus extends Component {
         super(props);
 
         this.handleClick = this.handleClick.bind(this);
-        // this.expandedText = this.expandedText(this);
-
     }
 
     handleClick(event, CONCEPT, API_ENDPOINT, ELEMENT_ID) {
@@ -37,32 +35,8 @@ class Metathesaurus extends Component {
             elementClicked: ELEMENT_ID
         });
 
-        // this.expandedText();
-
         event.preventDefault();
     }
-
-    // expandedText() {
-    //     this.setState({
-    //         expanded: true
-    //     })
-    // }
-    //
-    // getMoreTextDiv() {
-    //     if (this.state.expanded) {
-    //         this.props.getInfoSubItems.map(item => {
-    //             return (
-    //                 <span>
-    //                     <p key={item.TermID}>{item.PreferredTerm}</p>
-    //                 </span>
-    //             )
-    //         });
-    //
-    //         return <div>Expanded</div>
-    //     } else {
-    //         return null;
-    //     }
-    // }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         return nextProps.searching
@@ -86,56 +60,15 @@ class Metathesaurus extends Component {
 
     render() {
         let getTerm_results = <Spinner/>;
-        let expandedDiv = null;
         let API_version = '/getSynonyms';
-        // let synonymList = [];
-        let synonymListLength = null;
-
-        // let expandedDiv = this.getMoreTextDiv();
-
-        // console.log('Expanded in Render: ' + this.state.expanded);
-        // console.log('elementClicked in Render: ' + this.state.elementClicked);
-        // if (this.state.expanded) {
-        //
-        //     expandedDiv = this.props.getInfoSubItems.map(item => {
-        //         return (
-        //             <p key={item.TermID}>{item.PreferredTerm} TermID: {item.TermID}</p>
-        //         )
-        //     });
-        //     console.log(expandedDiv)
-        // }
-
-        // if (this.state.expanded) {
-        //     // array
-        //     this.props.getInfoSubItems.map(item => {
-        //         return(
-        //             synonymList.push(item.TermID)
-        //         )
-        //     });
-        //     //
-        //     // // console.log('synonymList: ' + synonymList);
-        //     // console.log('synonymList: ' + typeof synonymList);
-        //     // synonymListLength = synonymList.length;
-        //     //
-        //     // // object set
-        //     // expandedDiv = this.props.getInfoSubItems.map(item => {
-        //     //     return (
-        //     //         <Synonym key={item.TermID}>{item.TermID}</Synonym>
-        //     //     )
-        //     // });
-        //     // console.log('expandedDiv: ' + expandedDiv)
-        // }
 
         const synonymList = (synonyms) => {
             return synonyms.map((synonym => <Synonym key={synonym.TermID}>{synonym.TermID}</Synonym>))
         };
 
-
         if (!this.props.loading) {
 
             let isElementClicked = false;
-
-            // expandedDiv = this.props.getInfoSubItems.map(item => <p>{item.PreferredTerm} TermID: {item.TermID}</p>);
 
             getTerm_results = this.props.getInfoItems.map(item => {
                 if (this.state.elementClicked === item.id) {
@@ -146,14 +79,10 @@ class Metathesaurus extends Component {
                 return (
                     <span key={item.id}>
                         <p style={{textAlign: 'center'}}>Preferred Term: {item.PreferredTerm} Concept: {item.Concept}</p>
-                        <p>{item.id}</p>
                         <button
                             onClick={(e) => this.handleClick(e, item.Concept, API_version, item.id)}>Synonym Count: {item.SynonymCount}</button>
-                        {/*<div id={item.id}>{expandedDiv}</div>*/}
 
-                        <div>{isElementClicked ? 'clicked' : 'not clicked'}</div>
-
-                        <ul>{isElementClicked ? synonymList(this.props.getInfoSubItems) : 'not clicked'}</ul>
+                        <ul>{isElementClicked ? synonymList(this.props.getInfoSubItems) : null}</ul>
 
                     </span>
                 );
@@ -162,8 +91,6 @@ class Metathesaurus extends Component {
 
         return (
             <React.Fragment>
-                <ul>Synonym Length: {synonymListLength}</ul>
-                <ul>{expandedDiv}</ul>
                 <div>{getTerm_results}</div>
             </React.Fragment>
         );

@@ -4,11 +4,32 @@ import {connect} from "react-redux";
 import * as actions from "../../../store/actions";
 
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import Synonym from "../Metathesaurus/Metathesaurus";
 
 // import classes from './Dictionary.css'
 
 
 class ClinicalDictionary extends Component {
+    state = {
+        expanded: false,
+        elementClicked: null
+    };
+
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(event, ELEMENT_ID) {
+        console.log('Clicked');
+        this.setState({
+            expanded: true,
+            elementClicked: ELEMENT_ID
+        });
+
+        event.preventDefault();
+    }
+
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         return nextProps.searching
     }
@@ -36,13 +57,27 @@ class ClinicalDictionary extends Component {
     render() {
         let getTerm_results = <Spinner/>;
 
+        const clinicalDefinition = (definition) => {
+            return <p>{definition}</p>
+        };
+
         if (!this.props.loading) {
-            // console.log("Render: 2nd if statement executed");
+            let isElementClicked = false;
             getTerm_results = this.props.getTermItems.map(item => {
+                if (this.state.elementClicked === item.id) {
+                    isElementClicked = true;
+                } else {
+                    isElementClicked = false;
+                }
                 return (
                     <span key={item.id}>
                         <p style={{textAlign: 'center'}}>Term: {item.Term}</p>
+                        <button onClick={(e) => this.handleClick(e, item.id)}>Read Definition</button>
+
                         <p style={{textAlign: 'center'}} key={item.id}>Clinical Definition: {item["Clinical Definition"]}</p>
+                        {/*<p>{isElementClicked ? clinicalDefinition(item["Clinical Definition"]) : null}</p>*/}
+
+                        <p>{isElementClicked ? 'clicked' : 'not clicked'}</p>
                     </span>
                 );
             });
