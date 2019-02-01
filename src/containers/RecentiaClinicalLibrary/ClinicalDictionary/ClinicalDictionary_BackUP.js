@@ -11,7 +11,31 @@ import ClinicalDefinition from './ClinicalDefinition/ClinicalDefinition';
 
 
 class ClinicalDictionary extends Component {
+    state = {
+        expanded: false,
+        elementClicked: null
+    };
+
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(event, ELEMENT_ID) {
+        console.log('Clicked');
+        this.props.onSubmitSearchStart();
+        this.setState({
+            expanded: true,
+            elementClicked: ELEMENT_ID
+        });
+
+        event.preventDefault();
+    }
+
     shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (nextProps.searching && nextState.expanded) {
+            return true
+        }
         return nextProps.searching
     }
 
@@ -34,13 +58,19 @@ class ClinicalDictionary extends Component {
         let getTerm_results = <Spinner/>;
 
         if (!this.props.loading) {
+            let isElementClicked = false;
             getTerm_results = this.props.getTermItems.map(item => {
+                if (this.state.elementClicked === item.id) {
+                    isElementClicked = true;
+                } else {
+                    isElementClicked = false;
+                }
                 return (
-                    <ClinicalDefinition
-                        key={item.id}
-                        itemTerm={item.Term}
-                        termDefinition={item["Clinical Definition"]}
-                    >{item.id}</ClinicalDefinition>
+                    <span key={item.id}>
+                        <p style={{textAlign: 'center'}}>Term: {item.Term}</p>
+                        <button onClick={(e) => this.handleClick(e, item.id)}>Read Definition</button>
+                        <p>{isElementClicked ? item["Clinical Definition"] : null}</p>
+                    </span>
                 );
             });
         }
@@ -52,7 +82,6 @@ class ClinicalDictionary extends Component {
         );
     }
 }
-
 
 const mapStateToProps = state => {
     return {
