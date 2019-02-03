@@ -57,7 +57,7 @@ export const language_dictionary = [
 ];
 
 
-export const api_call = [
+export const api_call =
     [
         {"DisplayOrder": 1, "Abbreviation": "ALL", "Language": "All supported languages"},
         {"DisplayOrder": 2, "Abbreviation": "ENG", "Language": "English"},
@@ -89,4 +89,4 @@ export const api_call = [
         {"DisplayOrder": 28, "Abbreviation": "SWE", "Language": "Swedish"},
         {"DisplayOrder": 29, "Abbreviation": "TUR", "Language": "Turkish"}
     ]
-];
+;

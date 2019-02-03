@@ -79,7 +79,9 @@ export const getInfo = (SEARCH_ITEM, API_ENDPOINT) => {
     } else if (API_ENDPOINT === '/getSynonyms') {
         SEARCH_COUNTERPART = '&Concept=';
         IS_SUB_COMPONENT_OR_NOT = true;
-        // console.log(IS_SUB_COMPONENT_OR_NOT);
+    } else if (API_ENDPOINT === '/getLanguages') {
+        SEARCH_COUNTERPART = '&Concept=';
+        IS_SUB_COMPONENT_OR_NOT = true;
     }
 
     return dispatch => {
