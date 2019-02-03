@@ -25,6 +25,11 @@ export const getInfoStart = () => {
     }
 };
 
+export const isSubComponent = () => {
+    return {
+        type: actionTypes.IS_SUB_COMPONENT
+    }
+};
 
 export const getInfoSuccess = (search_results, is_sub_component_or_not) => {
     return {
@@ -78,7 +83,14 @@ export const getInfo = (SEARCH_ITEM, API_ENDPOINT) => {
     }
 
     return dispatch => {
-        dispatch(getInfoStart());
+        if(IS_SUB_COMPONENT_OR_NOT) {
+            console.log('IS_SUB_COMPONENT_OR_NOT: ' + IS_SUB_COMPONENT_OR_NOT);
+            dispatch(isSubComponent());
+        } else {
+            console.log('IS_SUB_COMPONENT_OR_NOT: ' + IS_SUB_COMPONENT_OR_NOT);
+            // dispatch(getInfoStart());
+        }
+
         // console.log(IS_SUB_COMPONENT_OR_NOT);
         axios.get(API_ENDPOINT + '.php?SessionID=' + session_id
             + SEARCH_COUNTERPART + SEARCH_ITEM

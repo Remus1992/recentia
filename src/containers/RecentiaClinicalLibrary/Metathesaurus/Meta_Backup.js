@@ -4,10 +4,34 @@ import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
 
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import Synonym from '../../../components/Subcomponents/Synonym/Synonym';
+// import Synonym from '../../../components/Subcomponents/Synonyms/Synonym/Synonym';
 
+// import classes from './Metathesaurus.css'
 
 class Metathesaurus extends Component {
+    state = {
+        expanded: false,
+        elementClicked: null
+    };
+
+    constructor(props) {
+        super(props);
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(event, CONCEPT, API_ENDPOINT, ELEMENT_ID) {
+        this.props.onSubmitSearchStart();
+        this.props.onGetInfo(CONCEPT, API_ENDPOINT);
+
+        this.setState({
+            expanded: true,
+            elementClicked: ELEMENT_ID
+        });
+
+        event.preventDefault();
+    }
+
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         return nextProps.searching
     }
@@ -30,16 +54,31 @@ class Metathesaurus extends Component {
 
     render() {
         let getTerm_results = <Spinner/>;
+        let API_version = '/getSynonyms';
+
+        const synonymList = (synonyms) => {
+            return synonyms.map((synonym => <p key={synonym.TermID}>{synonym.TermID}</p>))
+        };
 
         if (!this.props.loading) {
-            getTerm_results = this.props.getInfoItems.map(item => {
-                return (
-                    <Synonym
-                        key={item.id}
-                        termConcept={item.Concept}
-                        synonymCount={item.SynonymCount}
 
-                    >{item.PreferredTerm}</Synonym>
+            let isElementClicked = false;
+
+            getTerm_results = this.props.getInfoItems.map(item => {
+                if (this.state.elementClicked === item.id) {
+                    isElementClicked = true;
+                } else {
+                    isElementClicked = false;
+                }
+                return (
+                    <span key={item.id}>
+                        <p style={{textAlign: 'center'}}>Preferred Term: {item.PreferredTerm} Concept: {item.Concept}</p>
+                        <button
+                            onClick={(e) => this.handleClick(e, item.Concept, API_version, item.id)}>Synonym Count: {item.SynonymCount}</button>
+
+                        <ul>{isElementClicked ? synonymList(this.props.getInfoSubItems) : null}</ul>
+
+                    </span>
                 );
             });
         }
@@ -58,8 +97,7 @@ const mapStateToProps = state => {
         loading: state.searchReducer.loading,
         getInfoItems: state.searchReducer.search_results,
         getInfoSubItems: state.searchReducer.search_sub_results,
-        searching: state.searchReducer.searchSubmit,
-        subComponent: state.searchReducer.subcomponent
+        searching: state.searchReducer.searchSubmit
     }
 };
 

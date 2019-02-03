@@ -5,7 +5,7 @@ import * as actions from "../../../store/actions";
 
 import Spinner from '../../../components/UI/Spinner/Spinner';
 
-import ClinicalDefinition from './ClinicalDefinition/ClinicalDefinition';
+import ClinicalDefinition from '../../../components/Subcomponents/ClinicalDefinition/ClinicalDefinition';
 
 // import classes from './Dictionary.css'
 

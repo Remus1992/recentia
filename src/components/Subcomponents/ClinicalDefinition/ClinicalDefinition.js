@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
-// import classes from './ClinicalDefinition.css.css';
+// import classes from './ClinicalDefinition.css';
 
-import Spinner from '../../../../components/UI/Spinner/Spinner';
+// import Spinner from '../../UI/Spinner/Spinner';
 
 class ClinicalDefinition extends Component {
     state = {

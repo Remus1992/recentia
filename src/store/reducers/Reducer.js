@@ -23,6 +23,7 @@ import session_id, {
 const initialState = {
     search_results: [],
     search_sub_results: [],
+    subcomponent: false,
 
     // query params
     session_id: session_id,
@@ -50,6 +51,10 @@ const initialState = {
 
 const getInfoStart = (state, action) => {
     return updateObject(state, {loading: true});
+};
+
+const isSubComponent = (state, action) => {
+    return updateObject(state, {subcomponent: true})
 };
 
 const getInfoFail = (state, action) => {
@@ -105,6 +110,8 @@ const reducer = (state = initialState, action) => {
             return getInfoSuccess(state, action);
         case actionTypes.GET_INFO_FAIL:
             return getInfoFail(state, action);
+        case actionTypes.IS_SUB_COMPONENT:
+            return(isSubComponent(state, action));
         default:
             return state;
     }
