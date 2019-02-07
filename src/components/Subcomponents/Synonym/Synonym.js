@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import {getInfo} from "../../../api";
 
-import Spinner from '../../../components/UI/Spinner/Spinner';
+// import Spinner from '../../../components/UI/Spinner/Spinner';
 
 // import classes from './Synonym.css';
 

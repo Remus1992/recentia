@@ -56,13 +56,13 @@ class Translate extends Component {
     }
 
     componentDidMount() {
-        let API_version = '/getLanguages';
+        // let API_version = '/getLanguages';
         // if (!this.props.searching && this.props.searchTerm.length !== 0) {
         //     this.props.onSubmitSearchStart();
         //     this.props.onGetInfo(this.props.searching, API_version);
         // }
         this.setState({
-            supportedLanguages: this.props.onGetInfo(null, API_version)
+            // supportedLanguages: this.props.onGetInfo(null, API_version)
         });
     }
 
@@ -86,18 +86,14 @@ class Translate extends Component {
 const mapStateToProps = state => {
     return {
         searchTerm: state.searchReducer.search_term,
-        loading: state.searchReducer.loading,
-        getInfoItems: state.searchReducer.search_results,
-        getInfoSubItems: state.searchReducer.search_sub_results,
-        searching: state.searchReducer.searchSubmit,
-        subComponent: state.searchReducer.subcomponent
+        searching: state.searchReducer.searchSubmit
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetInfo: (SEARCH, API_VERSION) => dispatch(actions.getInfo(SEARCH, API_VERSION)),
-        onSubmitSearchStart: () => dispatch(actions.submitSearchStart())
+        onSubmitSearchStart: () => dispatch(actions.submitSearchStart()),
+        onSubmitSearchSuccess: () => dispatch(actions.submitSearchSuccess())
     }
 };
 
