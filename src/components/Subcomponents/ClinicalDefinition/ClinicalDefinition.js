@@ -7,6 +7,7 @@ import React, {Component} from 'react';
 class ClinicalDefinition extends Component {
     state = {
         expanded: false,
+        isToggleOn: true
     };
 
     constructor(props) {
@@ -15,10 +16,11 @@ class ClinicalDefinition extends Component {
     }
 
     handleClick(event) {
-        console.log('Clicked');
-        this.setState({
-            expanded: true,
-        });
+        this.setState(function(prevState) {
+			return {
+			    expanded: !prevState.expanded
+			};
+		});
 
         event.preventDefault();
     }
