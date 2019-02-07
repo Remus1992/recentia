@@ -56,11 +56,6 @@ class Translate extends Component {
     }
 
     componentDidMount() {
-        // let API_version = '/getLanguages';
-        // if (!this.props.searching && this.props.searchTerm.length !== 0) {
-        //     this.props.onSubmitSearchStart();
-        //     this.props.onGetInfo(this.props.searching, API_version);
-        // }
         this.setState({
             // supportedLanguages: this.props.onGetInfo(null, API_version)
         });
