@@ -26,11 +26,6 @@ class Synonym extends Component {
     async handleClick(event, CONCEPT, API_ENDPOINT) {
         const synonymList = await getInfo(CONCEPT, API_ENDPOINT);
 
-        // this.setState({
-        //     expanded: true,
-        //     synonymList: synonymList
-        // });
-
         this.setState(function(prevState) {
 			return {
 			    expanded: !prevState.expanded,
