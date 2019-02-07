@@ -1,5 +1,6 @@
 export {
     getSearchTerm,
     getInfo,
-    submitSearchStart
+    submitSearchStart,
+    submitSearchSuccess
 } from './search';

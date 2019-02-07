@@ -16,6 +16,7 @@ import session_id, {
     clinic_license,
     physician_license
 } from "../../../secret";
+import Synonym from "./Metathesaurus";
 
 
 export function handleInputChange(query) {
@@ -247,3 +248,52 @@ getSynonym_API_CALL =
         {"TermID": 771353, "PreferredTerm": "nonsmall cell lung cancer, stage IV"},
         {"TermID": 771328, "PreferredTerm": "non-small cell lung cancer, stage IV"}
     ];
+
+
+
+
+
+        // NEW NEW
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return nextState.searching
+    }
+
+    async componentDidUpdate(prevProps, prevState, snapshot) {
+        let API_version = '/getTerms';
+        if (!prevState.searching) {
+            console.log('API_VERSION: ' + API_version);
+            // this.props.onGetInfo(this.props.searchTerm, API_version);
+            const preferredTermList = await getInfo(this.props.searchTerm, API_version);
+            this.setState({
+                preferredTermList: preferredTermList,
+                searching: true
+            })
+        }
+    }
+
+    async componentDidMount() {
+        let API_version = '/getTerms';
+        if (!this.state.searching && this.props.searchTerm.length !== 0) {
+            const preferredTermList = await getInfo(this.props.searchTerm, API_version);
+            this.setState({
+                preferredTermList: preferredTermList,
+                searching: true
+            })
+        }
+    }
+
+    render() {
+        let getTerm_results = <Spinner/>;
+
+        if (!this.state.loading) {
+            getTerm_results  = ({data}) => {
+                return data.map((item =>
+                    <Synonym
+                        key={item.id}
+                        termConcept={item.Concept}
+                        synonymCount={item.SynonymCount}
+                    >{item.PreferredTerm}</Synonym>
+                ));
+            };
+        }

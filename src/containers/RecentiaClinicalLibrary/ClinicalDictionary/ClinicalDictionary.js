@@ -3,51 +3,65 @@ import {connect} from "react-redux";
 
 import * as actions from "../../../store/actions";
 
+import {getInfo} from "../../../api";
 import Spinner from '../../../components/UI/Spinner/Spinner';
-
 import ClinicalDefinition from '../../../components/Subcomponents/ClinicalDefinition/ClinicalDefinition';
 
 // import classes from './Dictionary.css'
 
+const getClinicalDefinitionList = (terms) => {
+    if (terms) {
+        return terms.map(item => (
+            <ClinicalDefinition
+                key={item.id}
+                itemTerm={item.Term}
+                termDefinition={item["Clinical Definition"]}
+            >{item.id}</ClinicalDefinition>
+        ));
+    }
+};
+
 
 class ClinicalDictionary extends Component {
+    state = {
+        clinicalDefinitionList: null
+    };
+
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         return nextProps.searching
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    async updateComponent() {
         let API_version = '/getClinicalDefinitionsByTerm';
+        this.setState({
+            loading: true,
+        });
+        const {data} = await getInfo(this.props.searchTerm, API_version);
+        this.setState({
+            clinicalDefinitionList: data,
+            loading: false,
+        });
+        this.props.onSubmitSearchSuccess();
+    }
+
+    async componentDidUpdate(prevProps, prevState, snapshot) {
         if (!prevProps.searching) {
-            this.props.onGetInfo(this.props.searchTerm, API_version);
+            await this.updateComponent()
         }
     }
 
-    componentDidMount() {
-        let API_version = '/getClinicalDefinitionsByTerm';
+    async componentDidMount() {
         if (!this.props.searching && this.props.searchTerm.length !== 0) {
             this.props.onSubmitSearchStart();
-            this.props.onGetInfo(this.props.searching, API_version);
+            await this.updateComponent()
         }
     }
 
     render() {
-        let getTerm_results = <Spinner/>;
-
-        if (!this.props.loading) {
-            getTerm_results = this.props.getTermItems.map(item => {
-                return (
-                    <ClinicalDefinition
-                        key={item.id}
-                        itemTerm={item.Term}
-                        termDefinition={item["Clinical Definition"]}
-                    >{item.id}</ClinicalDefinition>
-                );
-            });
-        }
 
         return (
             <React.Fragment>
-                <div>{getTerm_results}</div>
+                <div>{(this.state.loading) ? <Spinner/> : getClinicalDefinitionList(this.state.clinicalDefinitionList)}</div>
             </React.Fragment>
         );
     }
@@ -57,16 +71,14 @@ class ClinicalDictionary extends Component {
 const mapStateToProps = state => {
     return {
         searchTerm: state.searchReducer.search_term,
-        loading: state.searchReducer.loading,
-        getTermItems: state.searchReducer.search_results,
         searching: state.searchReducer.searchSubmit
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetInfo: (SEARCH, API_VERSION) => dispatch(actions.getInfo(SEARCH, API_VERSION)),
-        onSubmitSearchStart: () => dispatch(actions.submitSearchStart())
+        onSubmitSearchStart: () => dispatch(actions.submitSearchStart()),
+        onSubmitSearchSuccess: () => dispatch(actions.submitSearchSuccess())
     }
 };
 

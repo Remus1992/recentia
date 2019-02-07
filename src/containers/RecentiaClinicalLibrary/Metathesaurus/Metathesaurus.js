@@ -3,50 +3,61 @@ import {connect} from 'react-redux';
 
 import * as actions from '../../../store/actions/index';
 
+import {getInfo} from "../../../api";
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Synonym from '../../../components/Subcomponents/Synonym/Synonym';
 
+const getPreferredTermList = (terms) => {
+    if (terms) {
+        return terms.map(item => (
+            <Synonym
+                key={item.Concept}
+                termConcept={item.Concept}
+                synonymCount={item.SynonymCount}
+            >{item.PreferredTerm}</Synonym>
+        ));
+    }
+};
 
 class Metathesaurus extends Component {
+    state = {
+        preferredTermList: null
+    };
+
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         return nextProps.searching
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    async updateComponent() {
         let API_version = '/getTerms';
+        this.setState({
+            loading: true,
+        });
+        const {data} = await getInfo(this.props.searchTerm, API_version);
+        this.setState({
+            preferredTermList: data,
+            loading: false,
+        });
+        this.props.onSubmitSearchSuccess();
+    }
+
+    async componentDidUpdate(prevProps, prevState, snapshot) {
         if (!prevProps.searching) {
-            console.log('API_VERSION: ' + API_version);
-            this.props.onGetInfo(this.props.searchTerm, API_version);
+            await this.updateComponent()
         }
     }
 
-    componentDidMount() {
-        let API_version = '/getTerms';
-        if (!this.props.searching && this.props.searchTerm.length !== 0) {
+    async componentDidMount() {
+        if (this.props.searchTerm.length !== 0) {
             this.props.onSubmitSearchStart();
-            this.props.onGetInfo(this.props.searching, API_version);
+            await this.updateComponent()
         }
     }
 
     render() {
-        let getTerm_results = <Spinner/>;
-
-        if (!this.props.loading) {
-            getTerm_results = this.props.getInfoItems.map(item => {
-                return (
-                    <Synonym
-                        key={item.id}
-                        termConcept={item.Concept}
-                        synonymCount={item.SynonymCount}
-
-                    >{item.PreferredTerm}</Synonym>
-                );
-            });
-        }
-
         return (
             <React.Fragment>
-                <div>{getTerm_results}</div>
+                <div>{(this.state.loading) ? <Spinner/> : getPreferredTermList(this.state.preferredTermList)}</div>
             </React.Fragment>
         );
     }
@@ -55,18 +66,14 @@ class Metathesaurus extends Component {
 const mapStateToProps = state => {
     return {
         searchTerm: state.searchReducer.search_term,
-        loading: state.searchReducer.loading,
-        getInfoItems: state.searchReducer.search_results,
-        getInfoSubItems: state.searchReducer.search_sub_results,
         searching: state.searchReducer.searchSubmit,
-        subComponent: state.searchReducer.subcomponent
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetInfo: (SEARCH, API_VERSION) => dispatch(actions.getInfo(SEARCH, API_VERSION)),
-        onSubmitSearchStart: () => dispatch(actions.submitSearchStart())
+        onSubmitSearchStart: () => dispatch(actions.submitSearchStart()),
+        onSubmitSearchSuccess: () => dispatch(actions.submitSearchSuccess())
     }
 };
 
