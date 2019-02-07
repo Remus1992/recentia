@@ -45,6 +45,28 @@ const initialState = {
     searchSubmit: false
 };
 
+// const getInfoStart = (state, action) => {
+//     return updateObject(state, {loading: true});
+// };
+//
+// const getInfoFail = (state, action) => {
+//     return updateObject(state, {loading: false});
+// };
+//
+// const getInfoSuccess = (state, action) => {
+//     if (action.is_sub_component_or_not) {
+//         return updateObject(state, {
+//             search_sub_results: action.search_results,
+//             loading: false
+//         });
+//     } else {
+//         return updateObject(state, {
+//             search_results: action.search_results,
+//             loading: false
+//         });
+//     }
+// };
+
 const getSearchTerm = (state, action) => {
     const updatedState = {
         search_term: action.searchTerm,
@@ -74,6 +96,14 @@ const reducer = (state = initialState, action) => {
             return submitSearchSuccess(state, action);
         case actionTypes.SUBMIT_SEARCH_FAIL:
             return submitSearchFail(state, action);
+        // case actionTypes.GET_INFO_START:
+        //     return getInfoStart(state, action);
+        // case actionTypes.GET_INFO_SUCCESS:
+        //     return getInfoSuccess(state, action);
+        // case actionTypes.GET_INFO_FAIL:
+        //     return getInfoFail(state, action);
+        // case actionTypes.IS_SUB_COMPONENT:
+        //     return(isSubComponent(state, action));
         default:
             return state;
     }
