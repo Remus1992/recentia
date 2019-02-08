@@ -7,6 +7,7 @@ import {getInfo} from "../../../api/translate_search";
 import Spinner from '../../../components/UI/Spinner/Spinner';
 
 import classes from './Translate.css'
+
 import Synonym from '../../../components/Subcomponents/Synonym/Synonym';
 
 const getTranslatedTermList = (terms) => {
@@ -108,18 +109,14 @@ class Translate extends Component {
         // });
         if (lang_type === 'input') {
             this.props.onInputLangChange(event.target.value);
-        } else if (lang_type === 'output'){
+        } else if (lang_type === 'output') {
             this.props.onOutputLangChange(event.target.value);
         }
 
-        this.props.onSubmitSearchStart();
+        if (this.props.searchTerm.length !== 0) {
+            this.props.onSubmitSearchStart();
+        }
     }
-
-    // handleSubmit(event) {
-    //     console.log('Input Language: ' + this.props.inputLanguage);
-    //     console.log('Output Language: ' + this.props.outputLanguage);
-    //     event.preventDefault();
-    // }
 
     render() {
 
@@ -130,25 +127,29 @@ class Translate extends Component {
 
         return (
             <React.Fragment>
-                <div>Translate</div>
-                {/*<form action="" className={classes.translate_form} onSubmit={this.handleSubmit}>*/}
+                <section className={classes.container}>
                     <p>Translate from...</p>
-                    <select onChange={(e) => this.handleSelectChange(e, 'input')}
-                        value={this.props.inputLanguage}
-                        >
-                        {supportLanguagesList(this.state.supportedLanguages)}
-                    </select>
+                    <div className={classes.dropdown}>
+                        <select
+                            name="one"
+                            className={classes["dropdown-select"]}
+                            onChange={(e) => this.handleSelectChange(e, 'input')}
+                            value={this.props.inputLanguage}>
+                            {supportLanguagesList(this.state.supportedLanguages)}
+                        </select>
+                    </div>
                     <p>Translate to...</p>
-                    <select onChange={(e) => this.handleSelectChange(e, 'output')}
-                        value={this.props.outputLanguage}
-                        >
-                        {supportLanguagesList(this.state.supportedLanguages)}
-                    </select>
-                    <br/>
-                    <p>---------</p>
-                    <br/>
-                    {/*<button type="submit">Search</button>*/}
-                {/*</form>*/}
+                    <div className={[classes.dropdown, classes["dropdown-dark"]].join(' ')}>
+                        <select
+                            name="two"
+                            className={classes["dropdown-select"]}
+                            onChange={(e) => this.handleSelectChange(e, 'output')}
+                            value={this.props.outputLanguage}>
+                            {supportLanguagesList(this.state.supportedLanguages)}
+                        </select>
+                    </div>
+
+                </section>
                 <div>{(this.state.loading) ? <Spinner/> : getTranslatedTermList(this.state.translatedTermList)}</div>
             </React.Fragment>
         );
