@@ -1,15 +1,32 @@
 import React, {Component} from 'react';
-import * as actions from "../../../store/actions";
 import {connect} from "react-redux";
 
-// import axios from '../../../axios-orders';
+import * as actions from "../../../store/actions";
 
-// import Spinner from '../../../components/UI/Spinner/Spinner';
+import {getInfo} from "../../../api/translate_search";
+import Spinner from '../../../components/UI/Spinner/Spinner';
 
-// import classes from './Languages.css'
+import classes from './Translate.css'
+import Synonym from '../../../components/Subcomponents/Synonym/Synonym';
+
+const getTranslatedTermList = (terms) => {
+    if (terms) {
+        return terms.map(item => (
+            <Synonym
+                key={item.Concept}
+                termConcept={item.Concept}
+                synonymCount={item.SynonymCount}
+            >{item.PreferredTerm}</Synonym>
+        ));
+    }
+};
 
 class Translate extends Component {
     state = {
+        translatedTermList: null,
+        loading: false,
+        // inputLanguage: 'ENG',
+        // outputLanguage: 'ENG',
         supportedLanguages:
             [
                 {"DisplayOrder": 1, "Abbreviation": "ALL", "Language": "All supported languages"},
@@ -44,35 +61,95 @@ class Translate extends Component {
             ]
     };
 
+    constructor(props) {
+        super(props);
+
+        this.handleSelectChange = this.handleSelectChange.bind(this);
+
+        // this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         return nextProps.searching
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        let API_version = '/getLanguages';
+    async updateComponent() {
+        let API_version = '/getTerms';
+        // let INPUT_LANG = this.state.inputLanguage;
+        // let OUTPUT_LANG = this.state.outputLanguage;
+
+        this.setState({
+            loading: true,
+        });
+        const {data} = await getInfo(this.props.searchTerm, API_version, this.props.inputLanguage, this.props.outputLanguage);
+        this.setState({
+            translatedTermList: data,
+            loading: false,
+        });
+        this.props.onSubmitSearchSuccess();
+    }
+
+    async componentDidUpdate(prevProps, prevState, snapshot) {
         if (!prevProps.searching) {
-            console.log('API_VERSION: ' + API_version);
+            await this.updateComponent()
         }
     }
 
-    componentDidMount() {
-        this.setState({
-            // supportedLanguages: this.props.onGetInfo(null, API_version)
-        });
+    async componentDidMount() {
+        if (this.props.searchTerm.length !== 0) {
+            this.props.onSubmitSearchStart();
+            await this.updateComponent()
+        }
     }
+
+    handleSelectChange(event, lang_type) {
+        // this.setState({
+        //     [value] : event.target.value
+        // });
+        if (lang_type === 'input') {
+            this.props.onInputLangChange(event.target.value);
+        } else if (lang_type === 'output'){
+            this.props.onOutputLangChange(event.target.value);
+        }
+
+        this.props.onSubmitSearchStart();
+    }
+
+    // handleSubmit(event) {
+    //     console.log('Input Language: ' + this.props.inputLanguage);
+    //     console.log('Output Language: ' + this.props.outputLanguage);
+    //     event.preventDefault();
+    // }
 
     render() {
 
         const supportLanguagesList = (supportedLangs) => {
-            return supportedLangs.map(supportedLang => <option key={supportedLang.DisplayOrder} value={supportedLang.Abbreviation}>{supportedLang.Language}</option>)
+            return supportedLangs.map(supportedLang => <option key={supportedLang.DisplayOrder}
+                                                               value={supportedLang.Abbreviation}>{supportedLang.Language}</option>)
         };
 
         return (
             <React.Fragment>
                 <div>Translate</div>
-                <select className="select-board-size">
-                    {supportLanguagesList(this.state.supportedLanguages)}
-                </select>
+                {/*<form action="" className={classes.translate_form} onSubmit={this.handleSubmit}>*/}
+                    <p>Translate from...</p>
+                    <select onChange={(e) => this.handleSelectChange(e, 'input')}
+                        value={this.props.inputLanguage}
+                        >
+                        {supportLanguagesList(this.state.supportedLanguages)}
+                    </select>
+                    <p>Translate to...</p>
+                    <select onChange={(e) => this.handleSelectChange(e, 'output')}
+                        value={this.props.outputLanguage}
+                        >
+                        {supportLanguagesList(this.state.supportedLanguages)}
+                    </select>
+                    <br/>
+                    <p>---------</p>
+                    <br/>
+                    {/*<button type="submit">Search</button>*/}
+                {/*</form>*/}
+                <div>{(this.state.loading) ? <Spinner/> : getTranslatedTermList(this.state.translatedTermList)}</div>
             </React.Fragment>
         );
     }
@@ -81,12 +158,16 @@ class Translate extends Component {
 const mapStateToProps = state => {
     return {
         searchTerm: state.searchReducer.search_term,
+        inputLanguage: state.searchReducer.input_language,
+        outputLanguage: state.searchReducer.output_language,
         searching: state.searchReducer.searchSubmit
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        onInputLangChange: (in_lang) => dispatch(actions.getInputLanguage(in_lang)),
+        onOutputLangChange: (out_lang) => dispatch(actions.getOutputLanguage(out_lang)),
         onSubmitSearchStart: () => dispatch(actions.submitSearchStart()),
         onSubmitSearchSuccess: () => dispatch(actions.submitSearchSuccess())
     }

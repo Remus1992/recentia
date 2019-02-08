@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 import * as actions from "../../../store/actions";
 
-import {getInfo} from "../../../api";
+import {getInfo} from "../../../api/translate_search";
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import ClinicalDefinition from '../../../components/Subcomponents/ClinicalDefinition/ClinicalDefinition';
 
@@ -36,7 +36,7 @@ class ClinicalDictionary extends Component {
         this.setState({
             loading: true,
         });
-        const {data} = await getInfo(this.props.searchTerm, API_version);
+        const {data} = await getInfo(this.props.searchTerm, API_version, this.props.inputLanguage, this.props.outputLanguage);
         this.setState({
             clinicalDefinitionList: data,
             loading: false,
@@ -71,6 +71,8 @@ class ClinicalDictionary extends Component {
 const mapStateToProps = state => {
     return {
         searchTerm: state.searchReducer.search_term,
+        inputLanguage: state.searchReducer.input_language,
+        outputLanguage: state.searchReducer.output_language,
         searching: state.searchReducer.searchSubmit
     }
 };

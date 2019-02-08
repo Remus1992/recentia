@@ -26,3 +26,16 @@ export const getSearchTerm = (term) => {
     }
 };
 
+export const getInputLanguage = (lang) => {
+    return {
+        type: actionTypes.GET_INPUT_LANGUAGE,
+        inputLanguage: lang
+    }
+};
+
+export const getOutputLanguage = (lang) => {
+    return {
+        type: actionTypes.GET_OUTPUT_LANGUAGE,
+        outputLanguage: lang
+    }
+};

@@ -27,7 +27,7 @@ class recentiaClinicalLibrary extends Component {
             <React.Fragment>
                 <Profile/>
                 <Header
-                    header_title="Recentia Clinical Library"
+                    header_title="Clinical Knowledge Base"
                     link1_title="Home"
                     link1="/"
                     link2_title="Clinical Visit Support"

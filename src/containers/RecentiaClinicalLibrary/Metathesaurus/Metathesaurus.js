@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import * as actions from '../../../store/actions/index';
 
-import {getInfo} from "../../../api";
+import {getInfo} from "../../../api/translate_search";
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Synonym from '../../../components/Subcomponents/Synonym/Synonym';
 
@@ -21,7 +21,8 @@ const getPreferredTermList = (terms) => {
 
 class Metathesaurus extends Component {
     state = {
-        preferredTermList: null
+        preferredTermList: null,
+        loading: false
     };
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -33,7 +34,7 @@ class Metathesaurus extends Component {
         this.setState({
             loading: true,
         });
-        const {data} = await getInfo(this.props.searchTerm, API_version);
+        const {data} = await getInfo(this.props.searchTerm, API_version, this.props.inputLanguage, this.props.outputLanguage);
         this.setState({
             preferredTermList: data,
             loading: false,
@@ -66,6 +67,8 @@ class Metathesaurus extends Component {
 const mapStateToProps = state => {
     return {
         searchTerm: state.searchReducer.search_term,
+        inputLanguage: state.searchReducer.input_language,
+        outputLanguage: state.searchReducer.output_language,
         searching: state.searchReducer.searchSubmit,
     }
 };
