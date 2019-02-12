@@ -3,11 +3,11 @@ import {connect} from "react-redux";
 
 import * as actions from "../../../store/actions";
 
-import {getInfo} from "../../../api/translate_search";
+import {getInfo} from "../../../api";
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import ClinicalDefinition from '../../../components/Subcomponents/ClinicalDefinition/ClinicalDefinition';
 
-// import classes from './Dictionary.css'
+import classes from './ClinicalDictionary.css'
 
 const getClinicalDefinitionList = (terms) => {
     if (terms) {
@@ -60,9 +60,9 @@ class ClinicalDictionary extends Component {
     render() {
 
         return (
-            <React.Fragment>
-                <div>{(this.state.loading) ? <Spinner/> : getClinicalDefinitionList(this.state.clinicalDefinitionList)}</div>
-            </React.Fragment>
+            <div className={classes.dictionary_case}>
+                {(this.state.loading) ? <Spinner/> : getClinicalDefinitionList(this.state.clinicalDefinitionList)}
+            </div>
         );
     }
 }

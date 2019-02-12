@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 import * as actions from "../../../store/actions";
 
-import {getInfo} from "../../../api/translate_search";
+import {getInfo} from "../../../api";
 import Spinner from '../../../components/UI/Spinner/Spinner';
 
 import classes from './Translate.css'

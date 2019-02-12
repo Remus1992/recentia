@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-// import classes from './ClinicalDefinition.css';
+import classes from './ClinicalDefinition.css';
 
 // import Spinner from '../../UI/Spinner/Spinner';
 
@@ -16,22 +16,32 @@ class ClinicalDefinition extends Component {
     }
 
     handleClick(event) {
-        this.setState(function(prevState) {
-			return {
-			    expanded: !prevState.expanded
-			};
-		});
+        this.setState(function (prevState) {
+            return {
+                expanded: !prevState.expanded
+            };
+        });
+
+        // let panel = this.nextElementSibling;
+        // if (panel.style.maxHeight) {
+        //     panel.style.maxHeight = null;
+        // } else {
+        //     panel.style.maxHeight = panel.scrollHeight + "px";
+        // }
 
         event.preventDefault();
     }
 
     render() {
 
+
         return (
             <React.Fragment>
-                <p style={{textAlign: 'center'}}>Term: {this.props.itemTerm}</p>
-                <button onClick={(e) => this.handleClick(e)}>Read Definition</button>
-                <p>{this.state.expanded ? this.props.termDefinition : null}</p>
+                <button className={this.state.expanded ? [classes.accordion, classes.active].join(' ') : classes.accordion}
+                        onClick={(e) => this.handleClick(e)}>{this.props.itemTerm}</button>
+                <div className={classes.panel}>
+                    <p>{this.state.expanded ? this.props.termDefinition : null}</p>
+                </div>
             </React.Fragment>
         )
     }

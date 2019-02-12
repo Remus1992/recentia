@@ -1,16 +1,20 @@
 import axios from '../axios-recentia'
 import session_id, {
     clinic_license,
-    clinical_variable, filter_by_value_sets,
-    input_language,
-    input_vocabulary, ip_address,
-    output_language,
-    output_vocabulary, physician_license,
-    query_type, row_off_set_arg, rows_in_subset_arg,
-    semantic_type, sort_order
+    clinical_variable,
+    filter_by_value_sets,
+    input_vocabulary,
+    ip_address,
+    output_vocabulary,
+    physician_license,
+    query_type,
+    row_off_set_arg,
+    rows_in_subset_arg,
+    semantic_type,
+    sort_order
 } from "../secret";
 
-export const getInfo = (search_item, apiEndPoint) => {
+export const getInfo = (search_item, apiEndPoint, inputLang, outputLang) => {
     let SEARCH_COUNTERPART = '';
 
     if (apiEndPoint === '/getTerms') {
@@ -27,8 +31,8 @@ export const getInfo = (search_item, apiEndPoint) => {
         + SEARCH_COUNTERPART + search_item
         + '&SearchTerm=' + search_item
         + '&QueryType=' + query_type
-        + '&InputLanguage=' + input_language
-        + '&OutputLanguage=' + output_language
+        + '&InputLanguage=' + inputLang
+        + '&OutputLanguage=' + outputLang
         + '&InputVocabulary=' + input_vocabulary
         + '&OutputVocabulary=' + output_vocabulary
         + '&SemanticType=' + semantic_type
