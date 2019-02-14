@@ -1,14 +1,37 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 
+import {withStyles} from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Select from '@material-ui/core/Select';
+
 import * as actions from "../../../store/actions";
 
 import {getInfo} from "../../../api";
 import Spinner from '../../../components/UI/Spinner/Spinner';
 
-import classes from './Translate.css'
+import classesSecondary from './Translate.css'
 
 import Synonym from '../../../components/Subcomponents/Synonym/Synonym';
+
+
+const styles = theme => ({
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    formControl: {
+        margin: theme.spacing.unit,
+        minWidth: 120,
+    },
+    selectEmpty: {
+        marginTop: theme.spacing.unit * 2,
+    },
+});
+
 
 const getTranslatedTermList = (terms) => {
     if (terms) {
@@ -26,6 +49,7 @@ class Translate extends Component {
     state = {
         translatedTermList: null,
         loading: false,
+        labelWidth: 0,
         // inputLanguage: 'ENG',
         // outputLanguage: 'ENG',
         supportedLanguages:
@@ -86,6 +110,7 @@ class Translate extends Component {
         this.setState({
             translatedTermList: data,
             loading: false,
+            // labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
         });
         this.props.onSubmitSearchSuccess();
     }
@@ -103,10 +128,15 @@ class Translate extends Component {
         }
     }
 
+    // handleChange = event => {
+    //     this.setState({[event.target.name]: event.target.value});
+    // };
+
     handleSelectChange(event, lang_type) {
         // this.setState({
         //     [value] : event.target.value
         // });
+
         if (lang_type === 'input') {
             this.props.onInputLangChange(event.target.value);
         } else if (lang_type === 'output') {
@@ -120,35 +150,65 @@ class Translate extends Component {
 
     render() {
 
+        const {classes} = this.props;
+
         const supportLanguagesList = (supportedLangs) => {
-            return supportedLangs.map(supportedLang => <option key={supportedLang.DisplayOrder}
-                                                               value={supportedLang.Abbreviation}>{supportedLang.Language}</option>)
+            return supportedLangs.map(supportedLang => <MenuItem value={supportedLang.Abbreviation}>{supportedLang.Language}</MenuItem>)
         };
+
+        // const supportLanguagesListOriginal = (supportedLangs) => {
+        //     return supportedLangs.map(supportedLang => <option key={supportedLang.DisplayOrder} value={supportedLang.Abbreviation}>{supportedLang.Language}</option>)
+        // };
 
         return (
             <React.Fragment>
-                <section className={classes.container}>
-                    <p>Translate from...</p>
-                    <div className={classes.dropdown}>
-                        <select
-                            name="one"
-                            className={classes["dropdown-select"]}
-                            onChange={(e) => this.handleSelectChange(e, 'input')}
-                            value={this.props.inputLanguage}>
-                            {supportLanguagesList(this.state.supportedLanguages)}
-                        </select>
-                    </div>
-                    <p>Translate to...</p>
-                    <div className={[classes.dropdown, classes["dropdown-dark"]].join(' ')}>
-                        <select
-                            name="two"
-                            className={classes["dropdown-select"]}
-                            onChange={(e) => this.handleSelectChange(e, 'output')}
-                            value={this.props.outputLanguage}>
-                            {supportLanguagesList(this.state.supportedLanguages)}
-                        </select>
-                    </div>
+                <section className={classesSecondary.container}>
+                    {/*<p>Translate from...</p>*/}
+                    {/*<div className={classesSecondary.dropdown}>*/}
+                        {/*<select*/}
+                            {/*name="one"*/}
+                            {/*className={classesSecondary["dropdown-select"]}*/}
+                            {/*onChange={(e) => this.handleSelectChange(e, 'input')}*/}
+                            {/*value={this.props.inputLanguage}*/}
+                        {/*>*/}
+                            {/*{supportLanguagesListOriginal(this.state.supportedLanguages)}*/}
+                        {/*</select>*/}
+                    {/*</div>*/}
 
+                    <FormControl className={classes.formControl}>
+                        <InputLabel htmlFor="age-simple">Translate From...</InputLabel>
+                        <Select
+                            value={this.props.inputLanguage}
+                            onChange={(e) => this.handleSelectChange(e, 'input')}
+                        >
+                            {supportLanguagesList(this.state.supportedLanguages)}
+                        </Select>
+                        <FormHelperText>Translate From...</FormHelperText>
+                    </FormControl>
+
+                    {/**/}
+
+                    {/*<p>Translate to...</p>*/}
+                    {/*<div className={[classesSecondary.dropdown, classesSecondary["dropdown-dark"]].join(' ')}>*/}
+                        {/*<select*/}
+                            {/*name="two"*/}
+                            {/*className={classesSecondary["dropdown-select"]}*/}
+                            {/*onChange={(e) => this.handleSelectChange(e, 'output')}*/}
+                            {/*value={this.props.outputLanguage}>*/}
+                            {/*{supportLanguagesListOriginal(this.state.supportedLanguages)}*/}
+                        {/*</select>*/}
+                    {/*</div>*/}
+
+                    <FormControl className={classes.formControl}>
+                        <InputLabel htmlFor="age-simple">Translate To...</InputLabel>
+                        <Select
+                            value={this.props.outputLanguage}
+                            onChange={(e) => this.handleSelectChange(e, 'output')}
+                        >
+                            {supportLanguagesList(this.state.supportedLanguages)}
+                        </Select>
+                        <FormHelperText>Translate To...</FormHelperText>
+                    </FormControl>
                 </section>
                 <div>{(this.state.loading) ? <Spinner/> : getTranslatedTermList(this.state.translatedTermList)}</div>
             </React.Fragment>
@@ -174,5 +234,6 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Translate);
+// export default connect(mapStateToProps, mapDispatchToProps)(Translate);
 
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Translate));

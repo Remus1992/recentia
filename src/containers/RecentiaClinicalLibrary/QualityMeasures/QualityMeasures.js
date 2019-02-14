@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Button from '@material-ui/core/Button';
 
 // import classes from "../QualityMeasures/QualityMeasures";
 
@@ -11,8 +12,9 @@ class QualityMeasures extends Component {
         return (
             <React.Fragment>
                 <div>Quality Measures</div>
-                {/*<a className="waves-effect waves-light btn">button</a>*/}
-                {/*<a className={[classesMaterialize['waves-effect'], classesMaterialize["waves-light"], classesMaterialize.btn].join(' ')}>button</a>*/}
+                <Button variant="contained" color="primary">
+                    Hello World
+                </Button>
             </React.Fragment>
         );
     }

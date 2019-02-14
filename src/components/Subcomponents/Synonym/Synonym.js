@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 
 import {getInfo} from "../../../api";
+// import * as actions from "../../../store/actions";
+import {connect} from "react-redux";
 
 // import Spinner from '../../../components/UI/Spinner/Spinner';
 
@@ -24,7 +26,7 @@ class Synonym extends Component {
     }
 
     async handleClick(event, CONCEPT, API_ENDPOINT) {
-        const synonymList = await getInfo(CONCEPT, API_ENDPOINT);
+        const synonymList = await getInfo(CONCEPT, API_ENDPOINT, this.props.inputLanguage, this.props.outputLanguage);
 
         this.setState(function(prevState) {
 			return {
@@ -49,5 +51,13 @@ class Synonym extends Component {
     }
 }
 
-export default Synonym;
+// export default Synonym;
 
+const mapStateToProps = state => {
+    return {
+        inputLanguage: state.searchReducer.input_language,
+        outputLanguage: state.searchReducer.output_language,
+    }
+};
+
+export default connect(mapStateToProps, null)(Synonym);

@@ -33,14 +33,13 @@ class ClinicalDefinition extends Component {
     }
 
     render() {
-
-
         return (
             <React.Fragment>
-                <button className={this.state.expanded ? [classes.accordion, classes.active].join(' ') : classes.accordion}
-                        onClick={(e) => this.handleClick(e)}>{this.props.itemTerm}</button>
-                <div className={classes.panel}>
-                    <p>{this.state.expanded ? this.props.termDefinition : null}</p>
+                <button
+                    className={this.state.expanded ? [classes.accordion, classes.active].join(' ') : classes.accordion}
+                    onClick={(e) => this.handleClick(e)}>{this.props.itemTerm}</button>
+                <div className={classes.panel} style={{maxHeight: this.state.expanded ? '150px': null}}>
+                    <p>{this.state.expanded ? this.props.termDefinition : null }</p>
                 </div>
             </React.Fragment>
         )
