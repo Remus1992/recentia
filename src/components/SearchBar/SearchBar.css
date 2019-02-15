@@ -11,8 +11,9 @@
 }
 
 .recentia_search_wrapper {
-    width: 50%;
+    /*width: 50%;*/
+    width: 600px;
     margin: auto auto 30px auto;
-    display: flex;
+    /*display: flex;*/
     justify-content: center;
 }

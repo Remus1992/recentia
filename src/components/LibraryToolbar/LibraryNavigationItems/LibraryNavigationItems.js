@@ -27,12 +27,12 @@ import Tab from '@material-ui/core/Tab';
 import {NavLink} from "react-router-dom";
 
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
-import blue from '@material-ui/core/colors/blue';
+import lightBlue from '@material-ui/core/colors/lightBlue';
 
 const theme = createMuiTheme({
-    palette: {
-        primary: blue,
-    },
+    // palette: {
+    //     primary: lightBlue,
+    // },
 });
 
 

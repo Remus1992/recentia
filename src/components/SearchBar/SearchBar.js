@@ -3,6 +3,7 @@ import classesSecondary from "./SearchBar.css";
 import {connect} from 'react-redux';
 import {withStyles} from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
 
 import * as actions from '../../store/actions/index';
 
@@ -30,19 +31,33 @@ class SearchBar extends Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const {classes} = this.props;
         return (
             <div className={classesSecondary.recentia_search_wrapper}>
                 <form onSubmit={this.handleSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Search"
+                    {/*<input*/}
+                    {/*type="text"*/}
+                    {/*placeholder="Search"*/}
+                    {/*onChange={(e) => this.props.onSearchChange(e.target.value)}*/}
+                    {/*className={classesSecondary.search_bar}/>*/}
+                    <TextField
+                        placeholder="Search..."
+                        className={classes.input}
+                        style={{margin: 8}}
+                        fullWidth
+                        margin="normal"
                         onChange={(e) => this.props.onSearchChange(e.target.value)}
-                        className={classesSecondary.search_bar}/>
-                    {/*<Input*/}
-                        {/*placeholder="Search..."*/}
-                        {/*className={classes.input}*/}
-                        {/*onChange={(e) => this.props.onSearchChange(e.target.value)}*/}
+                    />
+                    {/*<TextField*/}
+                        {/*label="Label"*/}
+                        {/*style={{margin: 8}}*/}
+                        {/*placeholder="Placeholder"*/}
+                        {/*helperText="Full width!"*/}
+                        {/*fullWidth*/}
+                        {/*margin="normal"*/}
+                        {/*InputLabelProps={{*/}
+                            {/*shrink: true,*/}
+                        {/*}}*/}
                     {/*/>*/}
                 </form>
             </div>

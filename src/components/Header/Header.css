@@ -10,9 +10,14 @@ h1 {
     text-align: center;
     height: 100px;
     margin-bottom: 10px;
-    border-bottom: 1px solid gray;
-    background-color: darkblue;
+    /*border-bottom: 1px solid gray;*/
+    background-color: #2020ca;;
     padding-bottom: 20px;
+    -moz-box-shadow: 0 0 8px 0 black;
+    -webkit-box-shadow: 0 0 8px 0 black;
+    box-shadow: 0 0 8px 0 black;
+    position:relative;
+    z-index: 10;
 }
 
 .recentia_header h1 {

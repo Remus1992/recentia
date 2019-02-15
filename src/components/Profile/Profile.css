@@ -4,7 +4,8 @@
     width: 95px;
     margin-right: 10px;
     margin-top: 10px;
-
+    position: relative;
+    z-index: 20;
 }
 
 .profile_pic {
