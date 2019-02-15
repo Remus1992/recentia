@@ -26,10 +26,20 @@ import Tab from '@material-ui/core/Tab';
 
 import {NavLink} from "react-router-dom";
 
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
+import blue from '@material-ui/core/colors/blue';
+
+const theme = createMuiTheme({
+    palette: {
+        primary: blue,
+    },
+});
+
+
 const styles = {
-  root: {
-    flexGrow: 1,
-  },
+    root: {
+        flexGrow: 1,
+    },
 };
 
 class libraryNavigationItems extends React.Component {
@@ -47,20 +57,23 @@ class libraryNavigationItems extends React.Component {
 
         return (
             <div className={classes.root}>
-                <AppBar position="static">
-                    <Tabs
-                        value={value}
-                        onChange={this.handleChange}
-                        centered
-                    >
-                        <Tab label="Metathesaurus" component={NavLink} to='/clinical_library/metathesaurus' />
-                        <Tab label="Quality Measures" component={NavLink} to='/clinical_library/quality_measures' />
-                        <Tab label="Code Groups" component={NavLink} to='/clinical_library/code_groups' />
-                        <Tab label="Coding Systems" component={NavLink} to='/clinical_library/coding_systems' />
-                        <Tab label="Clinical Dictionary" component={NavLink} to='/clinical_library/clinical_dictionary'/>
-                        <Tab label="Translate" component={NavLink} to='/clinical_library/translate'/>
-                    </Tabs>
-                </AppBar>
+                <MuiThemeProvider theme={theme}>
+                    <AppBar position="static">
+                        <Tabs
+                            value={value}
+                            onChange={this.handleChange}
+                            centered
+                        >
+                            <Tab label="Metathesaurus" component={NavLink} to='/clinical_library/metathesaurus'/>
+                            <Tab label="Quality Measures" component={NavLink} to='/clinical_library/quality_measures'/>
+                            <Tab label="Code Groups" component={NavLink} to='/clinical_library/code_groups'/>
+                            <Tab label="Coding Systems" component={NavLink} to='/clinical_library/coding_systems'/>
+                            <Tab label="Clinical Dictionary" component={NavLink}
+                                 to='/clinical_library/clinical_dictionary'/>
+                            <Tab label="Translate" component={NavLink} to='/clinical_library/translate'/>
+                        </Tabs>
+                    </AppBar>
+                </MuiThemeProvider>
             </div>
         );
     }

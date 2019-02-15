@@ -7,6 +7,8 @@ import {getInfo} from "../../../api";
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Synonym from '../../../components/Subcomponents/Synonym/Synonym';
 
+import classes from './Metathesaurus.css';
+
 const getPreferredTermList = (terms) => {
     if (terms) {
         return terms.map(item => (
@@ -57,9 +59,9 @@ class Metathesaurus extends Component {
 
     render() {
         return (
-            <React.Fragment>
-                <div>{(this.state.loading) ? <Spinner/> : getPreferredTermList(this.state.preferredTermList)}</div>
-            </React.Fragment>
+                <div className={classes.metathesaurus_container}>
+                    {(this.state.loading) ? <Spinner/> : getPreferredTermList(this.state.preferredTermList)}
+                </div>
         );
     }
 }

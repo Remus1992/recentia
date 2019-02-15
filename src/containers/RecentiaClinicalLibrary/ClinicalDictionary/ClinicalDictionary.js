@@ -60,7 +60,7 @@ class ClinicalDictionary extends Component {
     render() {
 
         return (
-            <div className={classes.dictionary_case}>
+            <div className={classes.dictionary_container}>
                 {(this.state.loading) ? <Spinner/> : getClinicalDefinitionList(this.state.clinicalDefinitionList)}
             </div>
         );

@@ -8,7 +8,22 @@ import {connect} from "react-redux";
 
 // import classes from './Synonym.css';
 
-// import Spinner from '../../UI/Spinner/Spinner';
+import {withStyles} from '@material-ui/core/styles';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+const styles = theme => ({
+    root: {
+        width: '100%',
+    },
+    heading: {
+        fontSize: theme.typography.pxToRem(15),
+        fontWeight: theme.typography.fontWeightRegular,
+    },
+});
 
 const synonymList = ({data}) => {
     return data.map((synonym => <li key={synonym.TermID}>{synonym.PreferredTerm}</li>))
@@ -39,13 +54,24 @@ class Synonym extends Component {
 
     render() {
         let API_version = '/getSynonyms';
+        const {classes} = this.props;
 
         return (
             <React.Fragment>
-                <p style={{textAlign: 'center'}}>Term: {this.props.children}</p>
-                <button onClick={(e) => this.handleClick(e, this.props.termConcept, API_version)}>List
-                    Synonyms: {this.props.synonymCount}</button>
-                <ul>{this.state.expanded ? synonymList(this.state.synonymList) : null}</ul>
+                {/*<p style={{textAlign: 'center'}}>Term: {this.props.children}</p>*/}
+                {/*<button onClick={(e) => this.handleClick(e, this.props.termConcept, API_version)}>List*/}
+                    {/*Synonyms: {this.props.synonymCount}</button>*/}
+                {/*<ul>{this.state.expanded ? synonymList(this.state.synonymList) : null}</ul>*/}
+                <ExpansionPanel>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={(e) => this.handleClick(e, this.props.termConcept, API_version)} >
+                        <Typography className={classes.heading}>Term: {this.props.children}</Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                        <Typography>
+                            {this.state.expanded ? synonymList(this.state.synonymList) : null}
+                        </Typography>
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
             </React.Fragment>
         )
     }
@@ -60,4 +86,5 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, null)(Synonym);
+// export default connect(mapStateToProps, null)(Synonym);
+export default connect(mapStateToProps, null)(withStyles(styles)(Synonym));

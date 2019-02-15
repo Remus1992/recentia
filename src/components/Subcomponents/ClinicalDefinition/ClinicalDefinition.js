@@ -1,8 +1,24 @@
 import React, {Component} from 'react';
 
-import classes from './ClinicalDefinition.css';
+// import classesSecondary from './ClinicalDefinition.css';
 
-// import Spinner from '../../UI/Spinner/Spinner';
+
+import {withStyles} from '@material-ui/core/styles';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+const styles = theme => ({
+    root: {
+        width: '100%',
+    },
+    heading: {
+        fontSize: theme.typography.pxToRem(15),
+        fontWeight: theme.typography.fontWeightRegular,
+    },
+});
 
 class ClinicalDefinition extends Component {
     state = {
@@ -22,28 +38,35 @@ class ClinicalDefinition extends Component {
             };
         });
 
-        // let panel = this.nextElementSibling;
-        // if (panel.style.maxHeight) {
-        //     panel.style.maxHeight = null;
-        // } else {
-        //     panel.style.maxHeight = panel.scrollHeight + "px";
-        // }
-
         event.preventDefault();
     }
 
+
+
     render() {
+        const {classes} = this.props;
+
         return (
             <React.Fragment>
-                <button
-                    className={this.state.expanded ? [classes.accordion, classes.active].join(' ') : classes.accordion}
-                    onClick={(e) => this.handleClick(e)}>{this.props.itemTerm}</button>
-                <div className={classes.panel} style={{maxHeight: this.state.expanded ? '150px': null}}>
-                    <p>{this.state.expanded ? this.props.termDefinition : null }</p>
-                </div>
+                {/*<button*/}
+                    {/*className={this.state.expanded ? [classesSecondary.accordion, classesSecondary.active].join(' ') : classesSecondary.accordion}*/}
+                    {/*onClick={(e) => this.handleClick(e)}>{this.props.itemTerm}</button>*/}
+                {/*<div className={classesSecondary.panel} style={{maxHeight: this.state.expanded ? '150px' : null}}>*/}
+                    {/*<p>{this.state.expanded ? this.props.termDefinition : null}</p>*/}
+                {/*</div>*/}
+                <ExpansionPanel>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} >
+                        <Typography className={classes.heading}>{this.props.itemTerm}</Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                        <Typography>
+                            {this.props.termDefinition}
+                        </Typography>
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
             </React.Fragment>
         )
     }
 }
 
-export default ClinicalDefinition;
+export default withStyles(styles)(ClinicalDefinition);
