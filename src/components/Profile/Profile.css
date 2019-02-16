@@ -12,6 +12,9 @@
     display: block;
     width: 60px;
     margin: auto;
+    -moz-box-shadow: 0 0 8px 0 gray;
+    -webkit-box-shadow: 0 0 8px 0 gray;
+    box-shadow: 0 0 8px 0 gray;
     /*box-shadow: 5px 5px 10px grey;*/
 }
 
