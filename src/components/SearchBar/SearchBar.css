@@ -18,44 +18,11 @@
     justify-content: center;
 }
 
-.icon {
-    background-image: url('../../assests/images/baseline-language-24px.svg');
-}
-
-.material-icons.md-48 { font-size: 48px; }
-
-.accordion {
-    background-color: #6262ff;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    /*border: none;*/
-    text-align: left;
-    outline: none;
-    border: 1px darkgray solid;
-    font-size: 15px;
-    transition: 0.5s;
-}
-
-.accordion:after {
-    content: '\002B';
-    color: #6262ff;
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
-}
-
-.active:after {
-    content: "\2212";
-}
-
-.panel {
+.languagePanel {
     padding: 0 18px;
     background-color: #6262ff;
     max-height: 0;
+    text-align: center;
     overflow: hidden;
     transition: max-height 0.5s ease-out;
 }
-
-/* NEW COLLAPSIBLE */
