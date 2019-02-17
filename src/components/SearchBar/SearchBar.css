@@ -18,6 +18,11 @@
     justify-content: center;
 }
 
+.icon {
+    background-image: url('../../assests/images/baseline-language-24px.svg');
+}
+
+.material-icons.md-48 { font-size: 48px; }
 
 .accordion {
     background-color: #eee;
