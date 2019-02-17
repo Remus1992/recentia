@@ -25,7 +25,7 @@
 .material-icons.md-48 { font-size: 48px; }
 
 .accordion {
-    background-color: #eee;
+    background-color: #6262ff;
     color: #444;
     cursor: pointer;
     padding: 18px;
@@ -38,13 +38,9 @@
     transition: 0.5s;
 }
 
-.active, .accordion:hover {
-    background-color: #ccc;
-}
-
 .accordion:after {
     content: '\002B';
-    color: #777;
+    color: #6262ff;
     font-weight: bold;
     float: right;
     margin-left: 5px;
@@ -56,48 +52,10 @@
 
 .panel {
     padding: 0 18px;
-    background-color: white;
+    background-color: #6262ff;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s ease-out;
 }
 
 /* NEW COLLAPSIBLE */
-
-.Collapsible__trigger {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    /*border: none;*/
-    text-align: left;
-    outline: none;
-    border: 1px darkgray solid;
-    font-size: 15px;
-    transition: 0.5s;
-}
-
-.is-open, .Collapsible__trigger:hover {
-    background-color: #ccc;
-}
-
-.Collapsible__trigger:after {
-    content: '\002B';
-    color: #777;
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
-}
-
-.is-open:after {
-    content: "\2212";
-}
-
-.panel {
-    padding: 0 18px;
-    background-color: white;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-out;
-}
