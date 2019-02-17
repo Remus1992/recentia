@@ -70,7 +70,7 @@ class libraryNavigationItems extends React.Component {
                             <Tab label="Coding Systems" component={NavLink} to='/clinical_library/coding_systems'/>
                             <Tab label="Clinical Dictionary" component={NavLink}
                                  to='/clinical_library/clinical_dictionary'/>
-                            <Tab label="Translate" component={NavLink} to='/clinical_library/translate'/>
+                            {/*<Tab label="Translate" component={NavLink} to='/clinical_library/translate'/>*/}
                         </Tabs>
                     </AppBar>
                 </MuiThemeProvider>

@@ -16,6 +16,7 @@ import Select from '@material-ui/core/Select';
 import * as actions from '../../store/actions/index';
 
 const color = "#fff";
+const blue = '#008';
 
 const theme = createMuiTheme({
     palette: {
@@ -54,6 +55,9 @@ const styles = theme => ({
             color: grey[800],
         },
     },
+    select: {
+        color: 'black'
+    }
 });
 
 
@@ -134,7 +138,7 @@ class SearchBar extends Component {
         const {classes} = this.props;
 
         const supportLanguagesList = (supportedLangs) => {
-            return supportedLangs.map(supportedLang => <MenuItem value={supportedLang.Abbreviation}>{supportedLang.Language}</MenuItem>)
+            return supportedLangs.map(supportedLang => <MenuItem className={classes.select} value={supportedLang.Abbreviation}>{supportedLang.Language}</MenuItem>)
         };
 
         return (

@@ -18,7 +18,7 @@ import QualityMeasures from './QualityMeasures/QualityMeasures';
 import CodeGroups from './CodeGroups/CodeGroups';
 import CodingSystems from './CodingSystems/CodingSystems';
 import ClinicalDictionary from './ClinicalDictionary/ClinicalDictionary';
-import Translate from './Translate/Translate';
+// import Translate from './Translate/Translate';
 
 class recentiaClinicalLibrary extends Component {
 
@@ -42,7 +42,7 @@ class recentiaClinicalLibrary extends Component {
                     <Route path={this.props.match.url + "/code_groups"} component={CodeGroups}/>
                     <Route path={this.props.match.url + "/coding_systems"} component={CodingSystems}/>
                     <Route path={this.props.match.url + "/clinical_dictionary"} component={ClinicalDictionary}/>
-                    <Route path={this.props.match.url + "/translate"} component={Translate}/>
+                    {/*<Route path={this.props.match.url + "/translate"} component={Translate}/>*/}
                     <Redirect from={this.props.match.url} to={this.props.match.url + "/metathesaurus"}/>
                 </Switch>
             </React.Fragment>
