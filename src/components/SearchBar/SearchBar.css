@@ -1,20 +1,6 @@
-.search_bar {
-    -webkit-appearance: none;
-    height: 33px;
-    width: 538px;
-    padding-left: 38px;
-    border: 1.5px gray solid;
-    background-image: url('../../assests/images/search_icon.png');
-    background-repeat: no-repeat;
-    background-size: 34px;
-    background-color: #fffff4;
-}
-
 .recentia_search_wrapper {
-    /*width: 50%;*/
     width: 600px;
     margin: auto auto 30px auto;
-    /*display: flex;*/
     justify-content: center;
 }
 

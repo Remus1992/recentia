@@ -17,7 +17,6 @@ import * as actions from '../../store/actions/index';
 import supportedLanguages from '../../api/languages';
 
 const color = "#fff";
-// const blue = '#008';
 
 const theme = createMuiTheme({
     palette: {
@@ -41,6 +40,7 @@ const styles = theme => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-end',
+        flexGrow: 1,
     },
     iconClicked: {
         margin: theme.spacing.unit * 2,
@@ -67,12 +67,6 @@ const styles = theme => ({
 
 
 class SearchBar extends Component {
-    state = {
-        expanded: false,
-        isToggleOn: true,
-        supportedLanguages: supportedLanguages
-    };
-
     constructor(props) {
         super(props);
 
@@ -81,9 +75,39 @@ class SearchBar extends Component {
         this.handleSelectChange = this.handleSelectChange.bind(this);
     }
 
+    state = {
+        expanded: false,
+        isToggleOn: true,
+        supportedLanguages: supportedLanguages,
+        completed: 0,
+        loading: false
+    };
+
+    componentDidMount() {
+        this.timer = setInterval(this.progress, 500);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timer);
+    }
+
+    progress = () => {
+        const {completed} = this.state;
+        if (completed === 100) {
+            this.setState({completed: 0});
+        } else {
+            const diff = Math.random() * 10;
+            this.setState({completed: Math.min(completed + diff, 100)});
+        }
+    };
+
+
     handleSubmit(event) {
         this.props.onSubmitSearchStart();
         event.preventDefault();
+        this.setState({
+            loading: true,
+        });
     }
 
     handleClick(event) {
@@ -120,11 +144,6 @@ class SearchBar extends Component {
             <MuiThemeProvider theme={theme}>
                 <div className={classesSecondary.recentia_search_wrapper}>
                     <form onSubmit={this.handleSubmit}>
-                        {/*<input*/}
-                        {/*type="text"*/}
-                        {/*placeholder="Search"*/}
-                        {/*onChange={(e) => this.props.onSearchChange(e.target.value)}*/}
-                        {/*className={classesSecondary.search_bar}/>*/}
                         <div className={classes.root}>
                             <TextField
                                 placeholder="Search..."
@@ -141,25 +160,24 @@ class SearchBar extends Component {
                         <div className={classesSecondary.languagePanel}
                              style={{maxHeight: this.state.expanded ? '150px' : null}}>
                             <FormControl className={classes.formControl}>
-                            <InputLabel htmlFor="age-simple">Translate From...</InputLabel>
-                            <Select
-                                value={this.props.inputLanguage}
-                                onChange={(e) => this.handleSelectChange(e, 'input')}
-                            >
-                                {supportLanguagesList(this.state.supportedLanguages)}
-                            </Select>
+                                <InputLabel htmlFor="age-simple">Translate From...</InputLabel>
+                                <Select
+                                    value={this.props.inputLanguage}
+                                    onChange={(e) => this.handleSelectChange(e, 'input')}
+                                >
+                                    {supportLanguagesList(this.state.supportedLanguages)}
+                                </Select>
                             </FormControl>
                             <FormControl className={classes.formControl}>
-                            <InputLabel htmlFor="age-simple">Translate To...</InputLabel>
-                            <Select
-                                value={this.props.outputLanguage}
-                                onChange={(e) => this.handleSelectChange(e, 'output')}
-                            >
-                                {supportLanguagesList(this.state.supportedLanguages)}
-                            </Select>
+                                <InputLabel htmlFor="age-simple">Translate To...</InputLabel>
+                                <Select
+                                    value={this.props.outputLanguage}
+                                    onChange={(e) => this.handleSelectChange(e, 'output')}
+                                >
+                                    {supportLanguagesList(this.state.supportedLanguages)}
+                                </Select>
                             </FormControl>
                         </div>
-
                     </form>
                 </div>
             </MuiThemeProvider>
