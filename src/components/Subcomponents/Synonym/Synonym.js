@@ -53,15 +53,11 @@ class Synonym extends Component {
     }
 
     render() {
-        let API_version = '/getSynonyms';
+        let API_version = '/getSynonyms.php';
         const {classes} = this.props;
 
         return (
             <React.Fragment>
-                {/*<p style={{textAlign: 'center'}}>Term: {this.props.children}</p>*/}
-                {/*<button onClick={(e) => this.handleClick(e, this.props.termConcept, API_version)}>List*/}
-                    {/*Synonyms: {this.props.synonymCount}</button>*/}
-                {/*<ul>{this.state.expanded ? synonymList(this.state.synonymList) : null}</ul>*/}
                 <ExpansionPanel>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} onClick={(e) => this.handleClick(e, this.props.termConcept, API_version)} >
                         <Typography className={classes.heading}>Term: {this.props.children}</Typography>

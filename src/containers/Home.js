@@ -14,7 +14,12 @@ import RecentiaClinicalVisitSupport from './RecentiaClinicalVisitSupport/Recenti
 // import HeaderNavItem from "../components/Header/HeaderNavItems/HeaderNavItem/HeaderNavItem";
 
 class Home extends Component {
+
     render() {
+        // const handleSubmit = (e) => {
+        //     console.log(e)
+        //     if(e.target.keyCode === 13) window.location.href = '/clinical_library/metathesaurus'
+        // }
         return (
             <React.Fragment>
                 <Profile/>
@@ -26,7 +31,7 @@ class Home extends Component {
                     link2="/clinical_visit" />
 
                 <div className={classes.recentia_search}>
-                    <SearchBar/>
+                    <SearchBar />
                 </div>
                 <Switch>
                     <Route path="/clinical_library" component={RecentiaClinicalLibrary}/>

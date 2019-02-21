@@ -32,7 +32,7 @@ class Metathesaurus extends Component {
     }
 
     async updateComponent() {
-        let API_version = '/getTerms';
+        let API_version = '/getTerms.php';
         this.setState({
             loading: true,
         });
@@ -41,6 +41,7 @@ class Metathesaurus extends Component {
             preferredTermList: data,
             loading: false,
         });
+        // console.log(this.state.preferredTermList)
         this.props.onSubmitSearchSuccess();
     }
 

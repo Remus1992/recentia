@@ -77,19 +77,8 @@ class SearchBar extends Component {
 
     state = {
         expanded: false,
-        isToggleOn: true,
         supportedLanguages: supportedLanguages,
-        completed: 0,
-        loading: false
     };
-
-    componentDidMount() {
-        this.timer = setInterval(this.progress, 500);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.timer);
-    }
 
     progress = () => {
         const {completed} = this.state;
@@ -105,9 +94,6 @@ class SearchBar extends Component {
     handleSubmit(event) {
         this.props.onSubmitSearchStart();
         event.preventDefault();
-        this.setState({
-            loading: true,
-        });
     }
 
     handleClick(event) {
@@ -151,6 +137,7 @@ class SearchBar extends Component {
                                 fullWidth
                                 margin="normal"
                                 onChange={(e) => this.props.onSearchChange(e.target.value)}
+                                value={this.props.searchTerm}
                             />
                             <Icon className={this.state.expanded ? classes.iconClicked : classes.iconHover}
                                   onClick={(e) => this.handleClick(e)}>

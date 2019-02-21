@@ -32,7 +32,7 @@ class ClinicalDictionary extends Component {
     }
 
     async updateComponent() {
-        let API_version = '/getClinicalDefinitionsByTerm';
+        let API_version = '/getClinicalDefinitionsByTerm.php';
         this.setState({
             loading: true,
         });
