@@ -12,6 +12,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
+import { Redirect } from "react-router-dom";
+
 import * as actions from '../../store/actions/index';
 
 import supportedLanguages from '../../api/languages';
@@ -94,6 +96,10 @@ class SearchBar extends Component {
     handleSubmit(event) {
         this.props.onSubmitSearchStart();
         event.preventDefault();
+
+        // console.log({this.props.match.url})
+        // console.log(this.props.history.location)
+        // push("/clinical_library/metathesaurus");
     }
 
     handleClick(event) {
@@ -126,9 +132,16 @@ class SearchBar extends Component {
                                                                  value={supportedLang.Abbreviation}>{supportedLang.Language}</MenuItem>)
         };
 
+        let searchRedirect = null;
+        // if (this.props.searching && window.location.pathname === 'http://localhost:3001/') {
+        if (this.props.searching && window.location.pathname === '/') {
+                searchRedirect = <Redirect to="/clinical_library/metathesaurus" />
+        }
+
         return (
             <MuiThemeProvider theme={theme}>
                 <div className={classesSecondary.recentia_search_wrapper}>
+                    {searchRedirect}
                     <form onSubmit={this.handleSubmit}>
                         <div className={classes.root}>
                             <TextField
@@ -166,6 +179,7 @@ class SearchBar extends Component {
                             </FormControl>
                         </div>
                     </form>
+
                 </div>
             </MuiThemeProvider>
         )
