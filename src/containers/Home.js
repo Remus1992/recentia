@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 
-// import axios from '../axios-orders';
-
 import Profile from '../components/Profile/Profile';
 import Header from '../components/Header/Header';
 import SearchBar from '../components/SearchBar/SearchBar';
@@ -11,15 +9,10 @@ import {Route, Switch} from "react-router-dom";
 
 import RecentiaClinicalLibrary from './RecentiaClinicalLibrary/RecentiaClinicalLibrary';
 import RecentiaClinicalVisitSupport from './RecentiaClinicalVisitSupport/RecentiaClinicalVisitSupport';
-// import HeaderNavItem from "../components/Header/HeaderNavItems/HeaderNavItem/HeaderNavItem";
 
 class Home extends Component {
 
     render() {
-        // const handleSubmit = (e) => {
-        //     console.log(e)
-        //     if(e.target.keyCode === 13) window.location.href = '/clinical_library/metathesaurus'
-        // }
         return (
             <React.Fragment>
                 <Profile/>

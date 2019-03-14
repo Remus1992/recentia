@@ -133,7 +133,6 @@ class SearchBar extends Component {
         };
 
         let searchRedirect = null;
-        // if (this.props.searching && window.location.pathname === 'http://localhost:3001/') {
         if (this.props.searching && window.location.pathname === '/') {
                 searchRedirect = <Redirect to="/clinical_library/metathesaurus" />
         }

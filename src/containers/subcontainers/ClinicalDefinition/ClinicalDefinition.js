@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 // import classesSecondary from './ClinicalDefinition.css';
 
-
 import {withStyles} from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -48,12 +47,6 @@ class ClinicalDefinition extends Component {
 
         return (
             <React.Fragment>
-                {/*<button*/}
-                    {/*className={this.state.expanded ? [classesSecondary.accordion, classesSecondary.active].join(' ') : classesSecondary.accordion}*/}
-                    {/*onClick={(e) => this.handleClick(e)}>{this.props.itemTerm}</button>*/}
-                {/*<div className={classesSecondary.panel} style={{maxHeight: this.state.expanded ? '150px' : null}}>*/}
-                    {/*<p>{this.state.expanded ? this.props.termDefinition : null}</p>*/}
-                {/*</div>*/}
                 <ExpansionPanel>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>} >
                         <Typography className={classes.heading}>{this.props.itemTerm}</Typography>

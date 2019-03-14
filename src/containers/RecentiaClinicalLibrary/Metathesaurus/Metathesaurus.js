@@ -5,7 +5,7 @@ import * as actions from '../../../store/actions/index';
 
 import {getInfo} from "../../../api";
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import Synonym from '../../../components/Subcomponents/Synonym/Synonym';
+import Synonym from '../../subcontainers/Synonym/Synonym';
 
 import classes from './Metathesaurus.css';
 

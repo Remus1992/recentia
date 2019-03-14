@@ -4,8 +4,6 @@ import {getInfo} from "../../../api";
 // import * as actions from "../../../store/actions";
 import {connect} from "react-redux";
 
-// import Spinner from '../../../components/UI/Spinner/Spinner';
-
 // import classes from './Synonym.css';
 
 import {withStyles} from '@material-ui/core/styles';
@@ -73,7 +71,6 @@ class Synonym extends Component {
     }
 }
 
-// export default Synonym;
 
 const mapStateToProps = state => {
     return {
@@ -82,5 +79,4 @@ const mapStateToProps = state => {
     }
 };
 
-// export default connect(mapStateToProps, null)(Synonym);
 export default connect(mapStateToProps, null)(withStyles(styles)(Synonym));
