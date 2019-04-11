@@ -82,24 +82,20 @@ class SearchBar extends Component {
         supportedLanguages: supportedLanguages,
     };
 
-    progress = () => {
-        const {completed} = this.state;
-        if (completed === 100) {
-            this.setState({completed: 0});
-        } else {
-            const diff = Math.random() * 10;
-            this.setState({completed: Math.min(completed + diff, 100)});
-        }
-    };
+    // progress = () => {
+    //     const {completed} = this.state;
+    //     if (completed === 100) {
+    //         this.setState({completed: 0});
+    //     } else {
+    //         const diff = Math.random() * 10;
+    //         this.setState({completed: Math.min(completed + diff, 100)});
+    //     }
+    // };
 
 
     handleSubmit(event) {
         this.props.onSubmitSearchStart();
         event.preventDefault();
-
-        // console.log({this.props.match.url})
-        // console.log(this.props.history.location)
-        // push("/clinical_library/metathesaurus");
     }
 
     handleClick(event) {
