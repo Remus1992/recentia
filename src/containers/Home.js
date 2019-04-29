@@ -22,7 +22,6 @@ class Home extends Component {
                     link1="/clinical_library/metathesaurus"
                     link2_title="Clinical Visit Support"
                     link2="/clinical_visit" />
-
                 <div className={classes.recentia_search}>
                     <SearchBar />
                 </div>
